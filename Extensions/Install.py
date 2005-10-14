@@ -35,12 +35,12 @@ import string
 
 configlets = \
 ( { 'id'         : 'RedirectionTool'
-  , 'name'       : 'Configure Redirection Tool'
+  , 'name'       : 'Redirection and Aliases'
   , 'action'     : 'string:${portal_url}/prefs_redirection_tool_form'
   , 'category'   : 'Products'
   , 'appId'      : 'RedirectionTool'
   , 'permission' : ManagePortal
-  , 'imageUrl'  : 'tool.gif'
+  , 'imageUrl'  : 'action_icon.gif'
   }
 ,
 )

@@ -1,5 +1,5 @@
 """
-$Id: __init__.py,v 1.1 2004/02/08 11:52:25 tesdal Exp $
+$Id$
 """
 
 from Products.CMFCore import CMFCorePermissions
@@ -18,5 +18,5 @@ def initialize( context ):
     ToolInit('Redirection Tool', 
             tools=(RedirectionTool.RedirectionTool, ), 
             product_name='RedirectionTool',
-            icon='tool.gif'
+            icon='action_icon.gif'
             ).initialize(context)

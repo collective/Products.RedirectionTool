@@ -13,7 +13,8 @@
 <body>
 
     <div metal:fill-slot="main"
-         tal:define="redirects python:here.portal_redirection.getRedirectsTo(here)">	
+         tal:define="redirects python:here.portal_redirection.getRedirectsTo(here);
+                     folder isFolder|isFolderish|nothing;">
 
         <h1 i18n:translate="heading_add_aliases">Aliases and alternative ID setup</h1>
 
@@ -28,7 +29,7 @@
               method="post"
               enctype="multipart/form-data"
               tal:define="errors options/state/getErrors;"
-              tal:attributes="action python:test(isFolder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
+              tal:attributes="action python:test(folder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
 
         <fieldset>
     
@@ -82,7 +83,7 @@
               enctype="multipart/form-data"
               tal:condition="redirects"
               tal:define="errors options/state/getErrors;"
-              tal:attributes="action python:test(isFolder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
+              tal:attributes="action python:test(folder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
 
             <fieldset>
             <legend i18n:translate="legend_existing_aliases">Existing aliases for this item</legend>
