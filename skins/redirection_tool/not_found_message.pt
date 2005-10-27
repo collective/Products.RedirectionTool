@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<tal:head metal:fill-slot="head_slot"
+          tal:define="dummy python:request.set('disable_border',1)"></tal:head>
+
+<div metal:fill-slot="main"
+     tal:define="global err_type options/error_type|nothing;
+                 global err_message options/error_message|nothing;
+                 global err_tb options/error_tb|nothing;
+                 global err_value options/error_value|nothing;
+                 global err_traceback options/error_traceback|nothing;
+                 desc_length site_properties/search_results_description_length;
+                 desc_ellipsis site_properties/ellipsis;
+                 redirectpath python:here.portal_redirection.getRedirectFromPathInfo(request.PATH_INFO);">
+
+        <metal:condition tal:condition="redirectpath">
+            <metal:redirect tal:define="dummy python:request.response.redirect(redirectpath, status=301, lock=1)" />
+        </metal:condition>
+
+        <div>
+
+            <h1 i18n:translate="heading_site_error_apologies">Our apologies...</h1>
+
+            <p i18n:translate="description_site_error_does_not_exist">
+            The item you requested does not exist on this server or cannot be served.
+            </p>
+
+            <p i18n:translate="description_site_error_listing_search_results">
+            Below we have listed some items that might correspond to what you are looking for.
+            </p>
+
+            <p i18n:translate="description_site_error_mail_admin">
+            If you know you have the correct web address but are encountering an error, please
+            send a mail to the administrator of this site.
+            </p>
+
+            <a href="" 
+               tal:replace="structure python: here.spamProtect(site_properties.email_from_address)">
+               example@mail.com
+            </a>
+
+            <p i18n:translate="description_site_error_thank_you">
+            Thank you.
+            </p>
+
+            <div>
+                <!-- Search results -->
+        
+                <dl>
+                    <metal:block tal:define="result python:here.portal_redirection.getFirstRealObjectFromPath(request.PATH_INFO)"
+                                 tal:on-error="nothing">
+                    <dt>
+                        <a href="#"
+                            tal:attributes="href result/absolute_url">
+                            <img src="#"
+                                 height="16"
+                                 width="16"
+                                 alt=""
+                                 tal:on-error="structure python:path('here/linkOpaque.gif')"
+                                 tal:replace="structure python:path('here/%s' % result.getIcon())" /></a>&nbsp;<a
+                           href="#" 
+                           tal:attributes="href result/absolute_url"
+                           tal:content="python:result.Title() or result.getId()" />
+                        <span class="discreet" i18n:translate="results_by_author">
+                        by <span tal:replace="result/Creator" i18n:name="author">Author</span>,
+                        <span tal:replace="python:here.toPortalTime(result.ModificationDate(), long_format=1)" i18n:name="date">Modification Date</span>
+                        </span>
+                    </dt>
+                    
+                    <dd tal:content="python:here.cropText(result.Description(), desc_length, desc_ellipsis)"> Description </dd>
+                    </metal:block>
+
+                <tal:results repeat="result python:here.portal_redirection.getAlternativePages(request.PATH_INFO)"
+                             on-error="nothing">
+                <tal:entry define="url result/getURL;">
+                    <dt>
+                        <a href="#"
+                            tal:attributes="href url">
+                            <img src="#"
+                                 height="16"
+                                 width="16"
+                                 alt=""
+                                 tal:on-error="structure python:path('here/linkOpaque.gif')"
+                                 tal:replace="structure python:path('here/%s' % result.getIcon)" /></a>&nbsp;<a
+                           href="#" 
+                           tal:attributes="href url"
+                           tal:content="python:result.Title or result.getId" />
+                        <span class="discreet" i18n:translate="results_by_author">
+                        by <span tal:replace="result/Creator" i18n:name="author">Author</span>,
+                        <span tal:replace="python:here.toPortalTime(result.ModificationDate, long_format=1)" i18n:name="date">Modification Date</span>
+                        </span>
+                    </dt>
+                    
+                    <dd tal:content="python:here.cropText(result.Description, desc_length, desc_ellipsis)"> Description </dd>
+        
+                </tal:entry>
+                </tal:results>
+                </dl>
+            </div>
+
+            <code>
+            404 Not Found
+            </code>
+        </div>
+
+</div>
+
+</html>
