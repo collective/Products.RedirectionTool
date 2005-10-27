@@ -1,0 +1,8 @@
+- RedirectionTool currently doesn't keep anchors. 
+  http://plone.org/roadmap#2.2 gets translated to
+  http://plone.org/products/plone/roadmap
+  losing the #2.2 part.
+  
+- There should be a central overview of all redirections that are registered,
+  and the ability to remove redirections. A simple multiple select list would
+  do for a first version.

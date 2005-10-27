@@ -1,0 +1,127 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="RedirectionTool">
+
+<head>
+    <metal:css fill-slot="css_slot">
+    <style type="text/css" media="all"
+           tal:content="string: @import url($portal_url/ploneboard.css);"></style>
+    </metal:css>
+</head>
+      
+<body>
+
+    <div metal:fill-slot="main"
+         tal:define="redirects python:here.portal_redirection.getRedirectsTo(here);
+                     folder isFolder|isFolderish|nothing;">
+
+        <h1 i18n:translate="heading_add_aliases">Aliases and alternative ID setup</h1>
+
+        <p i18n:translate="description_adding_aliases">
+        Using this form, you can add additional aliases for an item. This
+        is an easy way to make an item available under two different URL
+        addresses.
+        </p>  
+
+        <form name="redirection_form"
+              action="." 
+              method="post"
+              enctype="multipart/form-data"
+              tal:define="errors options/state/getErrors;"
+              tal:attributes="action python:test(folder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
+
+        <fieldset>
+    
+            <legend i18n:translate="legend_add_alias">Add alias</legend>    
+
+            <input type="hidden" name="form.submitted" value="1" />
+
+            <div class="field"
+                 tal:define="error errors/redirection|nothing;
+                             redirection request/title | nothing;"
+                 tal:attributes="class python:test(error, 'field error', 'field')"> 
+                <label for="title" i18n:translate="label_alias">Alias</label>
+                
+                <span class="fieldRequired" title="Required"
+                      i18n:attributes="title"
+                      i18n:translate="label_required">(Required)</span>
+
+                <div tal:content="error">Validation error output</div>
+                    
+                <div class="formHelp" i18n:translate="help_alias">
+                    Enter the alternative Short Name or an absolute path where an alias should exist.
+                </div>
+                
+                <input type="text" 
+                       name="redirection" 
+                       value="#" 
+                       size="40" 
+                       tabindex=""
+                       tal:attributes="value request/redirection | nothing;
+                                       tabindex tabindex/next;" 
+                       />
+
+                <div class="formControls">
+    
+                    <input class="context"
+                           type="submit"
+                           value="Add"
+                           name="form.button.Add"
+                           tabindex=""
+                           i18n:attributes="value"
+                           tal:attributes="tabindex tabindex/next;"
+                           />
+                </div>
+            </div>
+        </fieldset>
+        </form>
+
+        <form name="redirection_form"
+              action="." 
+              method="post"
+              enctype="multipart/form-data"
+              tal:condition="redirects"
+              tal:define="errors options/state/getErrors;"
+              tal:attributes="action python:test(folder,template.getId(),'%s/%s' % (here.getId(),template.getId()))" >
+
+            <fieldset>
+            <legend i18n:translate="legend_existing_aliases">Existing aliases for this item</legend>
+
+                <input type="hidden" name="form.submitted" value="1" />
+    
+                <tal:iterate repeat="redirect redirects"> 
+                    <div tal:define="oddrow repeat/redirect/odd;"
+                         tal:attributes="class python:test(oddrow, 'even', 'odd')" >
+    
+                        <input type="checkbox" 
+                               class="noborder" 
+                               name="redirects:list" 
+                               value="#"
+                               tal:attributes="value redirect;
+                                               checked request/redirects_checked|nothing;
+                                               tabindex tabindex/next|nothing;"/>
+    
+                        <span tal:replace="redirect" />
+    
+                    </div>
+                </tal:iterate>
+    
+                <div class="formControls">
+
+                    <input class="context"
+                           type="submit"
+                           value="Remove"
+                           name="form.button.Remove"
+                           tabindex=""
+                           i18n:attributes="value"
+                           tal:attributes="tabindex tabindex/next;"
+                           />
+                </div>
+            </fieldset>
+        </form>
+        
+    </div>
+                     
+</body>
+</html>
