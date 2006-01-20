@@ -5,7 +5,7 @@
 # Learning Lab Denmark
 #  http://www.lld.dk
 """
-$Id: RedirectionTool.py,v 1.12 2005/01/11 16:43:52 gerry_kirk Exp $
+$Id$
 """
 
 import os
@@ -333,7 +333,7 @@ class RedirectionTool( UniqueObject, SimpleItem, ActionProviderBase ):
         else:
             # Assume this is an object
             obj = source
-        if not obj:
+        if obj is None:
             raise NameError('No such object %s' % source)
         return getSecurityManager().checkPermission( permission, obj )
 
