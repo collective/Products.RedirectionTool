@@ -1,0 +1,4 @@
+﻿
+    - Added german translation [spamsch]
+
+    - Added default validators and actions [spamsch]
