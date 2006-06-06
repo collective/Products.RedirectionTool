@@ -2,3 +2,6 @@
     - Added german translation [spamsch]
 
     - Added default validators and actions [spamsch]
+
+    - Moved ActionProviderBase before SimpleItem so that
+      actions tab is shown in ZMI

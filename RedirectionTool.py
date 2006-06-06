@@ -35,10 +35,11 @@ ignoreids = ( 'index_html'
             , 'view'
             )
 
-class RedirectionTool( UniqueObject, SimpleItem, ActionProviderBase ):
+class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
 
     id = 'portal_redirection'
     meta_type = 'Redirection Tool'
+
     __implements__ = (IRedirectionTool, ActionProviderBase.__implements__)
     _actions = (ActionInformation(id='redirection'
                                 , title='Aliases'
