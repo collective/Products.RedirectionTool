@@ -1,6 +1,6 @@
 # Gettext file for Redirection Tool.
 # Santiágo Peresón <santiago.pereson@euskosare.org>, 2004.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool 1.0\n"
@@ -18,14 +18,22 @@ msgstr ""
 "Domain: plone\n"
 "X-Is-Fallback-For: es-bo es-cl es-co es-cr es-do es-ec es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
-msgid "Configure Redirection Tool"
-msgstr "Configurar la Herramienta de Redireccionamiento"
-
 msgid "Aliases"
 msgstr "Alias"
 
+
+msgid "Configure Redirection Tool"
+msgstr "Configurar la Herramienta de Redireccionamiento"
+
+
 msgid "Redirection"
 msgstr "Redireccionamiento"
+
+
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
+
 
 #: not_found_message.pt
 #. <p i18n:translate="description_site_error_listing_search_results">
@@ -34,3 +42,8 @@ msgstr "Redireccionamiento"
 msgid "description_site_error_listing_search_results"
 msgstr "Debajo encontrará algunos ítems que pueden corresponder a su búsqueda."
 
+#- Removed msgids:
+# 
+
+#- Added msgids:
+#  "Redirection and Aliases"

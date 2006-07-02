@@ -32,3 +32,7 @@ msgstr ""
 msgid "description_site_error_listing_search_results"
 msgstr ""
 
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
+

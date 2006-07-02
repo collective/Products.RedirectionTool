@@ -4,147 +4,131 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
 "POT-Creation-Date: 2004-09-26 13:43+0000\n"
-"PO-Revision-Date: 2004-09-26 13:43+0000\n"
-"Last-Translator: Anton Stonor <stonor@giraffen.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-07-02 10:06+0100\n"
+"Last-Translator: Radim Novotny <novotny.radim@gmail.com>\n"
+"Language-Team: CoreNet <info@corenet.cz>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
-"Preferred-Encodings: latin1 utf-8\n"
+"Language-Code: cs\n"
+"Language-Name: Czech\n"
+"Preferred-Encodings: utf-8\n"
 "Domain: RedirectionTool\n"
 
-#: redirection_form.cpt
 #. <input class="context" i18n:attributes="value" name="form.button.Add" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Add"/>
+#: redirection_form.cpt
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
-
-#: prefs_redirection_tool_form.pt
 #. <input class="context" i18n:attributes="value" name="clear_redirection_types" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Allow all types"/>
-msgid "Allow all types"
-msgstr ""
-
-
-#: redirection_form.cpt
-#. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
-msgid "Remove"
-msgstr ""
-
-
-#: redirection_form.cpt
-#. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
-msgid "Required"
-msgstr ""
-
-
 #: prefs_redirection_tool_form.pt
-#. <input class="context" i18n:attributes="value" name="save" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Save"/>
-msgid "Save"
-msgstr ""
+msgid "Allow all types"
+msgstr "Povolit všechny typy položek"
 
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr "Přesměrování a aliasy"
 
+#. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
 #: redirection_form.cpt
+msgid "Remove"
+msgstr "Odebrat"
+
+#. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
+#: redirection_form.cpt
+msgid "Required"
+msgstr "Vyžadováno"
+
+#. <input class="context" i18n:attributes="value" name="save" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Save"/>
+#: prefs_redirection_tool_form.pt
+msgid "Save"
+msgstr "Uložit"
+
 #. <p i18n:translate="description_adding_aliases">
 #.         Using this form, you can add additional aliases for an item. This
 #.         is an easy way to make an item available under two different URL
 #.         addresses.
 #. </p>
+#: redirection_form.cpt
 msgid "description_adding_aliases"
-msgstr "Using this form, you can add additional aliases for an item. This is an easy way to make an item available under two different URL addresses."
+msgstr "Tento formulář umožňuje přidat k aktuální položce aliasy. Můžete tak jednoduše položku zpřístupnit pod více URL adresami. "
 
-
-#: prefs_redirection_tool_form.pt
 #. <div class="description" i18n:translate="description_configure">
 #.         Here you can configure settings for Redirection Tool.
 #. </div>
+#: prefs_redirection_tool_form.pt
 msgid "description_configure"
-msgstr "Here you can configure settings for Redirection Tool."
+msgstr "Nastavení nástroje pro přesměrování."
 
-
-#: redirection_form.cpt
 #. <h1 i18n:translate="heading_add_aliases">
 #.  Aliases and alternative ID setup
 #. </h1>
+#: redirection_form.cpt
 msgid "heading_add_aliases"
-msgstr "Aliases and alternative ID setup"
+msgstr "Nastavení aliasů a alternativních identifikátorů položek. "
 
-
-#: prefs_redirection_tool_form.pt
 #. <h1 i18n:translate="heading_redirection_config">
 #.  Redirection Tool
 #. configuration
 #. </h1>
+#: prefs_redirection_tool_form.pt
 msgid "heading_redirection_config"
-msgstr "Redirection Tool configuration"
+msgstr "Nastavení nástroje pro přesměrování."
 
-
-#: redirection_form.cpt
 #. <div class="formHelp" i18n:translate="help_alias">
 #.                     Enter the alternative Short Name or an absolute path where an alias should exist.
 #. </div>
+#: redirection_form.cpt
 msgid "help_alias"
-msgstr "Enter the alternative Short Name or an absolute path where an alias should exist."
+msgstr "Zadejte alternativní krátký název položky nebo absolutní cestu, pod kterou bude alias dostupný. "
 
-
-#: prefs_redirection_tool_form.pt
 #. <div class="help" i18n:translate="help_redirection_item_type" id="item_type_search_help" style="visibility:hidden">
 #.                     Allow specified types to have redirection.
 #. </div>
+#: prefs_redirection_tool_form.pt
 msgid "help_redirection_item_type"
-msgstr "Allow specified types to have redirection."
+msgstr "Umožňuje využívat přesměrování vybraným typům položek.  "
 
-
-#: redirection_form.cpt
 #. <label for="title" i18n:translate="label_alias">
 #.  Alias
 #. </label>
+#: redirection_form.cpt
 msgid "label_alias"
 msgstr "Alias"
 
-
-#: prefs_redirection_tool_form.pt
 #. <span i18n:translate="label_item_type">
 #.  Item type
 #. </span>
+#: prefs_redirection_tool_form.pt
 msgid "label_item_type"
-msgstr "Item type"
+msgstr "Typ položky"
 
-
-#: redirection_form.cpt
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
 #.  (Required)
 #. </span>
-msgid "label_required"
-msgstr "(Required)"
-
-
 #: redirection_form.cpt
+msgid "label_required"
+msgstr "(Vyžadováno)"
+
 #. <legend i18n:translate="legend_add_alias">
 #.  Add alias
 #. </legend>
-msgid "legend_add_alias"
-msgstr "Add alias"
-
-
 #: redirection_form.cpt
+msgid "legend_add_alias"
+msgstr "Přidat alias"
+
 #. <legend i18n:translate="legend_existing_aliases">
 #.  Existing aliases for this item
 #. </legend>
+#: redirection_form.cpt
 msgid "legend_existing_aliases"
-msgstr "Existing aliases for this item"
+msgstr "Existující aliasy položky"
 
-
-#: prefs_redirection_tool_form.pt
 #. <span class="legend" i18n:translate="legend_prefs_redirection_tool">
 #.  Redirection
 #. </span>
+#: prefs_redirection_tool_form.pt
 msgid "legend_prefs_redirection_tool"
-msgstr "Redirection"
-
-#: Extensions/Install.py
-msgid "Redirection and Aliases"
-msgstr ""
+msgstr "Přesměrování"
 

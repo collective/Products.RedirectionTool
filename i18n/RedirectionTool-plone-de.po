@@ -15,14 +15,22 @@ msgstr ""
 "Domain: plone\n"
 "X-Is-Fallback-For: de-at de-li de-lu de-ch\n"
 
-msgid "Configure Redirection Tool"
-msgstr "Umleitungs-Tool konfigurieren"
-
 msgid "Aliases"
 msgstr "Umleitungen"
 
+
+msgid "Configure Redirection Tool"
+msgstr "Umleitungs-Tool konfigurieren"
+
+
 msgid "Redirection"
 msgstr "Umleitung"
+
+
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
+
 
 #: not_found_message.pt
 #. <p i18n:translate="description_site_error_listing_search_results">
@@ -31,3 +39,8 @@ msgstr "Umleitung"
 msgid "description_site_error_listing_search_results"
 msgstr "Wir haben hier eine Auswahl von Objekten, die dem entsprechen k&ouml;nnten was Sie suchen."
 
+#- Removed msgids:
+# 
+
+#- Added msgids:
+#  "Redirection and Aliases"
