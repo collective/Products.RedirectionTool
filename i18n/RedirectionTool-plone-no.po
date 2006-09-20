@@ -1,0 +1,47 @@
+# Gettext file for Redirection Tool.
+# Alexander Limi <limi@plone.org>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: Redirection Tool 1.0\n"
+"POT-Creation-Date: 2004-09-26 13:43+0000\n"
+"PO-Revision-Date: 2004-09-26 16:12+0100\n"
+"Last-Translator: Alexander Limi <limi@plone.org>\n"
+"Language-Team: Alexander Limi <limi@plone.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: no\n"
+"Language-Name: Norsk\n"
+"Preferred-Encodings: latin1 utf-8\n"
+"Domain: plone\n"
+
+msgid "Aliases"
+msgstr "Alias"
+
+
+msgid "Configure Redirection Tool"
+msgstr "Omdirigerings-innstillinger"
+
+
+msgid "Redirection"
+msgstr "Omdirigering"
+
+
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
+
+
+#: not_found_message.pt
+#. <p i18n:translate="description_site_error_listing_search_results">
+#.             Below we have listed some items that might correspond to what you are looking for.
+#. </p>
+msgid "description_site_error_listing_search_results"
+msgstr "Nedenfor har vi listet innhold som kan være relevant for det du leter etter."
+
+#- Removed msgids:
+# 
+
+#- Added msgids:
+#  "Redirection and Aliases"
