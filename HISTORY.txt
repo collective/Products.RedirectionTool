@@ -1,4 +1,6 @@
 ﻿
+    - take into account site property allowAnonymousViewAbout in not_found_message
+
     - Added german translation [spamsch]
 
     - Added default validators and actions [spamsch]

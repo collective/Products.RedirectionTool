@@ -43,8 +43,8 @@
         </p>
 
         <!-- Search results -->
-        <dl>
-            <metal:block tal:define="result python:here.portal_redirection.getFirstRealObjectFromPath(request.PATH_INFO)"
+        <dl tal:define="toLocalizedTime toLocalizedTime | nocall:context/toLocalizedTime;">
+            <metal:block tal:define="result python:here.portal_redirection.getFirstRealObjectFromPath(request.PATH_INFO);"
                          tal:on-error="nothing">
             <dt>
                 <a href="#"
@@ -58,9 +58,9 @@
                    href="#" 
                    tal:attributes="href result/absolute_url"
                    tal:content="python:result.Title() or result.getId()" />
-                <span class="discreet" i18n:translate="results_by_author">
+                <span class="discreet" i18n:translate="results_by_author" tal:condition="python:not isAnon or site_properties.getProperty('allowAnonymousViewAbout',1)">
                 by <span tal:replace="result/Creator" i18n:name="author">Author</span>,
-                <span tal:replace="python:here.toLocalizedTime(result.ModificationDate(), long_format=1)" i18n:name="date">Modification Date</span>
+                <span tal:replace="python:toLocalizedTime(result.ModificationDate(), long_format=1)" i18n:name="date">Modification Date</span>
                 </span>
             </dt>
             
@@ -82,9 +82,9 @@
                    href="#" 
                    tal:attributes="href url"
                    tal:content="python:result.Title or result.getId" />
-                <span class="discreet" i18n:translate="results_by_author">
+                <span class="discreet" i18n:translate="results_by_author" tal:condition="python:not isAnon or site_properties.getProperty('allowAnonymousViewAbout',1)">
                 by <span tal:replace="result/Creator" i18n:name="author">Author</span>,
-                <span tal:replace="python:here.toLocalizedTime(result.ModificationDate, long_format=1)" i18n:name="date">Modification Date</span>
+                <span tal:replace="python:toLocalizedTime(result.ModificationDate, long_format=1)" i18n:name="date">Modification Date</span>
                 </span>
             </dt>
             
