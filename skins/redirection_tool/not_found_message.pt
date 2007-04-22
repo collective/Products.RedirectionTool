@@ -43,7 +43,7 @@
         </p>
 
         <!-- Search results -->
-        <dl tal:define="toLocalizedTime toLocalizedTime | nocall:context/toLocalizedTime;">
+        <dl tal:define="toLocalizedTime nocall:context/toLocalizedTime;">
             <metal:block tal:define="result python:here.portal_redirection.getFirstRealObjectFromPath(request.PATH_INFO);"
                          tal:on-error="nothing">
             <dt>
