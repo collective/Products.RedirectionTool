@@ -17,7 +17,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessRaises(NameError, self.rt.extractReference, 'nonexisting')
 
     def testExtractReferenceFromATObject(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testobj = utils.makeContent(self.portal, 'DDocument', 'testobj')
         reference = self.rt.extractReference(testobj)
         self.failUnless(reference)
@@ -28,11 +28,10 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testExtractReferenceFromNonATObject(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         reference = self.rt.extractReference(testobj)
         self.failUnless(reference)
-        self.failUnlessEqual(reference, '/%s' % self.portal.portal_url.getRelativeContentURL(testobj))
         self.failUnlessEqual(reference, self.rt.extractReference('/%s' % self.portal.portal_url.getRelativeContentURL(testobj)))
         self.failUnlessEqual(reference, self.rt.extractReference(self.portal.portal_url.getRelativeContentURL(testobj)))
         self.logout()
@@ -43,7 +42,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessRaises(NameError, self.rt.addRedirect, '/nonexisting', None)
 
     def testBasicAddRedirectToObjectAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         self.failUnless(self.rt.addRedirect(testurl, testobj))
@@ -52,7 +51,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testBasicAddRedirectToUIDAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'DDocument', 'testobj')
         self.failUnless(self.rt.addRedirect(testurl, testobj.UID()))
@@ -61,7 +60,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testBasicAddRedirectToPathAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         testpath = self.portal.portal_url.getRelativeContentURL(testobj)
@@ -71,7 +70,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testAddRedirectToObjectAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
@@ -91,7 +90,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testAddRedirectToUIDAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
@@ -111,7 +110,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testAddRedirectToPathAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
@@ -131,12 +130,12 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testRemoveNonExisting(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         self.failIf(self.rt.removeRedirect('/nonexisting'))
         self.logout()
 
     def testRemoveRedirect(self):
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         self.rt.addRedirect(testurl, testobj)

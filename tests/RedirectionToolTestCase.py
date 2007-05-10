@@ -1,7 +1,6 @@
 from Testing import ZopeTestCase
 from AccessControl.SecurityManagement import newSecurityManager
 from AccessControl.SecurityManagement import noSecurityManager
-from Products.CMFPlone.tests import PloneTestCase
 import time
 import utils
 import transaction
@@ -11,17 +10,39 @@ ZopeTestCase.installProduct('PortalTransforms')
 ZopeTestCase.installProduct('MimetypesRegistry')
 ZopeTestCase.installProduct('RedirectionTool')
 
+from Products.PloneTestCase.PloneTestCase import PloneTestCase
+from Products.Archetypes.Extensions.Install import install as installArchetypes
 
-class RedirectionToolTestCase(PloneTestCase.PloneTestCase):
+class RedirectionToolTestCase(PloneTestCase):
     def afterSetUp(self):
 #        self.refreshSkinData()
-        self.loginPortalOwner()
-        utils.disableScriptValidators(self.portal)
+        self.loginAsPortalOwner()
+
+        #
+        # setupRedirectionTool
+        # Until Plone 2.5.2, this was done once and committed 
+        # in the setupRedirectionTool method, below.
+        # Moved here because of a problem getting the old mechanism working.
+        # 
+        uf = self.portal.acl_users
+        # setup
+        uf._doAddUser('PloneMember', '', ['Members'], [])
+        uf._doAddUser('PloneManager', '', ['Manager'], [])
+        # login as manager
+        user = uf.getUserById('PloneManager').__of__(uf)
+        newSecurityManager(None, user)
+
+        # Add Redirection Tool
+        self.portal.portal_quickinstaller.installProduct('RedirectionTool')
+        installArchetypes(self.portal, include_demo=1)
+        # Log out
+        noSecurityManager()
+        # /setupRedirectionTool
+        # 
 
         self.rt = self.portal.portal_redirection
-        
         self.logout()
-        
+                
 def setupRedirectionTool(app, quiet=0):
     transaction.get()
     _start = time.time()
@@ -37,17 +58,9 @@ def setupRedirectionTool(app, quiet=0):
     
     # Add Redirection Tool
     app.portal.portal_quickinstaller.installProduct('RedirectionTool')
-    # Add Archetypes (need the archetypestool) - use Install method directly until quickinstaller takes arguments
-#    app.portal.portal_quickinstaller.installProduct('Archetypes', include_demo=1)
-    from Products.Archetypes.Extensions.Install import install as installArchetypes
     installArchetypes(app.portal, include_demo=1)
-
 
     # Log out
     noSecurityManager()
     transaction.get().commit()
     if not quiet: ZopeTestCase._print('done (%.3fs)\n' % (time.time()-_start,))
-
-app = ZopeTestCase.app()
-setupRedirectionTool(app)
-ZopeTestCase.close(app)
