@@ -152,7 +152,7 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
     def getRedirectObject(self, redirectfrom):
         """Return the redirect if it exists"""
         # Redirectfrom is always a string with the path.
-        # Check for object existance and return path to redirect to
+        # Check for object existence and return path to redirect to
         if redirectfrom.find('http://') != -1:
             comps = [redirectfrom]
         else:

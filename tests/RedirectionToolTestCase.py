@@ -21,7 +21,7 @@ class RedirectionToolTestCase(PloneTestCase):
         #
         # setupRedirectionTool
         # Until Plone 2.5.2, this was done once and committed 
-        # in the setupRedirectionTool method, below.
+        # by the setupRedirectionTool method, below.
         # Moved here because of a problem getting the old mechanism working.
         # 
         uf = self.portal.acl_users

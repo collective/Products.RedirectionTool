@@ -110,6 +110,9 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.logout()
 
     def testAddRedirectToPathAndGetRedirect(self):
+        #testfolder -+            <--/testfolderredirect
+        #            +-testobj    <--/testredirect, /testredirect/
+        # 
         self.loginAsPortalOwner()
         testid = 'testobj'
         testfolderid = 'testfolder'
