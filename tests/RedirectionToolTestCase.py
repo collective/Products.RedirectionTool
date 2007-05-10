@@ -4,6 +4,7 @@ from AccessControl.SecurityManagement import noSecurityManager
 from Products.CMFPlone.tests import PloneTestCase
 import time
 import utils
+import transaction
 
 ZopeTestCase.installProduct('Archetypes')
 ZopeTestCase.installProduct('PortalTransforms')
@@ -22,7 +23,7 @@ class RedirectionToolTestCase(PloneTestCase.PloneTestCase):
         self.logout()
         
 def setupRedirectionTool(app, quiet=0):
-    get_transaction().begin()
+    transaction.get()
     _start = time.time()
     if not quiet: ZopeTestCase._print('Adding Redirection Tool ... ')
 
@@ -44,7 +45,7 @@ def setupRedirectionTool(app, quiet=0):
 
     # Log out
     noSecurityManager()
-    get_transaction().commit()
+    transaction.get().commit()
     if not quiet: ZopeTestCase._print('done (%.3fs)\n' % (time.time()-_start,))
 
 app = ZopeTestCase.app()
