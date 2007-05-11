@@ -22,6 +22,7 @@ from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
 from Products.CMFCore.ActionInformation import ActionInformation
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.Expression import Expression
+from Products.CMFPlone.browser.navtree import getNavigationRoot
 
 from types import StringType
 
@@ -59,7 +60,8 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
     
     #temporary logging - while documenting
     def logg(self,msg):
-        #print('RT: ' + msg)
+        self.plone_log(msg)
+        print('RT: ' + msg)
         pass
         
     def __init__(self):
@@ -217,6 +219,9 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         redirectobject = self.getRedirectObject(redirectfrom)
         ret = redirectobject and redirectobject.absolute_url() or\
               redirectobject
+        if ret:
+            diagnostic = getNavigationRoot(redirectobject)
+            self.logg('gr NAVROOT: ' + diagnostic )
         self.logg('gr ret: ' + str(ret) )
         return ret
 
