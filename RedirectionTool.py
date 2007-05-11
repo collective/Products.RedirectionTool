@@ -56,7 +56,12 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
                )
 
     security = ClassSecurityInfo()
-
+    
+    #temporary logging - while documenting
+    def logg(self,msg):
+        #print('RT: ' + msg)
+        pass
+        
     def __init__(self):
         self._redirectionmap = OOBTree()         # path or referenceid -> path or referenceid
         self._reverse_redirectionmap = OOBTree() # path or referenceid -> Set of paths or referenceids
@@ -142,64 +147,84 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
             if hasattr(self, '_redirectionTypes'):
                 del self._redirectionTypes
 
-#    security.declareProtected(View, 'debugVar')
-#    def debugVar(self, var=None):
-#        import pdb
-#        pdb.set_trace()
-#        tmpvar = var
-
     security.declareProtected(View, 'getRedirectObject')
     def getRedirectObject(self, redirectfrom):
         """Return the redirect if it exists"""
         # Redirectfrom is always a string with the path.
         # Check for object existence and return path to redirect to
+        # 
+        self.logg('gro: -> ' + redirectfrom )
         if redirectfrom.find('http://') != -1:
             comps = [redirectfrom]
+            self.logg('gro: httpcomps ' + str(comps) )
         else:
             comps = redirectfrom.split('/')
             comps = ['']+[x for x in comps if x]
+            self.logg('gro: comps ' + str(comps) )
+        
+        #Take the chunks of the url and see if folders higher 
+        # up the tree have redirects as well
+        # So if portal/folder has a redirect to portal/newfolder,
+        # accessing portal/folder/someobject will redirect to
+        # portal/newfolder/someobject
         redirectto = None
         remainingcomps = []
         i = len(comps)
-        #Take the chunks of the url and see if folders higher up the tree have redirects as well
-        #So if portal/folder has a redirect to portal/newfolder accessing portal/folder/someobject will redirect to portal/newfolder/someobject
         while not redirectto and i > 0:
             redirectto = self._redirectionmap.get('/'.join(comps[:i]), None)
             remainingcomps = comps[i:]
             i-=1
         if not redirectto:
+            self.logg('gro no redirectto ' )
             return None
         obj = None
+        
         # Find out if it's a path or a referenceid
         if redirectto.startswith('/'):
             # Check if the path is valid, otherwise return None
             portal = getToolByName(self, 'portal_url').getPortalObject()
             obj = portal.restrictedTraverse(redirectto[1:], None)
+            self.logg('gro path redirectto: %s %s' % (redirectto, obj) )
         else:
-            reftool = getToolByName(self, 'reference_catalog', getToolByName(self, 'archetype_tool', None))
+            reftool = getToolByName(self, 'reference_catalog',
+                          getToolByName(self, 'archetype_tool', None))
 
             if not reftool:
+                self.logg('gro no refcatalog: ' )
                 return None
             obj = reftool.lookupObject(redirectto)
+            self.logg('gro ID redirectto: %s %s' % (redirectto, obj) )
 
         # Delete redirect if the object it points to doesn't exist
 #        if not obj:
 #            self.removeRedirect(redirectfrom)
 #            return None
-        if obj and remainingcomps:
-            return obj.restrictedTraverse('/'.join(remainingcomps), None)
 
+        # try to find a more specific object if a whole tree was redirected
+        if obj and remainingcomps:
+            extendobj = obj.restrictedTraverse('/'.join(remainingcomps), None)
+            self.logg('gro extobj: %s %s %s' % (obj, str(comps),
+                      str(extendobj)))
+            return extendobj
+            
+        self.logg('gro obj: ' + str(obj) )
         return obj
 
     security.declareProtected(View, 'getRedirect')
     def getRedirect(self, redirectfrom):
         """Return the redirect if it exists"""
+        self.logg('gr start: ' + redirectfrom )
         redirectobject = self.getRedirectObject(redirectfrom)
-        return redirectobject and redirectobject.absolute_url() or redirectobject
+        ret = redirectobject and redirectobject.absolute_url() or\
+              redirectobject
+        self.logg('gr ret: ' + str(ret) )
+        return ret
 
     security.declareProtected(View, 'getRedirectFromPathInfo')
     def getRedirectFromPathInfo(self, path_info):
         """Redirect based on path info"""
+        self.logg('grpi path_info: ' + path_info )
+        
         siteroot = getToolByName(self, 'portal_url').getPortalObject().getPhysicalPath()
         pathelements = path_info.split('/')
         try:
@@ -216,8 +241,10 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         if key.endswith('/') and len(key) > 1:
             key = key[:-1]
         redirect = self.getRedirect(key)
+        self.logg('grpi redirect1: ' + redirect )
 
-        # As a last resort, let's try a catalogsearch to see if we find the requested object
+        # As a last resort, let's try a catalogsearch to see if we find 
+        # the requested object
         # This search will only find items visible for Anonymous
         if not redirect:
             ct = getToolByName(self, 'portal_catalog')
@@ -228,29 +255,40 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
 #            res = ct(getId=searchcomp)
             res = ct(id=searchcomp)
             if len(res)==1:
-                return res[0].getURL()
-
+                resurl = res[0].getURL()
+                self.logg('grpi resurl: ' + resurl )
+                return resurl
+        self.logg('grpi redirect: ' + redirect )
         return redirect
 
     security.declareProtected(View, 'getFirstRealObjectFromPath')
     def getFirstRealObjectFromPath(self, path_info):
         """Redirect based on path info"""
+        self.logg('gfrofp : ' + path_info )
+        
         portal = getToolByName(self, 'portal_url').getPortalObject()
         pathelements = path_info.split('/')
+        self.logg('gfrofp pe : ' + pathelements )
+
         try:
             if 'VirtualHostRoot' in pathelements:
                 pathelements = pathelements[pathelements.index('VirtualHostRoot')+1:]
+                self.logg('gfrofp afterVHR : ' + pathelements )
             else:
                 siteroot = portal.getPhysicalPath()
                 pathelements = pathelements[pathelements.index(siteroot[-1])+1:]
+                self.logg('gfrofp noVHR : ' + pathelements )
         except IndexError:
             # Filter some other way
+            self.logg('gfrofp indexerr : ' )
             pass
         pathelements = [x for x in pathelements if x]
         for i in range(len(pathelements)-1,0,-1):
             obj = portal.restrictedTraverse('/'.join(pathelements[:i]), None)
             if obj and obj is not self:
+                self.logg('gfrofp special : ' )
                 return obj
+        self.logg('gfrofp drop thru : ' )
         return None
 
 

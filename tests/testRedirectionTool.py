@@ -120,16 +120,22 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         testfolderurl = '/testfolderredirect'
         testfolder = utils.makeContent(self.portal, 'Folder', testfolderid)
         testobj = utils.makeContent(testfolder, 'Document', testid)
-        self.failUnless(self.rt.addRedirect(testurl, self.portal.portal_url.getRelativeContentURL(testobj)))
+        self.failUnless(
+           self.rt.addRedirect(testurl,
+           self.portal.portal_url.getRelativeContentURL(testobj)))
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
         self.failUnless(self.rt.getRedirect(testurl+'/'))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl+'/'), testobj)
-        self.failUnless(self.rt.addRedirect(testfolderurl, self.portal.portal_url.getRelativeContentURL(testfolder)))
+        self.failUnless(\
+          self.rt.addRedirect(testfolderurl, 
+          self.portal.portal_url.getRelativeContentURL(testfolder)))
         self.failUnless(self.rt.getRedirect(testfolderurl))
-        self.failUnlessEqual(self.rt.getRedirectObject(testfolderurl), testfolder)
+        self.failUnlessEqual(\
+          self.rt.getRedirectObject(testfolderurl), testfolder)
         self.failUnless(self.rt.getRedirect('%s/%s'%(testfolderurl,testid)))
-        self.failUnlessEqual(self.rt.getRedirectObject('%s/%s'%(testfolderurl,testid)), testobj)
+        self.failUnlessEqual(\
+          self.rt.getRedirectObject('%s/%s'%(testfolderurl,testid)), testobj)
         self.logout()
 
     def testRemoveNonExisting(self):
