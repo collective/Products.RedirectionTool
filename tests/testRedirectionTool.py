@@ -9,6 +9,7 @@ if __name__ == '__main__':
 from Testing import ZopeTestCase
 import RedirectionToolTestCase
 import utils
+from Products.CMFPlone.utils import _createObjectByType
 
 class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
 
@@ -29,7 +30,7 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
 
     def testExtractReferenceFromNonATObject(self):
         self.setRoles(['Manager'])
-        testobj = utils.makeContent(self.portal, 'Document', 'testobj')
+        testobj = _createObjectByType('TempFolder', self.portal, 'testobj')
         reference = self.rt.extractReference(testobj)
         self.failUnless(reference)
         self.failUnlessEqual(reference, '/%s' % self.portal.portal_url.getRelativeContentURL(testobj))
