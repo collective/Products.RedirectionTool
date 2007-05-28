@@ -25,10 +25,9 @@ PloneboardDiscussionTool into the Plone Site instance.
 
 from Products.RedirectionTool import RedirectionTool, redirection_tool_globals
 
-from Products.CMFCore.TypesTool import ContentFactoryMetadata
 from Products.CMFCore.DirectoryView import addDirectoryViews
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.permissions import ManagePortal
 
 from cStringIO import StringIO
 import string

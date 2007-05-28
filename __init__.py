@@ -2,7 +2,6 @@
 $Id$
 """
 
-from Products.CMFCore import CMFCorePermissions
 from Products.CMFCore.utils import ToolInit, ContentInit
 from Products.CMFCore.DirectoryView import registerDirectory
 

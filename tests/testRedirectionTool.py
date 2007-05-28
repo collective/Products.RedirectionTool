@@ -17,25 +17,25 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessRaises(NameError, self.rt.extractReference, 'nonexisting')
 
     def testExtractReferenceFromATObject(self):
-        self.loginPortalOwner()
-        testobj = utils.makeContent(self.portal, 'DDocument', 'testobj')
+        self.setRoles(['Manager'])
+        testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         reference = self.rt.extractReference(testobj)
         self.failUnless(reference)
         self.failUnlessEqual(reference, testobj.UID())
         self.failUnlessEqual(reference, self.rt.extractReference(testobj.UID()))
         self.failUnlessEqual(reference, self.rt.extractReference('/%s' % self.portal.portal_url.getRelativeContentURL(testobj)))
         self.failUnlessEqual(reference, self.rt.extractReference(self.portal.portal_url.getRelativeContentURL(testobj)))
-        self.logout()
+        self.setRoles(['Member'])
 
     def testExtractReferenceFromNonATObject(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         reference = self.rt.extractReference(testobj)
         self.failUnless(reference)
         self.failUnlessEqual(reference, '/%s' % self.portal.portal_url.getRelativeContentURL(testobj))
         self.failUnlessEqual(reference, self.rt.extractReference('/%s' % self.portal.portal_url.getRelativeContentURL(testobj)))
         self.failUnlessEqual(reference, self.rt.extractReference(self.portal.portal_url.getRelativeContentURL(testobj)))
-        self.logout()
+        self.setRoles(['Member'])
 
     # Test interface
     def testAddRedirectToNonExisting(self):
@@ -43,35 +43,35 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessRaises(NameError, self.rt.addRedirect, '/nonexisting', None)
 
     def testBasicAddRedirectToObjectAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         self.failUnless(self.rt.addRedirect(testurl, testobj))
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testBasicAddRedirectToUIDAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testurl = '/testredirect'
-        testobj = utils.makeContent(self.portal, 'DDocument', 'testobj')
+        testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         self.failUnless(self.rt.addRedirect(testurl, testobj.UID()))
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testBasicAddRedirectToPathAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         testpath = self.portal.portal_url.getRelativeContentURL(testobj)
         self.failUnless(self.rt.addRedirect(testurl, testpath))
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testAddRedirectToObjectAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
@@ -88,16 +88,16 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessEqual(self.rt.getRedirectObject(testfolderurl), testfolder)
         self.failUnless(self.rt.getRedirect('%s/%s'%(testfolderurl,testid)))
         self.failUnlessEqual(self.rt.getRedirectObject('%s/%s'%(testfolderurl,testid)), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testAddRedirectToUIDAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
         testfolderurl = '/testfolderredirect'
-        testfolder = utils.makeContent(self.portal, 'SimpleFolder', testfolderid)
-        testobj = utils.makeContent(testfolder, 'DDocument', testid)
+        testfolder = utils.makeContent(self.portal, 'Folder', testfolderid)
+        testobj = utils.makeContent(testfolder, 'Document', testid)
         self.failUnless(self.rt.addRedirect(testurl, testobj.UID()))
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
@@ -108,10 +108,10 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessEqual(self.rt.getRedirectObject(testfolderurl), testfolder)
         self.failUnless(self.rt.getRedirect('%s/%s'%(testfolderurl,testid)))
         self.failUnlessEqual(self.rt.getRedirectObject('%s/%s'%(testfolderurl,testid)), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testAddRedirectToPathAndGetRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testid = 'testobj'
         testfolderid = 'testfolder'
         testurl = '/testredirect'
@@ -128,22 +128,22 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnlessEqual(self.rt.getRedirectObject(testfolderurl), testfolder)
         self.failUnless(self.rt.getRedirect('%s/%s'%(testfolderurl,testid)))
         self.failUnlessEqual(self.rt.getRedirectObject('%s/%s'%(testfolderurl,testid)), testobj)
-        self.logout()
+        self.setRoles(['Member'])
 
     def testRemoveNonExisting(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         self.failIf(self.rt.removeRedirect('/nonexisting'))
-        self.logout()
+        self.setRoles(['Member'])
 
     def testRemoveRedirect(self):
-        self.loginPortalOwner()
+        self.setRoles(['Manager'])
         testurl = '/testredirect'
         testobj = utils.makeContent(self.portal, 'Document', 'testobj')
         self.rt.addRedirect(testurl, testobj)
         self.failUnless(self.rt.getRedirect(testurl))
         self.failUnless(self.rt.removeRedirect(testurl))
         self.failIf(self.rt.getRedirect(testurl))
-        self.logout()
+        self.setRoles(['Member'])
 
     def testGetRedirectFromNotExisting(self):
         self.failUnless(self.rt.getRedirect('/norealurl') is None)

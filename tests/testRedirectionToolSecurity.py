@@ -23,7 +23,7 @@ class TestRedirectionToolSecurity(RedirectionToolTestCase.RedirectionToolTestCas
     def testCheckPermission(self):
         self.login('user1')
         folder = self.membership.getHomeFolder('user1')
-        testobj = utils.makeContent(folder, 'DDocument', 'testobj')
+        testobj = utils.makeContent(folder, 'Document', 'testobj')
         self.failUnless(self.rt.checkPermission('Modify portal content', testobj))
         self.failUnless(self.rt.checkPermission('Modify portal content', testobj.UID()))
         self.failUnless(self.rt.checkPermission('Modify portal content', self.portal.portal_url.getRelativeContentURL(testobj)))

@@ -16,8 +16,8 @@ from BTrees.OOBTree import OOBTree, OOSet
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import UniqueObject, getToolByName
-from Products.CMFCore.CMFCorePermissions import ManagePortal
-from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import ManagePortal
+from Products.CMFCore.permissions import View, ModifyPortalContent
 
 from Products.CMFCore.ActionInformation import ActionInformation
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
