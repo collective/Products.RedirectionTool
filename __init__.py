@@ -16,6 +16,5 @@ def initialize( context ):
     
     ToolInit('Redirection Tool', 
             tools=(RedirectionTool.RedirectionTool, ), 
-            product_name='RedirectionTool',
             icon='action_icon.gif'
             ).initialize(context)
