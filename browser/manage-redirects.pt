@@ -8,13 +8,53 @@
 
   <body>
     <div metal:fill-slot="main">
-      <h1 i18n:translate="heading_add_aliases">Aliases and alternative ID setup</h1>
+      <h1 i18n:translate="heading_add_aliases">Manage aliases</h1>
 
       <p i18n:translate="description_adding_aliases">
-      Using this form, you can add additional aliases for an item. This
-      is an easy way to make an item available under two different URL
-      addresses.
+      Using this form, you can manage aliases for an item. This
+      is an easy way to make an item available under two different URLs.
       </p>  
+
+      <form tal:attributes="action view/view_url" method="post">
+        <fieldset>
+          <legend i18n:translate="legend_existing_aliases">Existing aliases for this item</legend>
+
+          <div class="field"
+               tal:define="error options/errors/redirection|nothing;
+                           redirection request/title | nothing;"
+               tal:attributes="class python:error and 'field error' or 'field'"> 
+              <label for="title" i18n:translate="label_alias">Alias</label>
+
+              <span class="fieldRequired" title="Required"
+                    i18n:attributes="title"
+                    i18n:translate="label_required">(Required)</span>
+
+              <div tal:content="error">Validation error output</div>
+
+              <div class="formHelp" i18n:translate="help_alias">
+                  Enter the alternative Short Name or an absolute path where an alias should exist.
+              </div>
+
+              <input type="text" 
+                     name="redirection" 
+                     value="#" 
+                     size="40" 
+                     tabindex=""
+                     tal:attributes="value request/redirection | nothing;
+                                     tabindex tabindex/next;" 
+                     />
+          </div>
+          <div class="formControls">
+            <input class="context"
+                   type="submit"
+                   value="Add"
+                   name="form.button.Add"
+                   i18n:attributes="value"
+                   />
+          </div>
+
+        </fieldset>
+      </form>
 
       <form tal:attributes="action view/view_url" method="post">
         <fieldset>
@@ -24,7 +64,7 @@
             <div>
               <input type="checkbox" 
                      class="noborder" 
-                     name="redirects:list" 
+                     name="redirects:tuple" 
                      tal:attributes="value redirect/redirect" />
 
               <span tal:replace="redirect/path" />
