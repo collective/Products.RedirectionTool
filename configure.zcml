@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <browser:page
+        name="manage-redirects"
+        for="*"
+        class=".browser.redirects.RedirectsView"
+        permission="zope2.View"
+        allowed_attributes="redirects view_url"
+        />
+
+</configure>

@@ -149,9 +149,6 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
     def testGetRedirectFromNotExisting(self):
         self.failUnless(self.rt.getRedirect('/norealurl') is None)
 
-    def getRedirectsToNonExisting(self):
-        pass
-
 
 if __name__ == '__main__':
     framework()

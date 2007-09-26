@@ -35,21 +35,6 @@ class TestRedirectionToolSecurity(RedirectionToolTestCase.RedirectionToolTestCas
         self.failIf(self.rt.checkPermission('Modify portal content', self.portal.portal_url.getRelativeContentURL(testobj)))
         self.logout()
 
-    def testAddRedirectNotAllowed(self):
-        pass
-
-    def testRemoveRedirectNotAllowed(self):
-        pass
-
-    def testIsRedirectionAllowedFor(self):
-        pass
-
-    def testIsRedirectionAllowedForNotAllowed(self):
-        pass
-
-    def testGetRedirectFromNotAllowed(self):
-        pass
-
 if __name__ == '__main__':
     framework()
 else:
