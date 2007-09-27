@@ -41,8 +41,13 @@ class RedirectsView(BrowserView):
         if 'form.button.Add' in form:
             redirection = form.get('redirection')
             if redirection is None or redirection == '':
-                errors['redirection'] = _(u"You have to enter an alias.")
-                status.addStatusMessage(_(u"You have to enter an alias."), type='error')
+                msg = _(u"You have to enter an alias.")
+                errors['redirection'] = msg
+                status.addStatusMessage(msg, type='error')
+            elif '://' in redirection:
+                msg = _(u"An alias is a path from the portal root and doesn't include http:// or alike.")
+                errors['redirection'] = msg
+                status.addStatusMessage(msg, type='error')
             else:
                 if redirection[0] != '/':
                     path = "/".join(self.context.getPhysicalPath()[:-1])
@@ -50,6 +55,8 @@ class RedirectsView(BrowserView):
                 else:
                     path = "/".join(portal.getPhysicalPath())
                     redirection = "%s%s" % (path, redirection)
+                # XXX check if there is an existing alias
+                # XXX check whether there is an object
                 del form['redirection']
                 storage.add(redirection, "/".join(self.context.getPhysicalPath()))
                 status.addStatusMessage(_(u"Alias added."), type='info')
