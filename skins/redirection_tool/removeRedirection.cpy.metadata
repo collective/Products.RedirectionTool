@@ -1,7 +1,0 @@
-[validators]
-validators..Remove = validateRemoveRedirection
-validators..=validateRemoveRedirection
-
-[actions]
-action.success=traverse_to:string:redirection_form
-action.failure=traverse_to:string:redirection_form
