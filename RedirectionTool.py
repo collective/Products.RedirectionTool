@@ -121,7 +121,6 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         if len(toset) == 0:
             del reversemap[toref]
         return 1
-        
 
     security.declareProtected(View, 'isRedirectionAllowedFor')
     def isRedirectionAllowedFor(self, object):
@@ -141,12 +140,6 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         else:
             if hasattr(self, '_redirectionTypes'):
                 del self._redirectionTypes
-
-#    security.declareProtected(View, 'debugVar')
-#    def debugVar(self, var=None):
-#        import pdb
-#        pdb.set_trace()
-#        tmpvar = var
 
     security.declareProtected(View, 'getRedirectObject')
     def getRedirectObject(self, redirectfrom):
@@ -182,10 +175,6 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
                 return None
             obj = reftool.lookupObject(redirectto)
 
-        # Delete redirect if the object it points to doesn't exist
-#        if not obj:
-#            self.removeRedirect(redirectfrom)
-#            return None
         if obj and remainingcomps:
             return obj.restrictedTraverse('/'.join(remainingcomps), None)
 
@@ -196,87 +185,6 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         """Return the redirect if it exists"""
         redirectobject = self.getRedirectObject(redirectfrom)
         return redirectobject and redirectobject.absolute_url() or redirectobject
-
-    security.declareProtected(View, 'getRedirectFromPathInfo')
-    def getRedirectFromPathInfo(self, path_info):
-        """Redirect based on path info"""
-        siteroot = getToolByName(self, 'portal_url').getPortalObject().getPhysicalPath()
-        pathelements = path_info.split('/')
-        try:
-            pathelements = pathelements[pathelements.index(siteroot[-1])+1:]
-            if 'VirtualHostRoot' in pathelements:
-                pathelements.remove('VirtualHostRoot')
-        except IndexError:
-            # Filter some other way
-            pass
-        key = '/'.join(pathelements)
-        if key[0] != '/':
-            key = '/' + key
-        # Remove trailing slash
-        if key.endswith('/') and len(key) > 1:
-            key = key[:-1]
-        redirect = self.getRedirect(key)
-
-        # As a last resort, let's try a catalogsearch to see if we find the requested object
-        # This search will only find items visible for Anonymous
-        if not redirect:
-            ct = getToolByName(self, 'portal_catalog')
-            searchcomp = ''
-            for comp in pathelements:
-                if comp and comp not in ignoreids:
-                    searchcomp = comp
-#            res = ct(getId=searchcomp)
-            res = ct(id=searchcomp)
-            if len(res)==1:
-                return res[0].getURL()
-
-        return redirect
-
-    security.declareProtected(View, 'getFirstRealObjectFromPath')
-    def getFirstRealObjectFromPath(self, path_info):
-        """Redirect based on path info"""
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        pathelements = path_info.split('/')
-        try:
-            if 'VirtualHostRoot' in pathelements:
-                pathelements = pathelements[pathelements.index('VirtualHostRoot')+1:]
-            else:
-                siteroot = portal.getPhysicalPath()
-                pathelements = pathelements[pathelements.index(siteroot[-1])+1:]
-        except IndexError:
-            # Filter some other way
-            pass
-        pathelements = [x for x in pathelements if x]
-        for i in range(len(pathelements)-1,0,-1):
-            obj = portal.restrictedTraverse('/'.join(pathelements[:i]), None)
-            if obj and obj is not self:
-                return obj
-        return None
-
-
-    security.declareProtected(View, 'getAlternativePages')
-    def getAlternativePages(self, path_info):
-        """Redirect based on path info"""
-        ct = getToolByName(self, 'portal_catalog')
-        pathelements = path_info.split('/')
-        try:
-            if 'VirtualHostRoot' in pathelements:
-                pathelements = pathelements[pathelements.index('VirtualHostRoot')+1:]
-            else:
-                siteroot = getToolByName(self, 'portal_url').getPortalObject().getPhysicalPath()
-                pathelements = pathelements[pathelements.index(siteroot[-1])+1:]
-        except IndexError:
-            # Filter some other way
-            pass
-        pathelements = [x for x in pathelements if x]
-        pathelements.reverse()
-        for comp in pathelements:
-            if comp not in ignoreids:
-                res = ct(SearchableText=comp)
-                if res:
-                    return res[:5]
-        return []
-
 
     security.declareProtected(View, 'getRedirectsTo')
     def getRedirectsTo(self, redirectto):
