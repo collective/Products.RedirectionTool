@@ -32,6 +32,7 @@ class RedirectsView(BrowserView):
 
     def __call__(self):
         storage = getUtility(IRedirectionStorage)
+        portal = getUtility(ISiteRoot)
         request = self.request
         form = request.form
         status = IStatusMessage(self.request)
@@ -43,6 +44,14 @@ class RedirectsView(BrowserView):
                 errors['redirection'] = _(u"You have to enter an alias.")
                 status.addStatusMessage(_(u"You have to enter an alias."), type='error')
             else:
+                if redirection[0] != '/':
+                    path = "/".join(self.context.getPhysicalPath()[:-1])
+                    redirection = "%s/%s" % (path, redirection)
+                else:
+                    path = "/".join(portal.getPhysicalPath())
+                    redirection = "%s%s" % (path, redirection)
+                del form['redirection']
+                storage.add(redirection, "/".join(self.context.getPhysicalPath()))
                 status.addStatusMessage(_(u"Alias added."), type='info')
         elif 'form.button.Remove' in form:
             redirects = form.get('redirects', ())
