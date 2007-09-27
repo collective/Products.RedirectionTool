@@ -6,7 +6,7 @@
         name="manage-redirects"
         for="*"
         class=".browser.redirects.RedirectsView"
-        permission="zope2.View"
+        permission="cmf.ModifyPortalContent"
         allowed_attributes="redirects view_url"
         />
 
