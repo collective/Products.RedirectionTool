@@ -3,7 +3,7 @@
     xmlns:browser="http://namespaces.zope.org/browser">
 
     <browser:page
-        name="manage-redirects"
+        name="manage-aliases"
         for="*"
         class=".browser.redirects.RedirectsView"
         permission="cmf.ModifyPortalContent"

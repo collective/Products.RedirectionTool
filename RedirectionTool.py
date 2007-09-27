@@ -44,7 +44,7 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
     _actions = (ActionInformation(id='redirection'
                                 , title='Aliases'
                                 , action=Expression(
-                text='string: ${object_url}/redirection_form')
+                text='string: ${object_url}/@@manage-aliases')
                                 , condition=Expression(
                 text='python: object is not None and ' +
                 'portal.portal_redirection.isRedirectionAllowedFor(object)')
