@@ -5,8 +5,9 @@
 RedirectionTool - 1.2 (unreleased)
 
     - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
-      with a view + template, a new configlet and migration for existing
-      redirects.
+      with a view + template and using GenericSetup for installation.
+      WARNING, there is no migration yet. The existing redirects aren't lost,
+      but they won't work anymore until the migration is written.
       [fschulze]
 
 RedirectionTool - before 1.2
