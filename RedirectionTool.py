@@ -8,6 +8,8 @@
 $Id$
 """
 
+from zope.component import getUtility
+
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from OFS.SimpleItem import SimpleItem
@@ -21,6 +23,7 @@ from Products.CMFCore.permissions import View, ModifyPortalContent
 from types import StringType
 
 from interfaces import IRedirectionTool
+from plone.app.redirector.interfaces import IRedirectionStorage
 
 
 class RedirectionTool(UniqueObject, SimpleItem):
@@ -44,36 +47,15 @@ class RedirectionTool(UniqueObject, SimpleItem):
         """Create a redirect"""
         # Make sure the user is allowed to edit the object in question
         if not self.checkPermission(ModifyPortalContent, redirectto):
-            return 0
-        # Remove trailing slash except where length is 1 (we dont want null strings instead of /)
-        if redirectfrom.endswith('/') and len(redirectfrom) > 1:
-            redirectfrom = redirectfrom[:-1]
-        # Add the reference to the redirectionmap and the reversemap.
+            return False
         # The redirectfrom is always a string with the path relative to the portal root
         portal = getToolByName(self, 'portal_url').getPortalObject()
         portal_path = "/".join(portal.getPhysicalPath())
         fromref = "%s%s" % (portal_path, redirectfrom)
         toref = self.extractReference(redirectto)
-        redirmap = self._redirectionmap
-        reversemap = self._reverse_redirectionmap
-
-        # If the redirect already exists, remove so it can be be added again (basically overwritten).
-        if redirmap.has_key(fromref):
-            # Get the old redirect
-            oldtoref = redirmap[fromref]
-            # Remove it from the reverse map
-            reversemap[oldtoref].remove(fromref)
-            if len(reversemap[oldtoref]) == 0:
-                del reversemap[oldtoref]
-
-        redirmap[fromref] = toref
-        torefset = reversemap.get(toref, None)
-        # Create a new Set if no set exists
-        if not torefset:
-            torefset = OOSet()
-            reversemap[toref] = torefset
-        torefset.insert(fromref)
-        return 1
+        storage = getUtility(IRedirectionStorage)
+        storage.add(fromref, toref)
+        return True
 
     security.declareProtected(View, 'removeRedirect')
     def removeRedirect(self, redirectfrom):
@@ -83,24 +65,12 @@ class RedirectionTool(UniqueObject, SimpleItem):
         portal_path = "/".join(portal.getPhysicalPath())
         redirectfrom = "%s%s" % (portal_path, redirectfrom)
         # Make sure the user is allowed to edit the object in question
-        redirectto = self._redirectionmap.get(redirectfrom, None)
-        if not redirectto or not self.checkPermission(ModifyPortalContent, redirectto):
-            return 0
-        redirmap = self._redirectionmap
-        reversemap = self._reverse_redirectionmap
-        fromref = redirectfrom
-        toref = redirmap[fromref]
-
-        # Delete from redirection map
-        del redirmap[fromref]
-
-        # Delete from reversemap, and delete entire entry in reversemap if
-        # it was the only entry in the set.
-        toset = reversemap.get(toref)
-        toset.remove(fromref)
-        if len(toset) == 0:
-            del reversemap[toref]
-        return 1
+        storage = getUtility(IRedirectionStorage)
+        redirectto = storage.get(redirectfrom)
+        if redirectto is None or not self.checkPermission(ModifyPortalContent, redirectto):
+            return False
+        storage.remove(redirectfrom)
+        return True
 
     security.declareProtected(View, 'isRedirectionAllowedFor')
     def isRedirectionAllowedFor(self, obj):
@@ -147,25 +117,18 @@ class RedirectionTool(UniqueObject, SimpleItem):
         redirectto = None
         remainingcomps = []
         i = len(comps)
+        storage = getUtility(IRedirectionStorage)
         #Take the chunks of the url and see if folders higher up the tree have redirects as well
         #So if portal/folder has a redirect to portal/newfolder accessing portal/folder/someobject will redirect to portal/newfolder/someobject
         while not redirectto and i > 0:
-            redirectto = self._redirectionmap.get('/'.join(comps[:i]), None)
+            redirectto = storage.get('/'.join(comps[:i]), None)
             remainingcomps = comps[i:]
             i-=1
         if not redirectto:
             return None
         obj = None
-        # Find out if it's a path or a referenceid
-        if redirectto.startswith('/'):
-            # Check if the path is valid, otherwise return None
-            obj = self.restrictedTraverse(redirectto, None)
-        else:
-            reftool = getToolByName(self, 'reference_catalog', getToolByName(self, 'archetype_tool', None))
-
-            if not reftool:
-                return None
-            obj = reftool.lookupObject(redirectto)
+        # Check if the path is valid, otherwise return None
+        obj = self.restrictedTraverse(redirectto, None)
 
         if obj and remainingcomps:
             return obj.restrictedTraverse('/'.join(remainingcomps), None)
@@ -185,7 +148,8 @@ class RedirectionTool(UniqueObject, SimpleItem):
         if not self.checkPermission(View, redirectto):
             return []
         toref = self.extractReference(redirectto)
-        return list(self._reverse_redirectionmap.get(toref, []))
+        storage = getUtility(IRedirectionStorage)
+        return storage.redirects(toref)
 
     security.declarePrivate('extractReference')
     def extractReference(self, source):
@@ -219,8 +183,8 @@ class RedirectionTool(UniqueObject, SimpleItem):
         obj = None
         if isinstance(source, StringType):
             portal = getToolByName(self, 'portal_url').getPortalObject()
-            obj = portal.unrestrictedTraverse(source[1:], portal.unrestrictedTraverse(source,None))
-            if not obj:
+            obj = portal.unrestrictedTraverse(source, None)
+            if obj is None:
                 # Wasn't a path, check for reference
                 reftool = getToolByName(self, 'reference_catalog', getToolByName(self, 'archetype_tool', None))
 
