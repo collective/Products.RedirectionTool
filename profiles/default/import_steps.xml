@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step id="redirectiontool_various"
+   version="20070928-01"
+   handler="Products.RedirectionTool.setuphandlers.importVarious"
+   title="RedirectionTool manual setup steps">
+   RedirectionTool manual (non-GS) setup work
+     <dependency step="actions"/>
+     <dependency step="toolset"/>
+ </import-step>
+
+</import-steps>

@@ -1,4 +1,16 @@
-﻿
+﻿Changelog for plone.app.redirector
+
+    (name of developer listed in brackets)
+
+RedirectionTool - 1.2 (unreleased)
+
+    - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
+      with a view + template, a new configlet and migration for existing
+      redirects.
+      [fschulze]
+
+RedirectionTool - before 1.2
+
     - take into account site property allowAnonymousViewAbout in not_found_message
 
     - Added german translation [spamsch]
