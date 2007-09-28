@@ -8,8 +8,7 @@
 $Id$
 """
 
-import os
-from Globals import InitializeClass, DTMLFile, package_home
+from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from OFS.SimpleItem import SimpleItem
 from BTrees.OOBTree import OOBTree, OOSet
@@ -19,41 +18,17 @@ from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import View, ModifyPortalContent
 
-from Products.CMFCore.ActionInformation import ActionInformation
-from Products.CMFCore.ActionProviderBase import ActionProviderBase
-from Products.CMFCore.Expression import Expression
-
 from types import StringType
 
 from interfaces import IRedirectionTool
 
-# List of ids to always ignore when trying to search for moved or missing content
-ignoreids = ( 'index_html'
-            , 'FrontPage'
-            , 'folder_listing'
-            , 'folder_contents'
-            , 'view'
-            )
 
-class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
+class RedirectionTool(UniqueObject, SimpleItem):
 
     id = 'portal_redirection'
     meta_type = 'Redirection Tool'
 
-    __implements__ = (IRedirectionTool, ActionProviderBase.__implements__)
-    _actions = (ActionInformation(id='redirection'
-                                , title='Aliases'
-                                , action=Expression(
-                text='string: ${object_url}/@@manage-aliases')
-                                , condition=Expression(
-                text='python: object is not None and ' +
-                'portal.portal_redirection.isRedirectionAllowedFor(object)')
-                                , permissions=(ModifyPortalContent,)
-                                , category='object'
-                                , visible=1
-                                 )
-               ,
-               )
+    __implements__ = (IRedirectionTool,)
 
     security = ClassSecurityInfo()
 
@@ -75,7 +50,9 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
             redirectfrom = redirectfrom[:-1]
         # Add the reference to the redirectionmap and the reversemap.
         # The redirectfrom is always a string with the path relative to the portal root
-        fromref = redirectfrom
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        portal_path = "/".join(portal.getPhysicalPath())
+        fromref = "%s%s" % (portal_path, redirectfrom)
         toref = self.extractReference(redirectto)
         redirmap = self._redirectionmap
         reversemap = self._reverse_redirectionmap
@@ -101,11 +78,14 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
     security.declareProtected(View, 'removeRedirect')
     def removeRedirect(self, redirectfrom):
         """Remove existing redirect"""
+        # The redirectfrom is always a string with the path relative to the portal root
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        portal_path = "/".join(portal.getPhysicalPath())
+        redirectfrom = "%s%s" % (portal_path, redirectfrom)
         # Make sure the user is allowed to edit the object in question
         redirectto = self._redirectionmap.get(redirectfrom, None)
         if not redirectto or not self.checkPermission(ModifyPortalContent, redirectto):
             return 0
-        # The redirectfrom is always a string with the path relative to the portal root
         redirmap = self._redirectionmap
         reversemap = self._reverse_redirectionmap
         fromref = redirectfrom
@@ -149,7 +129,10 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         if redirectfrom.find('http://') != -1:
             comps = [redirectfrom]
         else:
-            comps = redirectfrom.split('/')
+            portal = getToolByName(self, 'portal_url').getPortalObject()
+            portal_path = "/".join(portal.getPhysicalPath())
+            fromref = "%s%s" % (portal_path, redirectfrom)
+            comps = fromref.split('/')
             comps = ['']+[x for x in comps if x]
         redirectto = None
         remainingcomps = []
@@ -166,8 +149,7 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         # Find out if it's a path or a referenceid
         if redirectto.startswith('/'):
             # Check if the path is valid, otherwise return None
-            portal = getToolByName(self, 'portal_url').getPortalObject()
-            obj = portal.restrictedTraverse(redirectto[1:], None)
+            obj = self.restrictedTraverse(redirectto, None)
         else:
             reftool = getToolByName(self, 'reference_catalog', getToolByName(self, 'archetype_tool', None))
 
@@ -183,6 +165,7 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
     security.declareProtected(View, 'getRedirect')
     def getRedirect(self, redirectfrom):
         """Return the redirect if it exists"""
+        # The redirectfrom is always a string with the path relative to the portal root
         redirectobject = self.getRedirectObject(redirectfrom)
         return redirectobject and redirectobject.absolute_url() or redirectobject
 
@@ -203,26 +186,19 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         if type(source) is StringType:
             portal = getToolByName(self, 'portal_url').getPortalObject()
             # Check for reference
-            if reftool.lookupObject(source):
-                return source
+            sourceobj = reftool.lookupObject(source)
+            if sourceobj is not None:
+                return "/".join(sourceobj.getPhysicalPath())
             # Not a reference, check path
-            sourceobj = 0
             if source.startswith('/'):
                 sourceobj = portal.restrictedTraverse(source[1:], None)
             else:
-                sourceobj = portal.restrictedTraverse(source,None)
-            if sourceobj:
-                return self.extractReference(sourceobj)
+                sourceobj = portal.restrictedTraverse(source, None)
+            if sourceobj is not None:
+                return "/".join(sourceobj.getPhysicalPath())
         # Assume this is an object
         else:
-            if reftool and reftool.isReferenceable(source):
-                return source.UID()
-            else:
-                try:
-                    urltool = getToolByName(self, 'portal_url')
-                    return '/%s' % urltool.getRelativeContentURL(source)
-                except AttributeError:
-                    pass
+            return "/".join(source.getPhysicalPath())
         raise NameError('Could not find source')
 
     security.declarePublic('checkPermission')
@@ -247,4 +223,4 @@ class RedirectionTool( UniqueObject, ActionProviderBase, SimpleItem ):
         return getSecurityManager().checkPermission( permission, obj )
 
 
-InitializeClass( RedirectionTool )
+InitializeClass(RedirectionTool)
