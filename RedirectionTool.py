@@ -103,14 +103,24 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return 1
 
     security.declareProtected(View, 'isRedirectionAllowedFor')
-    def isRedirectionAllowedFor(self, object):
+    def isRedirectionAllowedFor(self, obj):
         """Checks whether the user is allowed to make a redirect for the object"""
-        return getSecurityManager().checkPermission(ModifyPortalContent, object) and (not hasattr(self, '_redirectionTypes')  or getattr(object, 'portal_type', '') in self.getRedirectionAllowedForTypes())
+        if obj is None:
+            return False
+        if not getSecurityManager().checkPermission(ModifyPortalContent, obj):
+            return False
+        types = getattr(self, '_redirectionTypes', None)
+        if types is None:
+            return True
+        return getattr(obj, 'portal_type', '') in self.getRedirectionAllowedForTypes()
 
     security.declareProtected(View, 'getRedirectionAllowedForTypes')
     def getRedirectionAllowedForTypes(self):
         """ Return the list of portal types that can be redirected to, default is all """
-        return getattr(self, '_redirectionTypes', getToolByName(self, 'portal_types').listContentTypes())
+        types = getattr(self, '_redirectionTypes', None)
+        if types is None:
+            types = getToolByName(self, 'portal_types').listContentTypes()
+        return types
 
     security.declareProtected(ManagePortal, 'setRedirectionAllowedForTypes')
     def setRedirectionAllowedForTypes(self, types=None):
@@ -118,7 +128,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         if types is not None:
             self._redirectionTypes = list(types)
         else:
-            if hasattr(self, '_redirectionTypes'):
+            if getattr(self, '_redirectionTypes', None) is not None:
                 del self._redirectionTypes
 
     security.declareProtected(View, 'getRedirectObject')
