@@ -9,6 +9,7 @@ $Id$
 """
 
 from zope.component import getUtility
+from zope.deprecation import deprecate
 
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
@@ -43,6 +44,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
 
     # 'portal_redirection' interface methods
     security.declareProtected(View, 'addRedirect')
+    @deprecate("The addRedirect method of the RedirectionTool has been "
+               "deprecated. Use the IRedirectionStorage utility from "
+               "plone.app.redirector instead.")
     def addRedirect(self, redirectfrom, redirectto):
         """Create a redirect"""
         # Make sure the user is allowed to edit the object in question
@@ -58,6 +62,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return True
 
     security.declareProtected(View, 'removeRedirect')
+    @deprecate("The removeRedirect method of the RedirectionTool has been "
+               "deprecated. Use the IRedirectionStorage utility from "
+               "plone.app.redirector instead.")
     def removeRedirect(self, redirectfrom):
         """Remove existing redirect"""
         # The redirectfrom is always a string with the path relative to the portal root
@@ -102,6 +109,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
                 del self._redirectionTypes
 
     security.declareProtected(View, 'getRedirectObject')
+    @deprecate("The getRedirectObject method of the RedirectionTool has been "
+               "deprecated. There is no replacement, since it was never "
+               "public.")
     def getRedirectObject(self, redirectfrom):
         """Return the redirect if it exists"""
         # Redirectfrom is always a string with the path.
@@ -136,6 +146,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return obj
 
     security.declareProtected(View, 'getRedirect')
+    @deprecate("The getRedirect method of the RedirectionTool has been "
+               "deprecated. Use the IRedirectionStorage utility from "
+               "plone.app.redirector instead.")
     def getRedirect(self, redirectfrom):
         """Return the redirect if it exists"""
         # The redirectfrom is always a string with the path relative to the portal root
@@ -143,6 +156,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return redirectobject and redirectobject.absolute_url() or redirectobject
 
     security.declareProtected(View, 'getRedirectsTo')
+    @deprecate("The getRedirectsTo method of the RedirectionTool has been "
+               "deprecated. Use the IRedirectionStorage utility from "
+               "plone.app.redirector instead.")
     def getRedirectsTo(self, redirectto):
         """Return the list of redirects"""
         if not self.checkPermission(View, redirectto):
@@ -152,6 +168,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return storage.redirects(toref)
 
     security.declarePrivate('extractReference')
+    @deprecate("The extractReference method of the RedirectionTool has been "
+               "deprecated. There is no replacement, since it was never "
+               "public.")
     def extractReference(self, source):
         """Extract the reference from the source"""
         # Prefer the UID, otherwise use path.
@@ -176,6 +195,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         raise NameError('Could not find source')
 
     security.declarePublic('checkPermission')
+    @deprecate("The checkPermission method of the RedirectionTool has been "
+               "deprecated. There is no replacement, since it was never "
+               "public.")
     def checkPermission(self, permission, source):
         """Extract the object from the source and check the permission"""
         # Check for referencable, otherwise get path for instances
