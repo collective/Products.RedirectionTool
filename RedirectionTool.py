@@ -14,12 +14,13 @@ from zope.deprecation import deprecate
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from OFS.SimpleItem import SimpleItem
-from BTrees.OOBTree import OOBTree, OOSet
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import View, ModifyPortalContent
+
+from Products.CMFPlone.utils import base_hasattr
 
 from types import StringType
 
@@ -35,10 +36,6 @@ class RedirectionTool(UniqueObject, SimpleItem):
     __implements__ = (IRedirectionTool,)
 
     security = ClassSecurityInfo()
-
-    def __init__(self):
-        self._redirectionmap = OOBTree()         # path or referenceid -> path or referenceid
-        self._reverse_redirectionmap = OOBTree() # path or referenceid -> Set of paths or referenceids
 
     # ZMI methods
 
@@ -218,5 +215,26 @@ class RedirectionTool(UniqueObject, SimpleItem):
             raise NameError('No such object %s' % source)
         return getSecurityManager().checkPermission( permission, obj )
 
+    security.declarePrivate('migrateStorage')
+    def migrateStorage(self, out):
+        if base_hasattr(self, '_reverse_redirectionmap'):
+            del self._reverse_redirectionmap
+        if base_hasattr(self, '_redirectionmap'):
+            portal = getToolByName(self, 'portal_url').getPortalObject()
+            portal_path = "/".join(portal.getPhysicalPath())
+            storage = getUtility(IRedirectionStorage)
+            redirmap = self._redirectionmap
+            for key in redirmap:
+                try:
+                    dst = self.extractReference(redirmap[key])
+                except NameError:
+                    print >> out, "RedirectionTool: the destination '%s' "\
+                                  "for '%s' could not be found, the "\
+                                  "redirection was not migrated." % (redirmap[key], key)
+                    continue
+                src = "%s%s" % (portal_path, key)
+                import pdb ; pdb.set_trace( )
+                storage.add(src, dst)
+            del self._redirectionmap
 
 InitializeClass(RedirectionTool)

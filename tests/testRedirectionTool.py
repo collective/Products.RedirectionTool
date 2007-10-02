@@ -6,10 +6,16 @@ import os, sys
 if __name__ == '__main__':
     execfile(os.path.join(sys.path[0], 'framework.py'))
 
+from StringIO import StringIO
 from Testing import ZopeTestCase
 import RedirectionToolTestCase
 import utils
-from Products.CMFPlone.utils import _createObjectByType
+from Products.CMFPlone.utils import _createObjectByType, base_hasattr
+from Products.CMFCore.utils import getToolByName
+from BTrees.OOBTree import OOBTree, OOSet
+from zope.component import getUtility
+from plone.app.redirector.interfaces import IRedirectionStorage
+
 
 class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
 
@@ -150,6 +156,75 @@ class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
         self.failUnless(self.rt.getRedirect('/norealurl') is None)
 
 
+class TestRedirectionToolMigration(RedirectionToolTestCase.RedirectionToolTestCase):
+    def afterSetUp(self):
+        RedirectionToolTestCase.RedirectionToolTestCase.afterSetUp(self)
+        self.rt._redirectionmap = OOBTree()
+        self.rt._reverse_redirectionmap = OOBTree()
+
+    def testOldStorageRemoved(self):
+        out = StringIO()
+        self.rt.migrateStorage(out)
+        self.failIf(base_hasattr(self.rt, '_redirectionmap'))
+        self.failIf(base_hasattr(self.rt, '_reverse_redirectionmap'))
+
+    def testRepeatedMigrationDoesntFail(self):
+        out = StringIO()
+        self.rt.migrateStorage(out)
+        self.rt.migrateStorage(out)
+
+    def testMigrationOfUIDs(self):
+        out = StringIO()
+        storage = getUtility(IRedirectionStorage)
+        self.setRoles(['Manager'])
+        testurl = '/testredirect'
+        testobj = utils.makeContent(self.portal, 'Document', 'testobj')
+        self.rt._redirectionmap[testurl] = testobj.UID()
+
+        self.assertEquals(self.rt.getRedirect(testurl), None)
+        self.assertEquals(storage.get('/plone%s' % testurl), None)
+
+        self.rt.migrateStorage(out)
+
+        self.assertEquals(self.rt.getRedirectObject(testurl), testobj)
+        self.assertEquals(storage.get('/plone%s' % testurl), "/".join(testobj.getPhysicalPath()))
+
+    def testMigrationOfPaths(self):
+        out = StringIO()
+        storage = getUtility(IRedirectionStorage)
+        urltool = getToolByName(self.portal, 'portal_url')
+        self.setRoles(['Manager'])
+        testurl = '/testredirect'
+        testobj = utils.makeContent(self.portal, 'Document', 'testobj')
+        path = '/%s' % urltool.getRelativeContentURL(testobj)
+        self.rt._redirectionmap[testurl] = path
+
+        self.assertEquals(self.rt.getRedirect(testurl), None)
+        self.assertEquals(storage.get('/plone%s' % testurl), None)
+
+        self.rt.migrateStorage(out)
+
+        self.assertEquals(self.rt.getRedirectObject(testurl), testobj)
+        self.assertEquals(storage.get('/plone%s' % testurl), "/".join(testobj.getPhysicalPath()))
+
+    def testMigrationOfBrokenRedirect(self):
+        out = StringIO()
+        storage = getUtility(IRedirectionStorage)
+        self.setRoles(['Manager'])
+        testurl = '/testredirect'
+        self.rt._redirectionmap[testurl] = "foobar"
+
+        self.assertEquals(self.rt.getRedirect(testurl), None)
+        self.assertEquals(storage.get('/plone%s' % testurl), None)
+
+        self.rt.migrateStorage(out)
+
+        self.assertEquals(self.rt.getRedirect(testurl), None)
+        self.assertEquals(storage.get('/plone%s' % testurl), None)
+        self.failIf(base_hasattr(self.rt, '_redirectionmap'))
+        self.failIf(base_hasattr(self.rt, '_reverse_redirectionmap'))
+
+
 if __name__ == '__main__':
     framework()
 else:
@@ -159,4 +234,5 @@ else:
     def test_suite():
         suite = TestSuite()
         suite.addTest(makeSuite(TestRedirectionTool))
+        suite.addTest(makeSuite(TestRedirectionToolMigration))
         return suite
