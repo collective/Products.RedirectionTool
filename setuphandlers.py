@@ -11,6 +11,7 @@ def importVarious(context):
 
     removeActionProvider(site, logger)
     removeSkin(site, logger)
+    migrateStorage(site, logger)
 
 
 def removeActionProvider(site, logger):
@@ -42,3 +43,9 @@ def removeSkin(site, logger):
             logger.info("Removed 'redirection_tool' from %s skin\n" % skin)
         else:
             logger.info("Skipping %s skin, 'redirection_tool' was not installed in it\n" % skin)
+
+
+def migrateStorage(site, logger):
+    rt = getToolByName(site, 'portal_redirection')
+    logger.info("Migrating any existing redirects.")
+    rt.migrateStorage(logger)

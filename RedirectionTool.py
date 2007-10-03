@@ -216,7 +216,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         return getSecurityManager().checkPermission( permission, obj )
 
     security.declarePrivate('migrateStorage')
-    def migrateStorage(self, out):
+    def migrateStorage(self, logger):
         if base_hasattr(self, '_reverse_redirectionmap'):
             del self._reverse_redirectionmap
         if base_hasattr(self, '_redirectionmap'):
@@ -228,12 +228,11 @@ class RedirectionTool(UniqueObject, SimpleItem):
                 try:
                     dst = self.extractReference(redirmap[key])
                 except NameError:
-                    print >> out, "RedirectionTool: the destination '%s' "\
-                                  "for '%s' could not be found, the "\
-                                  "redirection was not migrated." % (redirmap[key], key)
+                    logger.warn("The destination '%s' for '%s' could not be "
+                                "found, the redirection was not migrated."
+                                % (redirmap[key], key))
                     continue
                 src = "%s%s" % (portal_path, key)
-                import pdb ; pdb.set_trace( )
                 storage.add(src, dst)
             del self._redirectionmap
 
