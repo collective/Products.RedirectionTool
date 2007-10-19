@@ -3,7 +3,7 @@
  <configlet title="Redirection and Aliases" action_id="RedirectionTool"
     appId="RedirectionTool" category="Products"
     condition_expr=""
-    url_expr="string:${portal_url}/@@redirections-controlpanel"
+    url_expr="string:${portal_url}/@@aliases-controlpanel"
     visible="True">
   <permission>Manage portal</permission>
  </configlet>

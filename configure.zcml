@@ -20,4 +20,12 @@
         allowed_attributes="redirects view_url"
         />
 
+    <browser:page
+        name="aliases-controlpanel"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".browser.redirects.RedirectsControlPanel"
+        permission="cmf.ManagePortal"
+        />
+
+
 </configure>

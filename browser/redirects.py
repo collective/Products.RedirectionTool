@@ -73,4 +73,44 @@ class RedirectsView(BrowserView):
 
     @memoize
     def view_url(self):
-        return self.context.absolute_url() + '/@@manage-redirects'
+        return self.context.absolute_url() + '/@@manage-aliases'
+
+
+class RedirectsControlPanel(BrowserView):
+    template = ViewPageTemplateFile('redirects-controlpanel.pt')
+
+    def redirects(self):
+        storage = getUtility(IRedirectionStorage)
+        portal = getUtility(ISiteRoot)
+        context_path = "/".join(self.context.getPhysicalPath())
+        portal_path = "/".join(portal.getPhysicalPath())
+        for redirect in storage:
+            path = "/%s" % redirect.lstrip(portal_path)
+            yield {
+                'redirect': redirect,
+                'path': path,
+                'redirect-to': storage.get(redirect),
+            }
+
+    def __call__(self):
+        storage = getUtility(IRedirectionStorage)
+        portal = getUtility(ISiteRoot)
+        request = self.request
+        form = request.form
+        status = IStatusMessage(self.request)
+        errors = {}
+
+        if 'form.button.Remove' in form:
+            redirects = form.get('redirects', ())
+            for redirect in redirects:
+                storage.remove(redirect)
+            if len(redirects) > 1:
+                status.addStatusMessage(_(u"Aliases removed."), type='info')
+            else:
+                status.addStatusMessage(_(u"Alias removed."), type='info')
+
+        return self.template(errors=errors)
+
+    @memoize
+    def view_url(self):
+        return self.context.absolute_url() + '/@@aliases-controlpanel'
