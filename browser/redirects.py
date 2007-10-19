@@ -1,6 +1,9 @@
 from zope.interface import implements
 from zope.component import getUtility
 
+from AccessControl import getSecurityManager
+from Products.RedirectionTool.permissions import ModifyAliases
+
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -55,11 +58,25 @@ class RedirectsView(BrowserView):
                 else:
                     path = "/".join(portal.getPhysicalPath())
                     redirection = "%s%s" % (path, redirection)
-                # XXX check if there is an existing alias
-                # XXX check whether there is an object
-                del form['redirection']
-                storage.add(redirection, "/".join(self.context.getPhysicalPath()))
-                status.addStatusMessage(_(u"Alias added."), type='info')
+                source = redirection.split('/')
+                while len(source):
+                    obj = portal.unrestrictedTraverse(source, None)
+                    if obj is None:
+                        source = source[:-1]
+                    else:
+                        if not getSecurityManager().checkPermission(ModifyAliases, obj):
+                            obj = None
+                        break
+                if obj is None:
+                    msg = _(u"You don't have the permission to set an alias from the location you provided.")
+                    errors['redirection'] = msg
+                    status.addStatusMessage(msg, type='error')
+                else:
+                    # XXX check if there is an existing alias
+                    # XXX check whether there is an object
+                    del form['redirection']
+                    storage.add(redirection, "/".join(self.context.getPhysicalPath()))
+                    status.addStatusMessage(_(u"Alias added."), type='info')
         elif 'form.button.Remove' in form:
             redirects = form.get('redirects', ())
             for redirect in redirects:

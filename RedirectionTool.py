@@ -18,7 +18,9 @@ from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.permissions import ManagePortal
-from Products.CMFCore.permissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import View
+
+from Products.RedirectionTool.permissions import ModifyAliases
 
 from Products.CMFPlone.utils import base_hasattr
 
@@ -47,12 +49,22 @@ class RedirectionTool(UniqueObject, SimpleItem):
     def addRedirect(self, redirectfrom, redirectto):
         """Create a redirect"""
         # Make sure the user is allowed to edit the object in question
-        if not self.checkPermission(ModifyPortalContent, redirectto):
+        if not self.checkPermission(ModifyAliases, redirectto):
             return False
         # The redirectfrom is always a string with the path relative to the portal root
         portal = getToolByName(self, 'portal_url').getPortalObject()
         portal_path = "/".join(portal.getPhysicalPath())
         fromref = "%s%s" % (portal_path, redirectfrom)
+        source = fromref.split('/')
+        while len(source):
+            obj = portal.unrestrictedTraverse(source, None)
+            if obj is None:
+                source = source[:-1]
+            else:
+                if not getSecurityManager().checkPermission(ModifyAliases, obj):
+                    return False
+                else:
+                    break
         toref = self.extractReference(redirectto)
         storage = getUtility(IRedirectionStorage)
         storage.add(fromref, toref)
@@ -71,7 +83,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         # Make sure the user is allowed to edit the object in question
         storage = getUtility(IRedirectionStorage)
         redirectto = storage.get(redirectfrom)
-        if redirectto is None or not self.checkPermission(ModifyPortalContent, redirectto):
+        if redirectto is None or not self.checkPermission(ModifyAliases, redirectto):
             return False
         storage.remove(redirectfrom)
         return True
@@ -81,7 +93,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         """Checks whether the user is allowed to make a redirect for the object"""
         if obj is None:
             return False
-        if not getSecurityManager().checkPermission(ModifyPortalContent, obj):
+        if not getSecurityManager().checkPermission(ModifyAliases, obj):
             return False
         types = getattr(self, '_redirectionTypes', None)
         if types is None:

@@ -13,15 +13,15 @@
         />
 
     <permission
-        id="Products.RedirectionTool.ManageAliases"
-        title="RedirectionTool: Manage aliases"
+        id="Products.RedirectionTool.ModifyAliases"
+        title="RedirectionTool: Modify aliases"
         />
 
     <browser:page
         name="manage-aliases"
         for="*"
         class=".browser.redirects.RedirectsView"
-        permission="Products.RedirectionTool.ManageAliases"
+        permission="Products.RedirectionTool.ModifyAliases"
         allowed_attributes="redirects view_url"
         />
 

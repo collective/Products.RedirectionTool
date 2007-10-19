@@ -9,6 +9,14 @@ RedirectionTool - 1.2 (unreleased)
       existing redirections on install.
       [fschulze]
 
+    - Use new permission "RedirectionTool: Modify aliases" for the alias tab.
+      [fschulze]
+
+    - When adding an alias a security check is performed on the source path.
+      This prevents users from linking to their own content from locations to
+      which they normally don't have access.
+      [fschulze]
+
 RedirectionTool - before 1.2
 
     - take into account site property allowAnonymousViewAbout in not_found_message

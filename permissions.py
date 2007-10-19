@@ -1,0 +1,1 @@
+ModifyAliases = "RedirectionTool: Modify aliases"
