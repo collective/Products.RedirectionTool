@@ -12,11 +12,16 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         />
 
+    <permission
+        id="Products.RedirectionTool.ManageAliases"
+        title="RedirectionTool: Manage aliases"
+        />
+
     <browser:page
         name="manage-aliases"
         for="*"
         class=".browser.redirects.RedirectsView"
-        permission="cmf.ModifyPortalContent"
+        permission="Products.RedirectionTool.ManageAliases"
         allowed_attributes="redirects view_url"
         />
 
@@ -26,6 +31,5 @@
         class=".browser.redirects.RedirectsControlPanel"
         permission="cmf.ManagePortal"
         />
-
 
 </configure>

@@ -10,7 +10,7 @@
    <property name="icon_expr"></property>
    <property name="available_expr">python: portal.portal_redirection.isRedirectionAllowedFor(object)</property>
    <property name="permissions">
-    <element value="ModifyPortalContent"/>
+    <element value="RedirectionTool: Manage aliases"/>
    </property>
    <property name="visible">True</property>
   </object>
