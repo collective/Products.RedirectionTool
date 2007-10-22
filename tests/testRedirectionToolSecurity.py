@@ -21,19 +21,26 @@ class TestRedirectionToolSecurity(RedirectionToolTestCase.RedirectionToolTestCas
         self.createMemberarea('user2')
 
     def testCheckPermission(self):
+        portal_path = self.portal.getPhysicalPath()
         self.login('user1')
         folder = self.membership.getHomeFolder('user1')
         testobj = utils.makeContent(folder, 'Document', 'testobj')
-        self.failUnless(self.rt.checkPermission('Modify portal content', testobj))
-        self.failUnless(self.rt.checkPermission('Modify portal content', testobj.UID()))
-        self.failUnless(self.rt.checkPermission('Modify portal content', self.portal.portal_url.getRelativeContentURL(testobj)))
-        testobj.manage_permission('Modify portal content', ['Manager',], 0)
-        self.logout()
-        self.login('user2')
-        self.failIf(self.rt.checkPermission('Modify portal content', testobj))
-        self.failIf(self.rt.checkPermission('Modify portal content', testobj.UID()))
-        self.failIf(self.rt.checkPermission('Modify portal content', self.portal.portal_url.getRelativeContentURL(testobj)))
-        self.logout()
+        folder_path = folder.getPhysicalPath()[len(portal_path):]
+        testurl = '/%s/foo' % '/'.join(folder_path)
+        # user should be able to add redirects to his own objects
+        self.failUnless(self.rt.addRedirect(testurl, testobj))
+        self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
+
+        folder = self.membership.getHomeFolder('user2')
+        folder_path = folder.getPhysicalPath()[len(portal_path):]
+        testurl = '/%s/foo' % '/'.join(folder_path)
+        # but only if the alias is in a place which belongs to him
+        self.failIf(self.rt.addRedirect(testurl, testobj))
+        self.failUnlessEqual(self.rt.getRedirectObject(testurl), None)
+        testurl = '/bar'
+        self.failIf(self.rt.addRedirect(testurl, testobj))
+        self.failUnlessEqual(self.rt.getRedirectObject(testurl), None)
+
 
 if __name__ == '__main__':
     framework()
