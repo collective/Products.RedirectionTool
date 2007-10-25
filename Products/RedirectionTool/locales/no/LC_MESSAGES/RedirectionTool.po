@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
-"POT-Creation-Date: 2004-09-26 13:43+0000\n"
+"POT-Creation-Date: 2007-10-25 14:11+0000\n"
 "PO-Revision-Date: 2004-09-27 14:04+0100\n"
 "Last-Translator: Alexander Limi <limi@plone.org>\n"
 "Language-Team: Alexander Limi <limi@plone.org>\n"
@@ -17,88 +17,104 @@ msgstr ""
 "Domain: RedirectionTool\n"
 
 #. <input class="context" i18n:attributes="value" name="form.button.Add" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Add"/>
-#: redirection_form.cpt
+#. Default: "Add"
+#: ./browser/manage-redirects.pt:48
 msgid "Add"
 msgstr "Legg til"
 
-#. <input class="context" i18n:attributes="value" name="clear_redirection_types" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Allow all types"/>
-#: prefs_redirection_tool_form.pt
-msgid "Allow all types"
-msgstr "Tillat alle innholdstyper"
+#: ./browser/redirects.py:79
+msgid "Alias added."
+msgstr ""
+
+#: ./browser/redirects.py:87
+msgid "Alias removed."
+msgstr ""
+
+msgid "Aliases"
+msgstr "Alias"
+
+#: ./browser/redirects.py:85
+msgid "Aliases removed."
+msgstr ""
+
+#: ./browser/redirects.py:51
+msgid "An alias is a path from the portal root and doesn't include http:// or alike."
+msgstr ""
+
+msgid "Configure Redirection Tool"
+msgstr "Omdirigerings-innstillinger"
+
+msgid "Redirection"
+msgstr "Omdirigering"
+
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
 
 #. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
-#: redirection_form.cpt
+#. Default: "Remove"
+#: ./browser/manage-redirects.pt:75
 msgid "Remove"
 msgstr "Fjern"
 
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
-#: redirection_form.cpt
+#. Default: "Required"
+#: ./browser/manage-redirects.pt:28
 msgid "Required"
 msgstr "Påkrevd"
 
-#. <input class="context" i18n:attributes="value" name="save" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Save"/>
-#: prefs_redirection_tool_form.pt
-msgid "Save"
-msgstr "Lagre"
+#: ./browser/redirects.py:71
+msgid "You don't have the permission to set an alias from the location you provided."
+msgstr ""
+
+#: ./browser/redirects.py:47
+msgid "You have to enter an alias."
+msgstr ""
 
 #. <p i18n:translate="description_adding_aliases">
 #. </p>
-#: redirection_form.cpt
+#. Default: "Using this form, you can manage aliases for an item. This is an easy way to make an item available under two different URLs."
+#: ./browser/manage-redirects.pt:13
 msgid "description_adding_aliases"
 msgstr "Her kan du legge til alternative web-adresser for en side i nettstedet. Dette er en enkel måte å gjøre en side tilgjengelig fra flere forskjellige web-adresser som er lettere å huske. Eksempel: www.nettsted.no/presse/2004/oekonomi/regnskap kan fungere med den kortere adressen www.nettsted.no/regnskap."
 
-#. <div class="description" i18n:translate="description_configure">
-#: prefs_redirection_tool_form.pt
-msgid "description_configure"
-msgstr "Innstillinger for omdirigering."
+#. Default: "Using this form, you can manage all existing aliases."
+#: ./browser/redirects-controlpanel.pt:16
+msgid "description_manage_aliases"
+msgstr ""
 
 #. <h1 i18n:translate="heading_add_aliases">
-#: redirection_form.cpt
+#. Default: "Manage aliases"
+#: ./browser/manage-redirects.pt:11
 msgid "heading_add_aliases"
 msgstr "Oppsett av alternative adresser"
 
-#. <h1 i18n:translate="heading_redirection_config">
-#: prefs_redirection_tool_form.pt
-msgid "heading_redirection_config"
-msgstr "Omdirigerings-innstillinger"
-
 #. <div class="formHelp" i18n:translate="help_alias">
-#: redirection_form.cpt
+#. Default: "Enter the alternative Short Name or an absolute path where an alias should exist."
+#: ./browser/manage-redirects.pt:34
 msgid "help_alias"
 msgstr "Skriv kortversjonen eller et alias for denne siden. Eksempel: regnskap eller /presse/regnskap."
 
-#. <div class="help" i18n:translate="help_redirection_item_type" id="item_type_search_help" style="visibility:hidden">
-#: prefs_redirection_tool_form.pt
-msgid "help_redirection_item_type"
-msgstr "Velg hvilke innholdstyper som skal kunne omdirigeres."
-
 #. <label for="title" i18n:translate="label_alias">
-#: redirection_form.cpt
+#. Default: "Alias"
+#: ./browser/manage-redirects.pt:26
 msgid "label_alias"
 msgstr "Alias"
 
-#. <span i18n:translate="label_item_type">
-#: prefs_redirection_tool_form.pt
-msgid "label_item_type"
-msgstr "Innholdstype"
-
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
-#: redirection_form.cpt
+#. Default: "(Required)"
+#: ./browser/manage-redirects.pt:28
 msgid "label_required"
 msgstr "(Påkrevd)"
 
-#. <legend i18n:translate="legend_add_alias">
-#: redirection_form.cpt
-msgid "legend_add_alias"
-msgstr "Legg til alias"
+#. Default: "All existing aliases for this site"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "legend_all_existing_aliases"
+msgstr ""
 
 #. <legend i18n:translate="legend_existing_aliases">
-#: redirection_form.cpt
+#. Default: "Existing aliases for this item"
+#: ./browser/manage-redirects.pt:20
 msgid "legend_existing_aliases"
 msgstr "Eksistere alias for denne siden"
-
-#. <span class="legend" i18n:translate="legend_prefs_redirection_tool">
-#: prefs_redirection_tool_form.pt
-msgid "legend_prefs_redirection_tool"
-msgstr "Omdirigering"
 

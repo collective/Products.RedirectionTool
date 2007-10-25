@@ -1,0 +1,135 @@
+# Gettext file for Redirection Tool.
+# Santiágo Peresón <santiago.pereson@euskosare.org>, 2005.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Redirection Tool\n"
+"POT-Creation-Date: 2007-10-25 14:11+0000\n"
+"PO-Revision-Date: 2005-03-03 05:25-0300\n"
+"Last-Translator: Santiágo Peresón <santiago.pereson@euskosare.org>\n"
+"Language-Team: EuskoSare-i18n <info@euskosare.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: es\n"
+"Language-Name: Castellano\n"
+"Preferred-Encodings: latin1 utf-8\n"
+"Domain: RedirectionTool\n"
+"X-Is-Fallback-For: es-bo es-cl es-co es-cr es-do es-ec es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+
+#. <input class="context" i18n:attributes="value" name="form.button.Add" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Add"/>
+#. Default: "Add"
+#: ./browser/manage-redirects.pt:48
+msgid "Add"
+msgstr "Agregar"
+
+#: ./browser/redirects.py:79
+msgid "Alias added."
+msgstr ""
+
+#: ./browser/redirects.py:87
+msgid "Alias removed."
+msgstr ""
+
+msgid "Aliases"
+msgstr "Alias"
+
+#: ./browser/redirects.py:85
+msgid "Aliases removed."
+msgstr ""
+
+#: ./browser/redirects.py:51
+msgid "An alias is a path from the portal root and doesn't include http:// or alike."
+msgstr ""
+
+msgid "Configure Redirection Tool"
+msgstr "Configurar la Herramienta de Redireccionamiento"
+
+msgid "Redirection"
+msgstr "Redireccionamiento"
+
+#: Extensions/Install.py
+msgid "Redirection and Aliases"
+msgstr ""
+
+#. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
+#. Default: "Remove"
+#: ./browser/manage-redirects.pt:75
+msgid "Remove"
+msgstr "Eliminar"
+
+#. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
+#. Default: "Required"
+#: ./browser/manage-redirects.pt:28
+msgid "Required"
+msgstr "Obligatorio"
+
+#: ./browser/redirects.py:71
+msgid "You don't have the permission to set an alias from the location you provided."
+msgstr ""
+
+#: ./browser/redirects.py:47
+msgid "You have to enter an alias."
+msgstr ""
+
+#. <p i18n:translate="description_adding_aliases">
+#. Using this form, you can add additional aliases for an item. This
+#. is an easy way to make an item available under two different URL
+#. addresses.
+#. </p>
+#. Default: "Using this form, you can manage aliases for an item. This is an easy way to make an item available under two different URLs."
+#: ./browser/manage-redirects.pt:13
+msgid "description_adding_aliases"
+msgstr "Utilizando este formulario podrá agregar alias adicionales para un ítem. Esta es una manera fácil de lograr que un ítem esté disponible en dos direcciones URL diferentes."
+
+#. Default: "Using this form, you can manage all existing aliases."
+#: ./browser/redirects-controlpanel.pt:16
+msgid "description_manage_aliases"
+msgstr ""
+
+#. <h1 i18n:translate="heading_add_aliases">
+#. Aliases and alternative ID setup
+#. </h1>
+#. Default: "Manage aliases"
+#: ./browser/manage-redirects.pt:11
+msgid "heading_add_aliases"
+msgstr "Configuración de alias e identificador alternativo"
+
+#. <div class="formHelp" i18n:translate="help_alias">
+#. Enter the alternative Short Name or an absolute path where an alias should exist.
+#. </div>
+#. Default: "Enter the alternative Short Name or an absolute path where an alias should exist."
+#: ./browser/manage-redirects.pt:34
+msgid "help_alias"
+msgstr "Ingrese el Nombre Corto alternativo o una ruta de acceso absoluta en el que debería existir un alias."
+
+#. <label for="title" i18n:translate="label_alias">
+#. Alias
+#. </label>
+#. Default: "Alias"
+#: ./browser/manage-redirects.pt:26
+msgid "label_alias"
+msgstr "Acceso"
+
+#. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
+#. (Required)
+#. </span>
+#. Default: "(Required)"
+#: ./browser/manage-redirects.pt:28
+msgid "label_required"
+msgstr "(Obligatorio)"
+
+#. Default: "All existing aliases for this site"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "legend_all_existing_aliases"
+msgstr ""
+
+#. <legend i18n:translate="legend_existing_aliases">
+#. Existing aliases for this item
+#. </legend>
+#. Default: "Existing aliases for this item"
+#: ./browser/manage-redirects.pt:20
+msgid "legend_existing_aliases"
+msgstr "Alias existentes para este ítem"
+
