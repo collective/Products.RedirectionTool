@@ -28,6 +28,8 @@
         allowed_attributes="redirects view_url"
         />
 
+    <adapter factory=".browser.redirects.RedirectsControlPanelAdapter" />
+
     <browser:page
         name="aliases-controlpanel"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"

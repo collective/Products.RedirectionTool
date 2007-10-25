@@ -1,5 +1,6 @@
-from zope.interface import implements
-from zope.component import getUtility
+from zope.interface import implements, Interface
+from zope.component import adapts, getUtility
+from zope.schema import Choice, Tuple
 
 from AccessControl import getSecurityManager
 from Products.RedirectionTool.permissions import ModifyAliases
@@ -9,7 +10,11 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 from plone.app.redirector.interfaces import IRedirectionStorage
+from plone.app.controlpanel.widgets import MultiCheckBoxThreeColumnWidget
+from zope.formlib.form import setUpWidgets, FormFields
 
 from plone.memoize.instance import memoize
 
@@ -93,8 +98,41 @@ class RedirectsView(BrowserView):
         return self.context.absolute_url() + '/@@manage-aliases'
 
 
+class IAliasesSchema(Interface):
+
+    managed_types = Tuple(title=_(u"Define the types for which the aliases "
+                                   "can be managed"),
+                          description=_(u""),
+                          required=True,
+                          missing_value=tuple(),
+                          value_type=Choice(
+                              vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes"))
+
+
+class RedirectsControlPanelAdapter(object):
+
+    adapts(IPloneSiteRoot)
+    implements(IAliasesSchema)
+
+    def __init__(self, context):
+        self.context = context
+        self.rt = getToolByName(context, 'portal_redirection')
+
+    def get_managed_types(self):
+        return self.rt.getRedirectionAllowedForTypes()
+
+    def set_managed_types(self, value):
+        self.rt.setRedirectionAllowedForTypes(value)
+
+    managed_types = property(get_managed_types, set_managed_types)
+
+
 class RedirectsControlPanel(BrowserView):
     template = ViewPageTemplateFile('redirects-controlpanel.pt')
+
+    form_fields = FormFields(IAliasesSchema, render_context=True)
+    form_fields['managed_types'].custom_widget = MultiCheckBoxThreeColumnWidget
+    form_fields['managed_types'].custom_widget.cssClass='label'
 
     def redirects(self):
         storage = getUtility(IRedirectionStorage)
@@ -110,6 +148,13 @@ class RedirectsControlPanel(BrowserView):
             }
 
     def __call__(self):
+        self.prefix = 'form'
+        self.adapters = {}
+        self.widgets = []
+        # self.widgets = setUpWidgets(
+        #     self.form_fields, self.prefix, self.context, self.request,
+        #     form=self, adapters=self.adapters, ignore_request=False)
+
         storage = getUtility(IRedirectionStorage)
         portal = getUtility(ISiteRoot)
         request = self.request
