@@ -100,9 +100,9 @@ class RedirectsView(BrowserView):
 
 class IAliasesSchema(Interface):
 
-    managed_types = Tuple(title=_(u"Define the types for which the aliases "
-                                   "can be managed"),
-                          description=_(u""),
+    managed_types = Tuple(title=_(u"Managed types"),
+                          description=_(u"Select the types for which the "
+                                         "aliases can be managed"),
                           required=True,
                           missing_value=tuple(),
                           value_type=Choice(
@@ -148,13 +148,6 @@ class RedirectsControlPanel(BrowserView):
             }
 
     def __call__(self):
-        self.prefix = 'form'
-        self.adapters = {}
-        self.widgets = []
-        # self.widgets = setUpWidgets(
-        #     self.form_fields, self.prefix, self.context, self.request,
-        #     form=self, adapters=self.adapters, ignore_request=False)
-
         storage = getUtility(IRedirectionStorage)
         portal = getUtility(ISiteRoot)
         request = self.request
@@ -166,10 +159,19 @@ class RedirectsControlPanel(BrowserView):
             redirects = form.get('redirects', ())
             for redirect in redirects:
                 storage.remove(redirect)
-            if len(redirects) > 1:
+            if len(redirects) == 0:
+                status.addStatusMessage(_(u"No aliases selected for removal."), type='info')
+            elif len(redirects) > 1:
                 status.addStatusMessage(_(u"Aliases removed."), type='info')
             else:
                 status.addStatusMessage(_(u"Alias removed."), type='info')
+        elif 'form.button.Save' in form:
+            dst = IAliasesSchema(self.context)
+            dst.managed_types = self.request.form['form.managed_types']
+
+        self.widgets = setUpWidgets(
+            self.form_fields, 'form', self.context, self.request,
+            form=self, ignore_request=True)
 
         return self.template(errors=errors)
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
-"POT-Creation-Date: 2007-10-25 14:11+0000\n"
+"POT-Creation-Date: 2007-10-26 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Anton Stonor <stonor@giraffen.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,26 +19,34 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: ./browser/redirects.py:79
+#: ./browser/redirects.py:84
 msgid "Alias added."
 msgstr ""
 
-#: ./browser/redirects.py:87
+#: ./browser/redirects.py:92
 msgid "Alias removed."
 msgstr ""
 
 msgid "Aliases"
 msgstr ""
 
-#: ./browser/redirects.py:85
+#: ./browser/redirects.py:90
 msgid "Aliases removed."
 msgstr ""
 
-#: ./browser/redirects.py:51
+#: ./browser/redirects.py:56
 msgid "An alias is a path from the portal root and doesn't include http:// or alike."
 msgstr ""
 
 msgid "Configure Redirection Tool"
+msgstr ""
+
+#: ./browser/redirects.py:103
+msgid "Managed types"
+msgstr ""
+
+#: ./browser/redirects.py:163
+msgid "No aliases selected for removal."
 msgstr ""
 
 msgid "Redirection"
@@ -58,11 +66,15 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: ./browser/redirects.py:71
+#: ./browser/redirects.py:104
+msgid "Select the types for which the aliases can be managed"
+msgstr ""
+
+#: ./browser/redirects.py:76
 msgid "You don't have the permission to set an alias from the location you provided."
 msgstr ""
 
-#: ./browser/redirects.py:47
+#: ./browser/redirects.py:52
 msgid "You have to enter an alias."
 msgstr ""
 
@@ -71,7 +83,7 @@ msgstr ""
 msgid "description_adding_aliases"
 msgstr ""
 
-#. Default: "Using this form, you can manage all existing aliases."
+#. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
 #: ./browser/redirects-controlpanel.pt:16
 msgid "description_manage_aliases"
 msgstr ""
@@ -97,12 +109,17 @@ msgid "label_required"
 msgstr ""
 
 #. Default: "All existing aliases for this site"
-#: ./browser/redirects-controlpanel.pt:22
+#: ./browser/redirects-controlpanel.pt:73
 msgid "legend_all_existing_aliases"
 msgstr ""
 
 #. Default: "Existing aliases for this item"
 #: ./browser/manage-redirects.pt:20
 msgid "legend_existing_aliases"
+msgstr ""
+
+#. Default: "Required"
+#: ./browser/redirects-controlpanel.pt:35
+msgid "title_required"
 msgstr ""
 

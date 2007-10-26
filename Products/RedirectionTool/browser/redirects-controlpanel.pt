@@ -14,7 +14,8 @@
       <h1 i18n:translate="heading_add_aliases">Manage aliases</h1>
 
       <p i18n:translate="description_manage_aliases">
-      Using this form, you can manage all existing aliases.
+      Using this form, you can select for which types you want to manage
+      aliases and manage all existing aliases.
       </p>  
 
       <form tal:attributes="action view/view_url" method="post">
@@ -57,6 +58,17 @@
             </div>
 
         </tal:block>
+
+        <div class="formControls"
+             i18n:domain="plone">
+          <input class="context"
+                 type="submit"
+                 value="Save"
+                 name="form.button.Save"
+                 i18n:attributes="value label_save;"
+                 />
+        </div>
+
         <fieldset>
           <legend i18n:translate="legend_all_existing_aliases">All existing aliases for this site</legend>
 
