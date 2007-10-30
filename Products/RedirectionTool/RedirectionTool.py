@@ -240,9 +240,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
                 try:
                     dst = self.extractReference(redirmap[key])
                 except NameError:
-                    logger.warn("The destination '%s' for '%s' could not be "
-                                "found, the redirection was not migrated."
-                                % (redirmap[key], key))
+                    logger.warning("The destination '%s' for '%s' could not be "
+                                   "found, the redirection was not migrated."
+                                   % (redirmap[key], key))
                     continue
                 src = "%s%s" % (portal_path, key)
                 storage.add(src, dst)
