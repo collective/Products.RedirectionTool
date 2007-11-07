@@ -2,7 +2,7 @@
 
     (name of developer listed in brackets)
 
-RedirectionTool - 1.2 (unreleased)
+RedirectionTool 1.2 - November 7, 2007
 
     - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
       with a view + template, using GenericSetup for installation and migrate
