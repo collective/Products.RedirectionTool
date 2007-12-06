@@ -139,12 +139,19 @@ class RedirectsControlPanel(BrowserView):
         portal = getUtility(ISiteRoot)
         context_path = "/".join(self.context.getPhysicalPath())
         portal_path = "/".join(portal.getPhysicalPath())
+        portal_path_len = len(portal_path)
         for redirect in storage:
-            path = "/%s" % redirect.lstrip(portal_path)
+            if redirect.startswith(portal_path):
+                path = redirect[portal_path_len:]
+            else:
+                path = redirect
+            redirectto = storage.get(redirect)
+            if redirectto.startswith(portal_path):
+                redirectto = redirectto[portal_path_len:]
             yield {
                 'redirect': redirect,
                 'path': path,
-                'redirect-to': storage.get(redirect),
+                'redirect-to': redirectto,
             }
 
     def __call__(self):
