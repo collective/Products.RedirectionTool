@@ -32,7 +32,7 @@ class RedirectsView(BrowserView):
         portal_path = "/".join(portal.getPhysicalPath())
         redirects = storage.redirects(context_path)
         for redirect in redirects:
-            path = "/%s" % redirect.lstrip(portal_path)
+            path = redirect[len(portal_path):]
             yield {
                 'redirect': redirect,
                 'path': path,
