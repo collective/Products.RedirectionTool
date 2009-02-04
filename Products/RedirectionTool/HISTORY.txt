@@ -4,10 +4,12 @@
 
 RedirectionTool - 1.2 (unreleased)
 
+    - fixed bug that caused incorrect display of redirects on the
+      @@manage-aliases page. [hexsprite]
+
     - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
       with a view + template, using GenericSetup for installation and migrate
-      existing redirections on install.
-      [fschulze]
+      existing redirections on install. [fschulze]
 
     - Use new permission "RedirectionTool: Modify aliases" for the alias tab.
       [fschulze]
@@ -19,7 +21,8 @@ RedirectionTool - 1.2 (unreleased)
 
 RedirectionTool - before 1.2
 
-    - take into account site property allowAnonymousViewAbout in not_found_message
+    - take into account site property allowAnonymousViewAbout in
+      not_found_message
 
     - Added german translation [spamsch]
 
