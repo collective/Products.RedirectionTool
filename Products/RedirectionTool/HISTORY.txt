@@ -2,10 +2,12 @@
 
     (name of developer listed in brackets)
 
-RedirectionTool - 1.2 (unreleased)
+RedirectionTool 1.2.1 - Februrary 11, 2009
 
-    - fixed bug that caused incorrect display of redirects on the
-      @@manage-aliases page. [hexsprite]
+    - Fixed bugs that caused incorrect display of redirects on the
+      @@manage-aliases and @@aliases-controlpanel pages. [hexsprite]
+
+RedirectionTool 1.2 - November 7, 2007
 
     - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
       with a view + template, using GenericSetup for installation and migrate
@@ -19,7 +21,7 @@ RedirectionTool - 1.2 (unreleased)
       which they normally don't have access.
       [fschulze]
 
-RedirectionTool - before 1.2
+RedirectionTool before 1.2
 
     - take into account site property allowAnonymousViewAbout in
       not_found_message
