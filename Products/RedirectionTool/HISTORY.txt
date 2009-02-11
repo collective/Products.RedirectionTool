@@ -1,4 +1,4 @@
-﻿Changelog for plone.app.redirector
+﻿Changelog for Redirection Tool
 
     (name of developer listed in brackets)
 
@@ -6,6 +6,8 @@ RedirectionTool 1.2.1 - Februrary 11, 2009
 
     - Fixed bugs that caused incorrect display of redirects on the
       @@manage-aliases and @@aliases-controlpanel pages. [hexsprite]
+    
+    - Expanded readme and packaged the release. [erikrose]
 
 RedirectionTool 1.2 - November 7, 2007
 

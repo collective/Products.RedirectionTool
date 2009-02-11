@@ -5,9 +5,21 @@ About
 
 Using The RedirectionTool
 
-  To use this product, simply click on the aliases tab in any plone content
-  type and type the alternative Short Name or an absolute path where this
-  alias should exist.
+  To make a redirection to a piece of
+  content...
+  
+    1. Navigate to that content.
+    
+    2. Click the Aliases tab.
+    
+    3. Enter the short name or the absolute path that should redirect to the
+       content.
+    
+    4. Click Add.
+  
+  There is also a Redirection and Aliases control panel under Site Setup which
+  presents all the redirections in the site in one place and allows enabling and
+  disabling alias management per content type.
 
 Credits
 
