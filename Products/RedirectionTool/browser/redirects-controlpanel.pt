@@ -16,8 +16,8 @@
       <p i18n:translate="description_manage_aliases">
       Using this form, you can select for which types you want to manage
       aliases and manage all existing aliases.
-      </p>  
-
+      </p>
+      
       <form tal:attributes="action view/view_url" method="post">
         <tal:block tal:repeat="widget view/widgets">
 
@@ -58,7 +58,9 @@
             </div>
 
         </tal:block>
+      </form>
 
+      <form tal:attributes="action view/view_url" method="post">
         <div class="formControls"
              i18n:domain="plone">
           <input class="context"
@@ -94,6 +96,7 @@
 
         </fieldset>
       </form>
+
     </div>
   </body>
 </html>
