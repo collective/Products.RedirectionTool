@@ -25,7 +25,7 @@
         for="*"
         class=".browser.redirects.RedirectsView"
         permission="Products.RedirectionTool.ModifyAliases"
-        allowed_attributes="redirects view_url"
+        allowed_attributes="redirects view_url errors"
         />
 
     <adapter factory=".browser.redirects.RedirectsControlPanelAdapter" />

@@ -2,6 +2,10 @@
 
     (name of developer listed in brackets)
 
+RedirectionTool 1.3 - unreleased
+
+    - Added bulk upload capability. [erikrose]
+
 RedirectionTool 1.2.1 - Februrary 11, 2009
 
     - Fixed bugs that caused incorrect display of redirects on the

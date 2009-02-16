@@ -11,11 +11,29 @@
 
   <body>
     <div metal:fill-slot="prefs_configlet_main">
+      <dl tal:condition="view/errors" class="portalMessage error">
+        <dt>Error</dt>
+        <dd>
+          <p i18n:translate="error_bulk_upload">
+            No aliases were added. Please correct these errors in your CSV file and try again:
+          </p>
+          <table style="text-align: left; vertical-align: top" border="0" cellpadding="2" cellspacing="0">
+            <tr tal:repeat="error view/errors" style="vertical-align: top">
+              <td nowrap="nowrap"><tal:block i18n:translate="label_bulk_upload_line">Line</tal:block> <span tal:replace="error/line_number" /><tal:block i18n:translate="label_bulk_upload_line_suffix">:</tal:block></td>
+              <td>
+                <code tal:content="error/line" />
+              </td>
+              <td tal:content="error/message" />
+            </tr>
+          </table>
+        </dd>
+      </dl>
+      
       <h1 i18n:translate="heading_add_aliases">Manage aliases</h1>
 
       <p i18n:translate="description_manage_aliases">
-      Using this form, you can select for which types you want to manage
-      aliases and manage all existing aliases.
+        Using this form, you can select for which types you want to manage
+        aliases and manage all existing aliases.
       </p>
       
       <form tal:attributes="action view/view_url" method="post">
@@ -97,6 +115,32 @@
         </fieldset>
       </form>
 
+      <form tal:attributes="action view/view_url" method="post" enctype="multipart/form-data">
+        <fieldset>
+          <legend i18n:translate="legend_bulk_upload">Bulk-upload aliases</legend>
+
+          <p i18n:translate="description_bulk_upload">
+            Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/).
+          </p>
+          <p>
+            <tal:block i18n:translate="example_caption_bulk_upload">Example:</tal:block><br />
+            <code i18n:translate="example_bulk_upload">/old-home-page.asp,/front-page<br />
+            /people/JoeT,/Users/joe-thurston</code>
+          </p>
+          
+          <input type="file" name="file" />
+
+          <div class="formControls">
+            <input class="context"
+                   type="submit"
+                   value="Upload"
+                   name="form.button.Upload"
+                   i18n:attributes="value"
+                   />
+          </div>
+
+        </fieldset>
+      </form>
     </div>
   </body>
 </html>

@@ -29,5 +29,7 @@ Credits
 
   Updated for Plone 3 by Florian Schulze at
   "Plone Solutions":http://www.plonesolutions.com.
+  
+  Bulk upload by Erik Rose of "WebLion":http://weblion.psu.edu.
 
   The Redirection Tool is released under the GPL licence.
