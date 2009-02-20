@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
-"POT-Creation-Date: 2007-10-26 12:09+0000\n"
-"PO-Revision-Date: 2006-06-06 13:43+0000\n"
-"Last-Translator: Simon Pamies <s.pamies@banality.de>\n"
+"POT-Creation-Date: 2009-02-16 19:18+0000\n"
+"PO-Revision-Date: 2009-02-20 02:22+0100\n"
+"Last-Translator: René Fleschenberg <rene@fleschenberg.net>\n"
 "Language-Team: -\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -15,48 +15,58 @@ msgstr ""
 "Domain: RedirectionTool\n"
 "X-Is-Fallback-For: de-at de-li de-lu de-ch\n"
 
+#: ./browser/redirects.py:246
+msgid "%i aliases added."
+msgstr "%i Umleitungen angelegt."
+
 #. <input class="context" i18n:attributes="value" name="form.button.Add" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Add"/>
 #. Default: "Add"
 #: ./browser/manage-redirects.pt:48
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: ./browser/redirects.py:84
+#: ./browser/redirects.py:106
 msgid "Alias added."
-msgstr ""
+msgstr "Umleitung angelegt."
 
-#: ./browser/redirects.py:92
+#: ./browser/redirects.py:49
+msgid "Alias path must start with a slash."
+msgstr "Der Pfad der Umleitung muss mit einem Schrägstrich beginnen."
+
+#: ./browser/redirects.py:114
 msgid "Alias removed."
-msgstr ""
+msgstr "Umleitung entfernt."
 
+#. Default: "Aliases"
+#: ./profiles/default/actions.xml
 msgid "Aliases"
 msgstr "Umleitungen"
 
-#: ./browser/redirects.py:90
+#: ./browser/redirects.py:112
 msgid "Aliases removed."
-msgstr ""
+msgstr "Umleitungen entfernt."
 
-#: ./browser/redirects.py:56
+#: ./browser/redirects.py:41
 msgid "An alias is a path from the portal root and doesn't include http:// or alike."
-msgstr ""
+msgstr "Eine Umleitung ist ein Pfad relativ zur Website-Wurzel und enthält kein http:// oder Ähnliches."
 
-msgid "Configure Redirection Tool"
-msgstr "Umleitungs-Tool konfigurieren"
+#: ./browser/redirects.py:234
+msgid "Each line must have 2 columns."
+msgstr "Jede Zeile muß aus 2 Spalten bestehen."
 
-#: ./browser/redirects.py:103
+#: ./browser/redirects.py:125
 msgid "Managed types"
-msgstr ""
+msgstr "Verwaltete Typen"
 
-#: ./browser/redirects.py:163
+#: ./browser/redirects.py:195
 msgid "No aliases selected for removal."
-msgstr ""
+msgstr "Keine Umleitungen zum Entfernen ausgewählt."
 
-msgid "Redirection"
-msgstr "Umleitung"
-
-#: Extensions/Install.py
+#. Default: "Redirection and Aliases"
+#: ./profiles/default/actionicons.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Redirection and Aliases"
-msgstr ""
+msgstr "Umleitungen"
 
 #. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
 #. Default: "Remove"
@@ -70,17 +80,34 @@ msgstr "Entfernen"
 msgid "Required"
 msgstr "Erforderlich"
 
-#: ./browser/redirects.py:104
+#: ./browser/redirects.py:126
 msgid "Select the types for which the aliases can be managed"
-msgstr ""
+msgstr "Wählen Sie die Typen aus, für die Umleitungen verwaltet werden können."
 
-#: ./browser/redirects.py:76
+#: ./browser/redirects.py:42
+msgid "Target path must be relative to the portal root and not include http:// or the like."
+msgstr "Der Zielpfad muss relativ zur Website-Wurzel sein und darf kein http:// oder Ähnliches enthalten."
+
+#: ./browser/redirects.py:50
+msgid "Target path must start with a slash."
+msgstr "Der Zielpfad muss mit einem Schrägstrich beginnen."
+
+#. Default: "Upload"
+#: ./browser/redirects-controlpanel.pt:134
+msgid "Upload"
+msgstr "Hochladen"
+
+#: ./browser/redirects.py:65
 msgid "You don't have the permission to set an alias from the location you provided."
-msgstr ""
+msgstr "Sie haben keine ausreichende Berechtigung, um diese Umleitung anzulegen."
 
-#: ./browser/redirects.py:52
+#: ./browser/redirects.py:39
+msgid "You have to enter a target."
+msgstr "Sie müssen ein Ziel angeben."
+
+#: ./browser/redirects.py:38
 msgid "You have to enter an alias."
-msgstr ""
+msgstr "Sie müssen einen Alias angeben."
 
 #. <p i18n:translate="description_adding_aliases">
 #. Using this form, you can add additional aliases for an item. This
@@ -92,10 +119,30 @@ msgstr ""
 msgid "description_adding_aliases"
 msgstr "Mit diesem Formular können Sie dem Objekt zusätzliche Aliase (Namen) geben. Diese Aliase sind ein einfacher Weg um dieses Objekt unter anderen Adressen verfügbar zu machen."
 
+#. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
+#: ./browser/redirects-controlpanel.pt:122
+msgid "description_bulk_upload"
+msgstr "Sie können mehrere Umleitungen gleichzeitig anlegen, indem Sie eine CSV-Datei hochladen. Die erste Spalte muss den Pfad enthalten, von dem aus umgeleitet wird. Die zweite Spalte muss das Ziel der Umleitung enthalten. Beide Pfade sind relativ zur Website-Wurzel und beginnen mit einem Schrägstrich (/)."
+
 #. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
-#: ./browser/redirects-controlpanel.pt:16
+#: ./browser/redirects-controlpanel.pt:34
 msgid "description_manage_aliases"
-msgstr ""
+msgstr "Mit diesem Formular können Sie auswählen, für welche Typen Sie Umleitungen verwalten wollen, und alle bestehenden Umleitungen verwalten."
+
+#. Default: "No aliases were added. Please correct these errors in your CSV file and try again:"
+#: ./browser/redirects-controlpanel.pt:17
+msgid "error_bulk_upload"
+msgstr "Keine Umleitungen angelegt. Bitte korrigieren Sie diese Fehler in Ihrer CSV-Datei, und versuchen Sie es erneut:"
+
+#. Default: "/old-home-page.asp,/front-page<br /> /people/JoeT,/Users/joe-thurston"
+#: ./browser/redirects-controlpanel.pt:127
+msgid "example_bulk_upload"
+msgstr "/alte-homepage.asp,/front-page<br /> /people/MaxM,/Users/max-mustermann"
+
+#. Default: "Example:"
+#: ./browser/redirects-controlpanel.pt:126
+msgid "example_caption_bulk_upload"
+msgstr "Beispiel:"
 
 #. <h1 i18n:translate="heading_add_aliases">
 #. Aliases and alternative ID setup
@@ -121,6 +168,16 @@ msgstr "Geben Sie hier einen Namen oder einen absoluten Pfad (wie /anderername) 
 msgid "label_alias"
 msgstr "Umleitung"
 
+#. Default: "Line"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line"
+msgstr "Zeile"
+
+#. Default: ":"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line_suffix"
+msgstr ":"
+
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
 #. (Required)
 #. </span>
@@ -130,9 +187,14 @@ msgid "label_required"
 msgstr "(Erforderlich)"
 
 #. Default: "All existing aliases for this site"
-#: ./browser/redirects-controlpanel.pt:73
+#: ./browser/redirects-controlpanel.pt:93
 msgid "legend_all_existing_aliases"
-msgstr ""
+msgstr "Alle bestehenden Umleitungen dieser Website"
+
+#. Default: "Bulk-upload aliases"
+#: ./browser/redirects-controlpanel.pt:120
+msgid "legend_bulk_upload"
+msgstr "Massen-Upload von Umleitungen"
 
 #. <legend i18n:translate="legend_existing_aliases">
 #. Existing aliases for this item
@@ -143,7 +205,7 @@ msgid "legend_existing_aliases"
 msgstr "Existierende Umleitungen für dieses Objekt"
 
 #. Default: "Required"
-#: ./browser/redirects-controlpanel.pt:35
+#: ./browser/redirects-controlpanel.pt:53
 msgid "title_required"
-msgstr ""
+msgstr "Erforderlich"
 
