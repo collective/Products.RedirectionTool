@@ -2,7 +2,8 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:gs="http://namespaces.zope.org/genericsetup"
-    xmlns:i18n="http://namespaces.zope.org/i18n">
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="RedirectionTool">
 
     <i18n:registerTranslations directory="locales" />
 
