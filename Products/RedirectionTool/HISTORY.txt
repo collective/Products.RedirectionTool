@@ -4,6 +4,10 @@
 
 RedirectionTool 1.3 - unreleased
 
+    - Added basque (eu) translation [erral]
+
+    - Regenerated PO files [erral]
+
     - Added bulk upload capability. [erikrose]
 
 RedirectionTool 1.2.1 - Februrary 11, 2009
