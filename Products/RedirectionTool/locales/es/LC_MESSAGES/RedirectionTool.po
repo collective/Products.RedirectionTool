@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
-"POT-Creation-Date: 2007-10-26 12:09+0000\n"
+"POT-Creation-Date: 2009-04-01 15:31+0000\n"
 "PO-Revision-Date: 2005-03-03 05:25-0300\n"
 "Last-Translator: Santiágo Peresón <santiago.pereson@euskosare.org>\n"
 "Language-Team: EuskoSare-i18n <info@euskosare.org>\n"
@@ -18,46 +18,62 @@ msgstr ""
 "Domain: RedirectionTool\n"
 "X-Is-Fallback-For: es-bo es-cl es-co es-cr es-do es-ec es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
+#: ./browser/redirects.py:246
+msgid "%i aliases added."
+msgstr ""
+
 #. <input class="context" i18n:attributes="value" name="form.button.Add" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Add"/>
 #. Default: "Add"
 #: ./browser/manage-redirects.pt:48
 msgid "Add"
 msgstr "Agregar"
 
-#: ./browser/redirects.py:84
+#: ./browser/redirects.py:106
 msgid "Alias added."
 msgstr ""
 
-#: ./browser/redirects.py:92
+#: ./browser/redirects.py:49
+msgid "Alias path must start with a slash."
+msgstr ""
+
+#: ./browser/redirects.py:114
 msgid "Alias removed."
 msgstr ""
 
+#. Default: "Aliases"
+#: ./profiles/default/actions.xml
 msgid "Aliases"
 msgstr "Alias"
 
-#: ./browser/redirects.py:90
+#: ./browser/redirects.py:112
 msgid "Aliases removed."
 msgstr ""
 
-#: ./browser/redirects.py:56
+#: ./browser/redirects.py:41
 msgid "An alias is a path from the portal root and doesn't include http:// or alike."
 msgstr ""
 
 msgid "Configure Redirection Tool"
 msgstr "Configurar la Herramienta de Redireccionamiento"
 
-#: ./browser/redirects.py:103
+#: ./browser/redirects.py:234
+msgid "Each line must have 2 columns."
+msgstr ""
+
+#: ./browser/redirects.py:125
 msgid "Managed types"
 msgstr ""
 
-#: ./browser/redirects.py:163
+#: ./browser/redirects.py:195
 msgid "No aliases selected for removal."
 msgstr ""
 
 msgid "Redirection"
 msgstr "Redireccionamiento"
 
-#: Extensions/Install.py
+#. Default: "Redirection and Aliases"
+#: ./profiles/default/controlpanel.xml
+#: ./profiles/default/actionicons.xml
 msgid "Redirection and Aliases"
 msgstr ""
 
@@ -73,15 +89,32 @@ msgstr "Eliminar"
 msgid "Required"
 msgstr "Obligatorio"
 
-#: ./browser/redirects.py:104
+#: ./browser/redirects.py:126
 msgid "Select the types for which the aliases can be managed"
 msgstr ""
 
-#: ./browser/redirects.py:76
+#: ./browser/redirects.py:42
+msgid "Target path must be relative to the portal root and not include http:// or the like."
+msgstr ""
+
+#: ./browser/redirects.py:50
+msgid "Target path must start with a slash."
+msgstr ""
+
+#. Default: "Upload"
+#: ./browser/redirects-controlpanel.pt:134
+msgid "Upload"
+msgstr ""
+
+#: ./browser/redirects.py:65
 msgid "You don't have the permission to set an alias from the location you provided."
 msgstr ""
 
-#: ./browser/redirects.py:52
+#: ./browser/redirects.py:39
+msgid "You have to enter a target."
+msgstr ""
+
+#: ./browser/redirects.py:38
 msgid "You have to enter an alias."
 msgstr ""
 
@@ -95,9 +128,29 @@ msgstr ""
 msgid "description_adding_aliases"
 msgstr "Utilizando este formulario podrá agregar alias adicionales para un ítem. Esta es una manera fácil de lograr que un ítem esté disponible en dos direcciones URL diferentes."
 
+#. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
+#: ./browser/redirects-controlpanel.pt:122
+msgid "description_bulk_upload"
+msgstr ""
+
 #. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
-#: ./browser/redirects-controlpanel.pt:16
+#: ./browser/redirects-controlpanel.pt:34
 msgid "description_manage_aliases"
+msgstr ""
+
+#. Default: "No aliases were added. Please correct these errors in your CSV file and try again:"
+#: ./browser/redirects-controlpanel.pt:17
+msgid "error_bulk_upload"
+msgstr ""
+
+#. Default: "/old-home-page.asp,/front-page<br /> /people/JoeT,/Users/joe-thurston"
+#: ./browser/redirects-controlpanel.pt:127
+msgid "example_bulk_upload"
+msgstr ""
+
+#. Default: "Example:"
+#: ./browser/redirects-controlpanel.pt:126
+msgid "example_caption_bulk_upload"
 msgstr ""
 
 #. <h1 i18n:translate="heading_add_aliases">
@@ -124,6 +177,16 @@ msgstr "Ingrese el Nombre Corto alternativo o una ruta de acceso absoluta en el 
 msgid "label_alias"
 msgstr "Acceso"
 
+#. Default: "Line"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line"
+msgstr ""
+
+#. Default: ":"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line_suffix"
+msgstr ""
+
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
 #. (Required)
 #. </span>
@@ -133,8 +196,13 @@ msgid "label_required"
 msgstr "(Obligatorio)"
 
 #. Default: "All existing aliases for this site"
-#: ./browser/redirects-controlpanel.pt:73
+#: ./browser/redirects-controlpanel.pt:93
 msgid "legend_all_existing_aliases"
+msgstr ""
+
+#. Default: "Bulk-upload aliases"
+#: ./browser/redirects-controlpanel.pt:120
+msgid "legend_bulk_upload"
 msgstr ""
 
 #. <legend i18n:translate="legend_existing_aliases">
@@ -146,7 +214,7 @@ msgid "legend_existing_aliases"
 msgstr "Alias existentes para este ítem"
 
 #. Default: "Required"
-#: ./browser/redirects-controlpanel.pt:35
+#: ./browser/redirects-controlpanel.pt:53
 msgid "title_required"
 msgstr ""
 

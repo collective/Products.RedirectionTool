@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redirection Tool\n"
-"POT-Creation-Date: 2009-02-16 19:18+0000\n"
+"POT-Creation-Date: 2009-04-01 15:31+0000\n"
 "PO-Revision-Date: 2009-02-20 02:22+0100\n"
 "Last-Translator: René Fleschenberg <rene@fleschenberg.net>\n"
 "Language-Team: -\n"
@@ -50,6 +50,9 @@ msgstr "Umleitungen entfernt."
 msgid "An alias is a path from the portal root and doesn't include http:// or alike."
 msgstr "Eine Umleitung ist ein Pfad relativ zur Website-Wurzel und enthält kein http:// oder Ähnliches."
 
+msgid "Configure Redirection Tool"
+msgstr ""
+
 #: ./browser/redirects.py:234
 msgid "Each line must have 2 columns."
 msgstr "Jede Zeile muß aus 2 Spalten bestehen."
@@ -62,9 +65,12 @@ msgstr "Verwaltete Typen"
 msgid "No aliases selected for removal."
 msgstr "Keine Umleitungen zum Entfernen ausgewählt."
 
+msgid "Redirection"
+msgstr ""
+
 #. Default: "Redirection and Aliases"
-#: ./profiles/default/actionicons.xml
 #: ./profiles/default/controlpanel.xml
+#: ./profiles/default/actionicons.xml
 msgid "Redirection and Aliases"
 msgstr "Umleitungen"
 
