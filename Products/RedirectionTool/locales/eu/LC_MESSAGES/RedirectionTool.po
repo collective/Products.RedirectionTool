@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-04-01 15:31+0000\n"
+"PO-Revision-Date: 2009-04-01 17:39+0100\n"
+"Last-Translator: Mikel Larreategi <mlarreategi@codesyntax.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: eu\n"
+"Language-Name: Basque\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: RedirectionTool\n"
+
+#: ./browser/redirects.py:246
+msgid "%i aliases added."
+msgstr "%i alias gehituta"
+
+#. Default: "Add"
+#: ./browser/manage-redirects.pt:48
+msgid "Add"
+msgstr "Gehitu"
+
+#: ./browser/redirects.py:106
+msgid "Alias added."
+msgstr "Aliasa gehituta"
+
+#: ./browser/redirects.py:49
+msgid "Alias path must start with a slash."
+msgstr "Aliasaren bidea / ikurrarekin hasi behar da."
+
+#: ./browser/redirects.py:114
+msgid "Alias removed."
+msgstr "Aliasa ezabatuta."
+
+#. Default: "Aliases"
+#: ./profiles/default/actions.xml
+msgid "Aliases"
+msgstr "Aliasak"
+
+#: ./browser/redirects.py:112
+msgid "Aliases removed."
+msgstr "Aliasa ezabatuta."
+
+#: ./browser/redirects.py:41
+msgid "An alias is a path from the portal root and doesn't include http:// or alike."
+msgstr "Aliasa atariaren errotik hasten den bidea da eta ez da http:// eta antzekoekin hasi behar."
+
+msgid "Configure Redirection Tool"
+msgstr "Berbideraketa Tresna konfiguratu"
+
+#: ./browser/redirects.py:234
+msgid "Each line must have 2 columns."
+msgstr "Lerro bakoitzak bi zutabe izan behar ditu."
+
+#: ./browser/redirects.py:125
+msgid "Managed types"
+msgstr "Kudeatutako elementu-motak"
+
+#: ./browser/redirects.py:195
+msgid "No aliases selected for removal."
+msgstr "Ez duzu ezabatzeko aliasik aukeratu."
+
+msgid "Redirection"
+msgstr "Berbideraketa"
+
+#. Default: "Redirection and Aliases"
+#: ./profiles/default/controlpanel.xml
+#: ./profiles/default/actionicons.xml
+msgid "Redirection and Aliases"
+msgstr "Berbideraketa eta aliasak"
+
+#. Default: "Remove"
+#: ./browser/manage-redirects.pt:75
+msgid "Remove"
+msgstr "Ezabatu"
+
+#. Default: "Required"
+#: ./browser/manage-redirects.pt:28
+msgid "Required"
+msgstr "Beharrezkoa"
+
+#: ./browser/redirects.py:126
+msgid "Select the types for which the aliases can be managed"
+msgstr "Aukeratu aliasak zein elementu motarentzat kudeatu ahal izango dituzun."
+
+#: ./browser/redirects.py:42
+msgid "Target path must be relative to the portal root and not include http:// or the like."
+msgstr "Helburu bidea atariaren eroarekiko erlatiboa izan behar da eta ez da http:// edo antzekoekin hasi behar."
+
+#: ./browser/redirects.py:50
+msgid "Target path must start with a slash."
+msgstr "Helburu bidea / ikurrarekin hasi behar da."
+
+#. Default: "Upload"
+#: ./browser/redirects-controlpanel.pt:134
+msgid "Upload"
+msgstr "Kargatu"
+
+#: ./browser/redirects.py:65
+msgid "You don't have the permission to set an alias from the location you provided."
+msgstr "Ez daukazu esandako helbidetik aliasa jartzeko baimenik"
+
+#: ./browser/redirects.py:39
+msgid "You have to enter a target."
+msgstr "Helburua idatzi behar duzu."
+
+#: ./browser/redirects.py:38
+msgid "You have to enter an alias."
+msgstr "Aliasa idatzi behar duzu."
+
+#. Default: "Using this form, you can manage aliases for an item. This is an easy way to make an item available under two different URLs."
+#: ./browser/manage-redirects.pt:13
+msgid "description_adding_aliases"
+msgstr "Formulario hau erabiliz, elementu baten aliasak kudeatu ditzakezu. Honek elementu bat helbide ezberdinetan atzigarri jartzea ahalbidetzen du."
+
+#. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
+#: ./browser/redirects-controlpanel.pt:122
+msgid "description_bulk_upload"
+msgstr "Alias asko CSV fitxategi baten bidez kargatu. Lehenengo zutabean aliasaren helbidea agertu behar da eta bigarrenean zein helbidetara eramango duen. Bi bideak Plone atariaren erroarekiko bide erlatiboak izan behar dira eta / ikurrarekin hasi behar dira."
+
+#. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
+#: ./browser/redirects-controlpanel.pt:34
+msgid "description_manage_aliases"
+msgstr "Formulario hau erabiliz, aliasak kudeatu eta zein elementu-motentzat aktibatuko diren konfigura dezakezu."
+
+#. Default: "No aliases were added. Please correct these errors in your CSV file and try again:"
+#: ./browser/redirects-controlpanel.pt:17
+msgid "error_bulk_upload"
+msgstr "Ez da aliasik gehitu. Zuzendu CSV fitxategiaren erroreak eta saiatu berriro."
+
+#. Default: "/old-home-page.asp,/front-page<br /> /people/JoeT,/Users/joe-thurston"
+#: ./browser/redirects-controlpanel.pt:127
+msgid "example_bulk_upload"
+msgstr "/helbide-zaharra.asp, /portada<br/> /ikasleak/Jon, /pertsonak/jon-gandiaga"
+
+#. Default: "Example:"
+#: ./browser/redirects-controlpanel.pt:126
+msgid "example_caption_bulk_upload"
+msgstr "Adibidea:"
+
+#. Default: "Manage aliases"
+#: ./browser/manage-redirects.pt:11
+msgid "heading_add_aliases"
+msgstr "Aliasak kudeatu"
+
+#. Default: "Enter the alternative Short Name or an absolute path where an alias should exist."
+#: ./browser/manage-redirects.pt:34
+msgid "help_alias"
+msgstr "Idatzi izen labur berria edo erabili beharreko helbidea"
+
+#. Default: "Alias"
+#: ./browser/manage-redirects.pt:26
+msgid "label_alias"
+msgstr "Aliasa"
+
+#. Default: "Line"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line"
+msgstr "Lerroa"
+
+#. Default: ":"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line_suffix"
+msgstr ":"
+
+#. Default: "(Required)"
+#: ./browser/manage-redirects.pt:28
+msgid "label_required"
+msgstr "(Beharrezkoa)"
+
+#. Default: "All existing aliases for this site"
+#: ./browser/redirects-controlpanel.pt:93
+msgid "legend_all_existing_aliases"
+msgstr "Webgunean dauden alias guztiak"
+
+#. Default: "Bulk-upload aliases"
+#: ./browser/redirects-controlpanel.pt:120
+msgid "legend_bulk_upload"
+msgstr "Alias asko batera kargatu"
+
+#. Default: "Existing aliases for this item"
+#: ./browser/manage-redirects.pt:20
+msgid "legend_existing_aliases"
+msgstr "Elementu honentzat konfiguratu diren aliasak"
+
+#. Default: "Required"
+#: ./browser/redirects-controlpanel.pt:53
+msgid "title_required"
+msgstr "Beharrezkoa"
+
