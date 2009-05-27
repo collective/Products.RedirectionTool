@@ -230,6 +230,9 @@ class RedirectsControlPanel(BrowserView):
                     err = "%s %s" % (err, target_err)  # sloppy w.r.t. i18n
                 elif target_err:
                     err = target_err
+                else:
+                    if abs_redirection == abs_target:
+                        err = _(u"Aliases that point to themselves will cause an endless cycle of redirects.")  # TODO: detect indirect recursion
             else:
                 err = _(u"Each line must have 2 columns.")
 

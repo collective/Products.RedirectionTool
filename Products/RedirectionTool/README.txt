@@ -18,8 +18,9 @@ Using The RedirectionTool
     4. Click Add.
   
   There is also a Redirection and Aliases control panel under Site Setup which
-  presents all the redirections in the site in one place and allows enabling and
-  disabling alias management per content type.
+  presents all the redirections in the site in one place, allows enabling and
+  disabling alias management per content type, and lets you upload redirections
+  in bulk.
 
 Credits
 
@@ -30,6 +31,6 @@ Credits
   Updated for Plone 3 by Florian Schulze at
   "Plone Solutions":http://www.plonesolutions.com.
   
-  Bulk upload by Erik Rose of "WebLion":http://weblion.psu.edu.
+  Bulk upload by "Erik Rose":https://weblion.psu.edu/trac/weblion/wiki/ErikRose of "WebLion":http://weblion.psu.edu.
 
   The Redirection Tool is released under the GPL licence.
