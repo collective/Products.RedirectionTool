@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Redirection Tool\n"
+"POT-Creation-Date: 2009-08-06 21:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Anton Stonor <stonor@giraffen.dk>\n"
+"Language-Team: Simples Consultoria <products@simplesconsultoria.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: pt_BR\n"
+"Language-Name: Português\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: RedirectionTool\n"
+
+#: ./browser/redirects.py:249
+msgid "%i aliases added."
+msgstr "%i atalhos adicionados."
+
+#. Default: "Add"
+#: ./browser/manage-redirects.pt:48
+msgid "Add"
+msgstr "Adicionar"
+
+#: ./browser/redirects.py:106
+msgid "Alias added."
+msgstr "Atalho adicionado"
+
+#: ./browser/redirects.py:49
+msgid "Alias path must start with a slash."
+msgstr "O caminho do atalho deve começar com uma barra '/'."
+
+#: ./browser/redirects.py:114
+msgid "Alias removed."
+msgstr "Atalho removido."
+
+#. Default: "Aliases"
+#: ./profiles/default/actions.xml
+msgid "Aliases"
+msgstr "Atalhos"
+
+#: ./browser/redirects.py:112
+msgid "Aliases removed."
+msgstr "Atalhos removidos."
+
+#: ./browser/redirects.py:235
+msgid "Aliases that point to themselves will cause an endless cycle of redirects."
+msgstr "Atalhos que apontam para eles mesmos irão causar um ciclo de redirecionamentos sem fim."
+
+#: ./browser/redirects.py:41
+msgid "An alias is a path from the portal root and doesn't include http:// or alike."
+msgstr "Um atalho é um caminho apartir da raiz do portal e não inclui o protocolo (http:// ou semelhantes)."
+
+msgid "Configure Redirection Tool"
+msgstr "Configuração do Redirection Tool"
+
+#: ./browser/redirects.py:237
+msgid "Each line must have 2 columns."
+msgstr "Cada linha deve ter 2 columns."
+
+#: ./browser/redirects.py:125
+msgid "Managed types"
+msgstr "Tipos gerenciados"
+
+#: ./browser/redirects.py:195
+msgid "No aliases selected for removal."
+msgstr "Nenhum atalho selecionado para remoção."
+
+msgid "Redirection"
+msgstr "Redirecionamento"
+
+#. Default: "Redirection and Aliases"
+#: ./profiles/default/controlpanel.xml
+#: ./profiles/default/actionicons.xml
+msgid "Redirection and Aliases"
+msgstr "Redireionamento e Atalhos"
+
+#. Default: "Remove"
+#: ./browser/redirects-controlpanel.pt:107
+msgid "Remove"
+msgstr "Remover"
+
+#. Default: "Required"
+#: ./browser/manage-redirects.pt:28
+msgid "Required"
+msgstr "Obrigatório"
+
+#: ./browser/redirects.py:126
+msgid "Select the types for which the aliases can be managed"
+msgstr "Selecione os tipos que os atalhos poderão ser gerenciados."
+
+#: ./browser/redirects.py:42
+msgid "Target path must be relative to the portal root and not include http:// or the like."
+msgstr "Caminho de destino deve ser relativo à raiz do portal e não inclui o protocolo (http:// or semelhantes)."
+
+#: ./browser/redirects.py:50
+msgid "Target path must start with a slash."
+msgstr "Caminho de destino deve começar com uma barra '/'."
+
+#. Default: "Upload"
+#: ./browser/redirects-controlpanel.pt:134
+msgid "Upload"
+msgstr "Upload"
+
+#: ./browser/redirects.py:65
+msgid "You don't have the permission to set an alias from the location you provided."
+msgstr "Você não tem permissão para configurar um atalho a partir do local que você escolheu."
+
+#: ./browser/redirects.py:39
+msgid "You have to enter a target."
+msgstr "Você deve selecionar um destino."
+
+#: ./browser/redirects.py:38
+msgid "You have to enter an alias."
+msgstr "Você deve selecionar um atalho."
+
+#. Default: "Using this form, you can manage aliases for an item. This is an easy way to make an item available under two different URLs."
+#: ./browser/manage-redirects.pt:13
+msgid "description_adding_aliases"
+msgstr "Usando esse formulário, você pode gerenciar os atalhos para um item. Essa é uma forma fácil de permitir o mesmo item com duas URLs diferentes."
+
+#. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
+#: ./browser/redirects-controlpanel.pt:122
+msgid "description_bulk_upload"
+msgstr "Você pode adicionar vários atalhos de uma vez fazendo o upload de um arquivo CSV. A primeira coluna deve ser o caminho de origem; a segunda, deve ser o caminho de destino. Ambos caminhos deve relativo ao portale começando com uma barra '/'."
+
+#. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
+#: ./browser/redirects-controlpanel.pt:34
+msgid "description_manage_aliases"
+msgstr ""
+
+#. Default: "No aliases were added. Please correct these errors in your CSV file and try again:"
+#: ./browser/redirects-controlpanel.pt:17
+msgid "error_bulk_upload"
+msgstr "Nenhum atalho foi adicionado. Por favor corrige os erros no seu arquivo CSV e tente novamente:"
+
+#. Default: "/old-home-page.asp,/front-page<br /> /people/JoeT,/Users/joe-thurston"
+#: ./browser/redirects-controlpanel.pt:127
+msgid "example_bulk_upload"
+msgstr "/velha-home-page.asp, /pagina-inicial<br />/pessoas/JoseSilva, /Usuarios/joao-souza"
+
+#. Default: "Example:"
+#: ./browser/redirects-controlpanel.pt:126
+msgid "example_caption_bulk_upload"
+msgstr "Examplo:"
+
+#. Default: "Manage aliases"
+#: ./browser/redirects-controlpanel.pt:32
+msgid "heading_add_aliases"
+msgstr "Gerenciar atalhos"
+
+#. Default: "Enter the alternative Short Name or an absolute path where an alias should exist."
+#: ./browser/manage-redirects.pt:34
+msgid "help_alias"
+msgstr "Selecione o nome curto alternativo ou um caminho absoluto onde um atalho pode existir."
+
+#. Default: "Alias"
+#: ./browser/manage-redirects.pt:26
+msgid "label_alias"
+msgstr "Atalho"
+
+#. Default: "Line"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line"
+msgstr "Linha"
+
+#. Default: ":"
+#: ./browser/redirects-controlpanel.pt:22
+msgid "label_bulk_upload_line_suffix"
+msgstr ":"
+
+#. Default: "(Required)"
+#: ./browser/redirects-controlpanel.pt:53
+msgid "label_required"
+msgstr "(Obrigatório)"
+
+#. Default: "All existing aliases for this site"
+#: ./browser/redirects-controlpanel.pt:93
+msgid "legend_all_existing_aliases"
+msgstr "Todos atalhos existentes para esse site"
+
+#. Default: "Bulk-upload aliases"
+#: ./browser/redirects-controlpanel.pt:120
+msgid "legend_bulk_upload"
+msgstr "Upload em lote de atalhos"
+
+#. Default: "Existing aliases for this item"
+#: ./browser/manage-redirects.pt:20
+msgid "legend_existing_aliases"
+msgstr "Atalhos existentes para esse item"
+
+#. Default: "Required"
+#: ./browser/redirects-controlpanel.pt:53
+msgid "title_required"
+msgstr "Obrigatório"
+
