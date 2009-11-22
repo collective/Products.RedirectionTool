@@ -9,6 +9,7 @@ $Id$
 """
 
 from zope.component import getUtility
+from zope.interface import implements
 from zope.deprecation import deprecate
 
 from Globals import InitializeClass
@@ -32,10 +33,10 @@ from plone.app.redirector.interfaces import IRedirectionStorage
 
 class RedirectionTool(UniqueObject, SimpleItem):
 
+    implements(IRedirectionTool)
+
     id = 'portal_redirection'
     meta_type = 'Redirection Tool'
-
-    __implements__ = (IRedirectionTool,)
 
     security = ClassSecurityInfo()
 

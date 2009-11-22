@@ -2,6 +2,10 @@
 
     (name of developer listed in brackets)
 
+RedirectionTool 1.4 - unreleased
+
+    - Changed IRedirectionTool into a Zope 3 interface. [davisagli]
+
 RedirectionTool 1.3b1 - March 26, 2009
 
     - Added basque (eu) translation [erral]
