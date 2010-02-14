@@ -1,10 +1,12 @@
-﻿Changelog for Redirection Tool
+Changelog for Redirection Tool
 
     (name of developer listed in brackets)
 
 RedirectionTool 1.4 - unreleased
 
     - Changed IRedirectionTool into a Zope 3 interface. [davisagli]
+
+    - Added Dutch (nl) translation [WouterVH]
 
 RedirectionTool 1.3b1 - March 26, 2009
 
