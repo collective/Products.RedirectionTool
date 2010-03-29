@@ -5,13 +5,19 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Added the z3c.autoinclude entry point so this package is automatically loaded
+  on Plone 3.3 and above. [WouterVH]
+
+- Added MANIFEST.in [WouterVH]
+
+- Reorganised \*.txt-files into toplevel-folder or /docs-folder to match current
+  best-practices. [WouterVH]
+
+- Removed version.txt to avoid deprecation-warning on Zope-startup [WouterVH]
+
 - Changed IRedirectionTool into a Zope 3 interface. [davisagli]
 
 - Added Dutch (nl) translation [WouterVH]
-
-
-1.3b1 (26-03-2009)
-------------------
 
 - Added basque (eu) translation [erral]
 
@@ -44,8 +50,8 @@ Changelog
   which they normally don't have access. [fschulze]
 
 
-before 1.2
-----------
+Prior 1.2
+---------
 
 - take into account site property allowAnonymousViewAbout in not_found_message
 
