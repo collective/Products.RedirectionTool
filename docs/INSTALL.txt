@@ -1,0 +1,11 @@
+Installing RedirectionTool
+
+  To install RedirectionTool, either uncompress the product into
+  your zope/Products directory or link it there, e.g.::
+
+    ln -s /path/to/installation /path/to/zope/Products
+
+  or use the egg Products.RedirectionTool if you use buildout or another
+  egg based setup.
+
+  Install it on your site through the Plone ''Add-on Products' control panel.

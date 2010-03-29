@@ -1,0 +1,4 @@
+- RedirectionTool currently doesn't keep anchors. 
+  http://plone.org/roadmap#2.2 gets translated to
+  http://plone.org/products/plone/roadmap
+  losing the #2.2 part.
