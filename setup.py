@@ -1,13 +1,25 @@
+import os
 from setuptools import setup, find_packages
-import sys, os
 
-version = '1.3'
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+version = '1.3dev'
+
+long_description = (
+    read('README.txt')
+    + '\n' +
+    read('CHANGES.txt')
+    #+ '\n' +
+    #read('Products', 'RedirectionTool', 'README.txt')
+    #+ '\n' +
+    #read('CONTRIBUTORS.txt')
+    )
 
 setup(name='Products.RedirectionTool',
       version=version,
       description="The Redirection Tool allows the management of the aliases stored in plone.app.redirector",
-      long_description="""\
-""",
+      long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Zope2",
@@ -29,5 +41,8 @@ setup(name='Products.RedirectionTool',
       ],
       entry_points="""
       # -*- Entry points: -*-
+
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
 )
