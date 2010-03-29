@@ -26,8 +26,12 @@ _ = MessageFactory('RedirectionTool')
 
 
 def absolutize_path(path, context=None, is_alias=True):
-    """Check whether `path` is a well-formed path from the portal root, and make it Zope-root-relative. If `is_alias` (as opposed to "is_target"), also make sure the user has the requisite ModifyAliases permissions to make an alias from that path. Return a 2-tuple: (absolute redirection path, an error message iff something goes wrong and otherwise '').
-    
+    """Check whether `path` is a well-formed path from the portal root, and
+       make it Zope-root-relative. If `is_alias` (as opposed to "is_target"),
+       also make sure the user has the requisite ModifyAliases permissions to
+       make an alias from that path. Return a 2-tuple: (absolute redirection path,
+       an error message iff something goes wrong and otherwise '').
+
     Assume relative paths are relative to `context`; reject relative paths if
     `context` is None.
 
@@ -155,7 +159,7 @@ class RedirectsControlPanel(BrowserView):
     form_fields = FormFields(IAliasesSchema, render_context=True)
     form_fields['managed_types'].custom_widget = MultiCheckBoxThreeColumnWidget
     form_fields['managed_types'].custom_widget.cssClass='label'
-    
+
     def __init__(self, context, request):
         super(RedirectsControlPanel, self).__init__(context, request)
         self.errors = []  # list of tuples: (line_number, absolute_redirection_path, err_msg, target)
@@ -211,10 +215,12 @@ class RedirectsControlPanel(BrowserView):
 
     def upload(self, file, portal, storage, status):
         """Add the redirections from the CSV file `file`. If anything goes wrong, do nothing."""
-        # Turn all kinds of newlines into LF ones. The csv module doesn't do its own newline sniffing and requires either \n or \r.
+        # Turn all kinds of newlines into LF ones. The csv module doesn't do
+        # its own newline sniffing and requires either \n or \r.
         file = StringIO('\n'.join(file.read().splitlines()))
 
-        # Use first two lines as a representative sample for guessing format, in case one is a bunch of headers.
+        # Use first two lines as a representative sample for guessing format,
+        # in case one is a bunch of headers.
         dialect = csv.Sniffer().sniff(file.readline() + file.readline())
         file.seek(0)
 
@@ -232,7 +238,8 @@ class RedirectsControlPanel(BrowserView):
                     err = target_err
                 else:
                     if abs_redirection == abs_target:
-                        err = _(u"Aliases that point to themselves will cause an endless cycle of redirects.")  # TODO: detect indirect recursion
+                        err = _(u"Aliases that point to themselves will cause \
+                            an endless cycle of redirects.") # TODO: detect indirect recursion
             else:
                 err = _(u"Each line must have 2 columns.")
 
