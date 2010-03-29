@@ -5,6 +5,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Removed all *.mo-files from the locales-dir, as these don't need to be versioned
+  [WouterVH]
+
 - Added the z3c.autoinclude entry point so this package is automatically loaded
   on Plone 3.3 and above. [WouterVH]
 
