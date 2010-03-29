@@ -1,4 +1,4 @@
-# Copyright (C) 2004 
+# Copyright (C) 2004
 # Plone Solutions AS <info@plonesolutions.com>
 #  http://www.plonesolutions.com
 #
@@ -138,8 +138,9 @@ class RedirectionTool(UniqueObject, SimpleItem):
         remainingcomps = []
         i = len(comps)
         storage = getUtility(IRedirectionStorage)
-        #Take the chunks of the url and see if folders higher up the tree have redirects as well
-        #So if portal/folder has a redirect to portal/newfolder accessing portal/folder/someobject will redirect to portal/newfolder/someobject
+        # Take the chunks of the url and see if folders higher up the tree have redirects as well
+        # So if portal/folder has a redirect to portal/newfolder accessing
+        # portal/folder/someobject will redirect to portal/newfolder/someobject
         while not redirectto and i > 0:
             redirectto = storage.get('/'.join(comps[:i]), None)
             remainingcomps = comps[i:]
@@ -226,7 +227,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
             obj = source
         if obj is None:
             raise NameError('No such object %s' % source)
-        return getSecurityManager().checkPermission( permission, obj )
+        return getSecurityManager().checkPermission(permission, obj)
 
     security.declarePrivate('migrateStorage')
     def migrateStorage(self, logger):
