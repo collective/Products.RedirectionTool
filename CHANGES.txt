@@ -1,65 +1,79 @@
 Changelog
 =========
 
-
-1.3 (unreleased)
+1.3 - unreleased
 ----------------
 
-- Removed all *.mo-files from the locales-dir, as these don't need to be versioned
+- Removed all ``*.mo`` files from the locales directory, as these don't need to
+  be versioned.
   [WouterVH]
 
 - Added the z3c.autoinclude entry point so this package is automatically loaded
-  on Plone 3.3 and above. [WouterVH]
+  on Plone 3.3 and above.
+  [WouterVH]
 
-- Added MANIFEST.in [WouterVH]
+- Added MANIFEST.in.
+  [WouterVH]
 
 - Reorganised \*.txt-files into toplevel-folder or /docs-folder to match current
-  best-practices. [WouterVH]
+  best-practices.
+  [WouterVH]
 
-- Removed version.txt to avoid deprecation-warning on Zope-startup [WouterVH]
+- Removed version.txt to avoid deprecation-warning on Zope-startup.
+  [WouterVH]
 
-- Changed IRedirectionTool into a Zope 3 interface. [davisagli]
+- Changed IRedirectionTool into a Zope 3 interface.
+  [davisagli]
 
-- Added Dutch (nl) translation [WouterVH]
+- Added Dutch (nl) translation.
+  [WouterVH]
 
-- Added basque (eu) translation [erral]
+- Added basque (eu) translation.
+  [erral]
 
-- Regenerated PO files [erral]
+- Regenerated PO files.
+  [erral]
 
-- Added bulk upload capability. [erikrose]
+- Added bulk upload capability.
+  [erikrose]
 
 
-1.2.1 (11-02-2009)
+1.2.1 - 2009-02-11
 ------------------
 
 - Fixed bugs that caused incorrect display of redirects on the
-  @@manage-aliases and @@aliases-controlpanel pages. [hexsprite]
+  @@manage-aliases and @@aliases-controlpanel pages.
+  [hexsprite]
 
-- Expanded readme and packaged the release. [erikrose]
+- Expanded readme and packaged the release.
+  [erikrose]
 
 
-1.2 (7-11-2007)
----------------
+1.2 - 2007-11-07
+----------------
 
 - Updated for Plone 3 by using plone.app.redirector, replacing skin parts
   with a view + template, using GenericSetup for installation and migrate
-  existing redirections on install. [fschulze]
+  existing redirections on install.
+  [fschulze]
 
 - Use new permission "RedirectionTool: Modify aliases" for the alias tab.
   [fschulze]
 
 - When adding an alias a security check is performed on the source path.
   This prevents users from linking to their own content from locations to
-  which they normally don't have access. [fschulze]
-
+  which they normally don't have access.
+  [fschulze]
 
 Prior 1.2
 ---------
 
-- take into account site property allowAnonymousViewAbout in not_found_message
+- Take into account site property allowAnonymousViewAbout in not_found_message
 
-- Added german translation [spamsch]
+- Added german translation.
+  [spamsch]
 
-- Added default validators and actions [spamsch]
+- Added default validators and actions.
+  [spamsch]
 
 - Moved ActionProviderBase before SimpleItem so that actions tab is shown in ZMI
