@@ -1,14 +1,5 @@
-#
-# Skeleton PloneTestCase
-#
-
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from Products.PloneTestCase import PloneTestCase
 import RedirectionToolTestCase
-import utils
 from Products.Five.testbrowser import Browser
 from Products.PloneTestCase.setup import portal_owner, default_password
 
@@ -49,13 +40,8 @@ class TestRedirectionToolForms(RedirectionToolTestCase.RedirectionToolTestCase,
         self.assertEquals(self.rt.getRedirectObject('/bar'), self.portal)
 
 
-if __name__ == '__main__':
-    framework()
-else:
-    # While framework.py provides its own test_suite()
-    # method the testrunner utility does not.
-    from unittest import TestSuite, makeSuite
-    def test_suite():
-        suite = TestSuite()
-        suite.addTest(makeSuite(TestRedirectionToolForms))
-        return suite
+from unittest import TestSuite, makeSuite
+def test_suite():
+    suite = TestSuite()
+    suite.addTest(makeSuite(TestRedirectionToolForms))
+    return suite

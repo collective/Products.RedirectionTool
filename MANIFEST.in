@@ -1,8 +1,0 @@
-include *.txt
-
-recursive-include docs *
-recursive-include collective *
-
-global-exclude *.pyc *.pyo
-global-exclude .project
-global-exclude .pydevproject

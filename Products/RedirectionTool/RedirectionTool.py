@@ -4,9 +4,6 @@
 #
 # Learning Lab Denmark
 #  http://www.lld.dk
-"""
-$Id$
-"""
 
 from zope.component import getUtility
 from zope.interface import implements

@@ -1,18 +1,8 @@
-#
-# Skeleton PloneTestCase
-#
-
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
-from StringIO import StringIO
-from Testing import ZopeTestCase
 import RedirectionToolTestCase
 import utils
 from Products.CMFPlone.utils import _createObjectByType, base_hasattr
 from Products.CMFCore.utils import getToolByName
-from BTrees.OOBTree import OOBTree, OOSet
+from BTrees.OOBTree import OOBTree
 from zope.component import getUtility
 from plone.app.redirector.interfaces import IRedirectionStorage
 import logging
@@ -226,14 +216,9 @@ class TestRedirectionToolMigration(RedirectionToolTestCase.RedirectionToolTestCa
         self.failIf(base_hasattr(self.rt, '_reverse_redirectionmap'))
 
 
-if __name__ == '__main__':
-    framework()
-else:
-    # While framework.py provides its own test_suite()
-    # method the testrunner utility does not.
-    from unittest import TestSuite, makeSuite
-    def test_suite():
-        suite = TestSuite()
-        suite.addTest(makeSuite(TestRedirectionTool))
-        suite.addTest(makeSuite(TestRedirectionToolMigration))
-        return suite
+from unittest import TestSuite, makeSuite
+def test_suite():
+    suite = TestSuite()
+    suite.addTest(makeSuite(TestRedirectionTool))
+    suite.addTest(makeSuite(TestRedirectionToolMigration))
+    return suite
