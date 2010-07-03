@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3b1 - unreleased
+1.3b1 - 2010-07-03
 ------------------
 
 - Removed all ``*.mo`` files from the locales directory, as these don't need to
