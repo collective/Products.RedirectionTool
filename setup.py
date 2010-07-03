@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.3b1'
+version = '1.3'
 
 setup(name='Products.RedirectionTool',
       version=version,
@@ -14,7 +14,7 @@ setup(name='Products.RedirectionTool',
       ],
       keywords='Redirection Alias Zope Plone',
       author='Jarn AS',
-      author_email='',
+      author_email='info@jarn.com',
       url='http://pypi.python.org/pypi/Products.RedirectionTool',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
