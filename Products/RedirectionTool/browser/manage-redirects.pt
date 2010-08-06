@@ -39,9 +39,7 @@
                      name="redirection" 
                      value="#" 
                      size="40" 
-                     tabindex=""
-                     tal:attributes="value request/redirection | nothing;
-                                     tabindex tabindex/next;" 
+                     tal:attributes="value request/redirection | nothing;" 
                      />
           </div>
           <div class="formControls">

@@ -4,6 +4,8 @@ Changelog
 1.3 - unreleased
 ----------------
 
+- Removed tabindex to work with Plone 4.
+  [stonor]
 
 1.3b1 - 2010-07-03
 ------------------
