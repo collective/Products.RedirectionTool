@@ -28,15 +28,15 @@ msgstr "Tilføj"
 
 #: ./browser/redirects.py:106
 msgid "Alias added."
-msgstr ""
+msgstr "Alias tilføjet"
 
 #: ./browser/redirects.py:49
 msgid "Alias path must start with a slash."
-msgstr ""
+msgstr "Sti til alias skal starte med en skråstreg"
 
 #: ./browser/redirects.py:114
 msgid "Alias removed."
-msgstr ""
+msgstr "Alias fjernet"
 
 #. Default: "Aliases"
 #: ./profiles/default/actions.xml
@@ -45,26 +45,26 @@ msgstr "Aliaser"
 
 #: ./browser/redirects.py:112
 msgid "Aliases removed."
-msgstr ""
+msgstr "Aliaser fjernet"
 
 #: ./browser/redirects.py:41
 msgid "An alias is a path from the portal root and doesn't include http:// or alike."
-msgstr ""
+msgstr "Et alias er en sti fra roden af sitet og indeholder ikke http:// eller lignende."
 
 msgid "Configure Redirection Tool"
 msgstr "Indstil Adresseomstilleren"
 
 #: ./browser/redirects.py:234
 msgid "Each line must have 2 columns."
-msgstr ""
+msgstr "Hver linie skal have to kolonner"
 
 #: ./browser/redirects.py:125
 msgid "Managed types"
-msgstr ""
+msgstr "Indholdstyper med alias"
 
 #: ./browser/redirects.py:195
 msgid "No aliases selected for removal."
-msgstr ""
+msgstr "Ingen aliaser valgt til at blive fjernet."
 
 msgid "Redirection"
 msgstr "omstilling"
@@ -73,7 +73,7 @@ msgstr "omstilling"
 #: ./profiles/default/controlpanel.xml
 #: ./profiles/default/actionicons.xml
 msgid "Redirection and Aliases"
-msgstr ""
+msgstr "Omstillinger og aliaser"
 
 #. <input class="context" i18n:attributes="value" name="form.button.Remove" tabindex="" tal:attributes="tabindex tabindex/next;" type="submit" value="Remove"/>
 #. Default: "Remove"
@@ -89,32 +89,32 @@ msgstr "Skal udfyldes"
 
 #: ./browser/redirects.py:126
 msgid "Select the types for which the aliases can be managed"
-msgstr ""
+msgstr "Vælg de indholdstyper man skal kunne vælge aliaser for"
 
 #: ./browser/redirects.py:42
 msgid "Target path must be relative to the portal root and not include http:// or the like."
-msgstr ""
+msgstr "Stien er fra roden af sitet og indeholder ikke http:// eller lignende."
 
 #: ./browser/redirects.py:50
 msgid "Target path must start with a slash."
-msgstr ""
+msgstr "Stien skal starte med en skråstreg."
 
 #. Default: "Upload"
 #: ./browser/redirects-controlpanel.pt:134
 msgid "Upload"
-msgstr ""
+msgstr "Upload"
 
 #: ./browser/redirects.py:65
 msgid "You don't have the permission to set an alias from the location you provided."
-msgstr ""
+msgstr "Du har ikke rettigheder til at oprette et alias from det sted."
 
 #: ./browser/redirects.py:39
 msgid "You have to enter a target."
-msgstr ""
+msgstr "Du skal udfylde en landingsside"
 
 #: ./browser/redirects.py:38
 msgid "You have to enter an alias."
-msgstr ""
+msgstr "Du skal udfylde et alias."
 
 #. <p i18n:translate="description_adding_aliases">
 #. </p>
@@ -126,27 +126,27 @@ msgstr "Her kan du tildele alternative web-adresser til en side. Dette er en let
 #. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
 #: ./browser/redirects-controlpanel.pt:122
 msgid "description_bulk_upload"
-msgstr ""
+msgstr "Tilføj en masse aliaser på en gang ved at uploade en CSV-fil. The første kolonne er en stil til, hvor der skal omstilles fra. Den anden kolonne er, hvad der skal omstilles til. Begge stier skal være relative i forhold til sitets rod og starte med en skråstreg (/)."
 
 #. Default: "Using this form, you can select for which types you want to manage aliases and manage all existing aliases."
 #: ./browser/redirects-controlpanel.pt:34
 msgid "description_manage_aliases"
-msgstr ""
+msgstr "Her kan du vælge, hvilke indholdstyper det skal være muligt at styre aliaser for og redigere alle eksisterende aliaser."
 
 #. Default: "No aliases were added. Please correct these errors in your CSV file and try again:"
 #: ./browser/redirects-controlpanel.pt:17
 msgid "error_bulk_upload"
-msgstr ""
+msgstr "Ingen aliaser bliver oprettet. Ret fejlene i CSV-filen og forsøg igen:"
 
 #. Default: "/old-home-page.asp,/front-page<br /> /people/JoeT,/Users/joe-thurston"
 #: ./browser/redirects-controlpanel.pt:127
 msgid "example_bulk_upload"
-msgstr ""
+msgstr "/gammel-forside.asp,/forside<br /> /presse,/om-os/nyheder/presse"
 
 #. Default: "Example:"
 #: ./browser/redirects-controlpanel.pt:126
 msgid "example_caption_bulk_upload"
-msgstr ""
+msgstr "Eksempel:"
 
 #. <h1 i18n:translate="heading_add_aliases">
 #. Default: "Manage aliases"
@@ -169,12 +169,12 @@ msgstr "Alias"
 #. Default: "Line"
 #: ./browser/redirects-controlpanel.pt:22
 msgid "label_bulk_upload_line"
-msgstr ""
+msgstr "Linie"
 
 #. Default: ":"
 #: ./browser/redirects-controlpanel.pt:22
 msgid "label_bulk_upload_line_suffix"
-msgstr ""
+msgstr ":"
 
 #. <span class="fieldRequired" i18n:attributes="title" i18n:translate="label_required" title="Required">
 #. Default: "(Required)"
@@ -185,12 +185,12 @@ msgstr "(Påkrævet)"
 #. Default: "All existing aliases for this site"
 #: ./browser/redirects-controlpanel.pt:93
 msgid "legend_all_existing_aliases"
-msgstr ""
+msgstr "Alle eksisterende aliaser for dette site"
 
 #. Default: "Bulk-upload aliases"
 #: ./browser/redirects-controlpanel.pt:120
 msgid "legend_bulk_upload"
-msgstr ""
+msgstr "Masse-upload aliaser"
 
 #. <legend i18n:translate="legend_existing_aliases">
 #. Default: "Existing aliases for this item"
@@ -201,5 +201,5 @@ msgstr "Eksisterende alias'er for denne side"
 #. Default: "Required"
 #: ./browser/redirects-controlpanel.pt:53
 msgid "title_required"
-msgstr ""
+msgstr "Påkrævet"
 
