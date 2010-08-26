@@ -7,8 +7,23 @@
       i18n:domain="RedirectionTool">
 
   <body>
-    <div metal:fill-slot="main">
-      <h1 i18n:translate="heading_add_aliases">Manage aliases</h1>
+    <div metal:fill-slot="main"
+         tal:define="context_state context/@@plone_context_state">
+      <h1 class="documentFirstHeading" i18n:translate="heading_add_aliases">Manage aliases</h1>
+
+      <dl class="portalMessage info" tal:condition="context_state/is_default_page">
+          <dt i18n:translate="">
+              Info
+          </dt>
+          <dd i18n:translate="help_sharing_page_default_page">
+              You are managing the aliases of a default view in a container.
+              To manage them for the entire container,
+              <a i18n:name="go_here"
+                 i18n:translate="help_aliases_go_here"
+                 tal:define="folder context_state/folder"
+                 tal:attributes="href string:${folder/absolute_url}/@@manage-aliases">go here</a>.
+          </dd>
+      </dl>
 
       <p i18n:translate="description_adding_aliases">
       Using this form, you can manage aliases for an item. This
