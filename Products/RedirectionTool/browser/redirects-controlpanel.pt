@@ -28,14 +28,14 @@
           </table>
         </dd>
       </dl>
-      
+
       <h1 i18n:translate="heading_add_aliases">Manage aliases</h1>
 
       <p i18n:translate="description_manage_aliases">
         Using this form, you can select for which types you want to manage
         aliases and manage all existing aliases.
       </p>
-      
+
       <form tal:attributes="action view/view_url" method="post">
         <tal:block tal:repeat="widget view/widgets">
 
@@ -94,9 +94,9 @@
 
           <tal:redirects repeat="redirect view/redirects">
             <div>
-              <input type="checkbox" 
-                     class="noborder" 
-                     name="redirects:tuple" 
+              <input type="checkbox"
+                     class="noborder"
+                     name="redirects:tuple"
                      tal:attributes="value redirect/redirect" />
 
               <span tal:replace="redirect/path" /> &rarr; <span tal:replace="redirect/redirect-to" />
@@ -127,7 +127,7 @@
             <code i18n:translate="example_bulk_upload">/old-home-page.asp,/front-page<br />
             /people/JoeT,/Users/joe-thurston</code>
           </p>
-          
+
           <input type="file" name="file" />
 
           <div class="formControls">
