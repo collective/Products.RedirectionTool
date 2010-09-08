@@ -6,7 +6,7 @@ Changelog
 
 - Removed tabindex to work with Plone 4.
   [stonor]
-  
+
 - Added notification for when a user is managing the aliases of a default item
   in a container instead of the container with a link. Took idea and
   implementation from the @@sharing control panel.
