@@ -4,7 +4,8 @@ version = '1.3'
 
 setup(name='Products.RedirectionTool',
       version=version,
-      description="The Redirection Tool allows the management of the aliases stored in plone.app.redirector",
+      description="The Redirection Tool allows the management of the aliases "
+                  "stored in plone.app.redirector",
       long_description = open('README.txt').read() + '\n' +
                          open('CHANGES.txt').read(),
       classifiers=[
