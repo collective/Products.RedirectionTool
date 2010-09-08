@@ -76,9 +76,7 @@
             </div>
 
         </tal:block>
-      </form>
 
-      <form tal:attributes="action view/view_url" method="post">
         <div class="formControls"
              i18n:domain="plone">
           <input class="context"
@@ -88,7 +86,9 @@
                  i18n:attributes="value label_save;"
                  />
         </div>
+      </form>
 
+      <form tal:attributes="action view/view_url" method="post">
         <fieldset>
           <legend i18n:translate="legend_all_existing_aliases">All existing aliases for this site</legend>
 

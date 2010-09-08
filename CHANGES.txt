@@ -4,6 +4,10 @@ Changelog
 1.3 - unreleased
 ----------------
 
+- Fixed the ``Manage aliases`` form in the controlpanel to include its form
+  controls.
+  [soerensigfusson, hannosch]
+
 - Removed tabindex to work with Plone 4.
   [stonor]
 
