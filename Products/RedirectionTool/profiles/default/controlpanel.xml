@@ -3,6 +3,7 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
    i18n:domain="RedirectionTool">
  <configlet title="Redirection and Aliases" action_id="RedirectionTool"
+    icon_expr="string:$portal_url/action_icon.gif"
     appId="RedirectionTool" category="Products"
     condition_expr=""
     url_expr="string:${portal_url}/@@aliases-controlpanel"
