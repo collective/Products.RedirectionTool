@@ -7,6 +7,10 @@
 
     <i18n:registerTranslations directory="locales" />
 
+    <include package="Products.CMFCore" file="permissions.zcml"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           zcml:condition="have plone-41" />
+
     <gs:registerProfile
         name="default"
         title="RedirectionTool"
