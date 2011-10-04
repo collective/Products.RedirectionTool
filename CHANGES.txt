@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.3.1 - unreleased
+1.3.1 - 2011-10-4
 ------------------
+
+- Include CMFCore permission on Plone 4.1
+  [rich_lewis2]
 
 - Added icon to control panel GS file.
   [ggozad]
