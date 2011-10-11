@@ -20,6 +20,15 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         />
 
+    <gs:upgradeStep
+        source="1"
+        destination="2"
+        profile="Products.RedirectionTool:default"
+        title="Upgrade control panel"
+        description="Add control panel icon for RedirectionTool"
+        handler="Products.RedirectionTool.setuphandlers.upgrade_controlpanel"
+        />
+
     <permission
         id="Products.RedirectionTool.ModifyAliases"
         title="RedirectionTool: Modify aliases"

@@ -1,5 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 
+PROFILE = 'Products.RedirectionTool:default'
+PROFILE_ID = 'profile-%s' % PROFILE
 
 def importVarious(context):
     """Manual steps not yet covered by GS."""
@@ -49,3 +51,7 @@ def migrateStorage(site, logger):
     rt = getToolByName(site, 'portal_redirection')
     logger.info("Migrating any existing redirects.")
     rt.migrateStorage(logger)
+
+def upgrade_controlpanel(site, logger=None):
+    setup = getToolByName(site, 'portal_setup')
+    setup.runImportStepFromProfile(PROFILE_ID, 'controlpanel')

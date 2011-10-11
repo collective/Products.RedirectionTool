@@ -6,6 +6,7 @@ from BTrees.OOBTree import OOBTree
 from zope.component import getUtility
 from plone.app.redirector.interfaces import IRedirectionStorage
 import logging
+from Products.RedirectionTool import setuphandlers
 
 
 class TestRedirectionTool(RedirectionToolTestCase.RedirectionToolTestCase):
@@ -216,9 +217,30 @@ class TestRedirectionToolMigration(RedirectionToolTestCase.RedirectionToolTestCa
         self.failIf(base_hasattr(self.rt, '_reverse_redirectionmap'))
 
 
+class TestRedirectionToolUpgrades(RedirectionToolTestCase.RedirectionToolTestCase):
+    def afterSetUp(self):
+        RedirectionToolTestCase.RedirectionToolTestCase.afterSetUp(self)
+
+    def testControlPanelUpgrade(self):
+        cptool = getToolByName(self.portal, 'portal_controlpanel')
+        configlet = cptool.getActionObject('Products/RedirectionTool')
+
+        #Plone versions < 4 don't have this
+        if hasattr(configlet, 'icon_expr'):
+            #Fake a pre-upgrade state without icon expression
+            configlet.setIconExpression('')
+            self.assertEquals(configlet.icon_expr, '')
+
+            setuphandlers.upgrade_controlpanel(self.portal)
+
+            new_configlet = cptool.getActionObject('Products/RedirectionTool')
+            self.failIf(new_configlet.icon_expr == '')
+
+
 from unittest import TestSuite, makeSuite
 def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestRedirectionTool))
     suite.addTest(makeSuite(TestRedirectionToolMigration))
+    suite.addTest(makeSuite(TestRedirectionToolUpgrades))
     return suite
