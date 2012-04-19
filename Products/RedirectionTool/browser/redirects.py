@@ -4,6 +4,7 @@ from cStringIO import StringIO
 from zope.interface import implements, Interface
 from zope.component import adapts, getUtility
 from zope.schema import Choice, Tuple
+from Acquisition import aq_inner
 
 from AccessControl import getSecurityManager
 from Products.RedirectionTool.permissions import ModifyAliases
@@ -19,6 +20,8 @@ from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.app.controlpanel.widgets import MultiCheckBoxThreeColumnWidget
 from zope.formlib.form import setUpWidgets, FormFields
 
+from plone.app.layout.navigation.interfaces import INavigationRoot
+from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from plone.memoize.instance import memoize
 
 from zope.i18nmessageid import MessageFactory
@@ -46,7 +49,14 @@ def absolutize_path(path, context=None, is_alias=True):
                         or _(u"Target path must be relative to the portal root and not include http:// or the like.")
     else:
         if path.startswith('/'):
-            context_path = "/".join(portal.getPhysicalPath())
+            # find navigation root
+            navroot = context or portal
+            while True:
+                if INavigationRoot.providedBy(navroot) or IPloneSiteRoot.providedBy(navroot):
+                    break
+                navroot = navroot.aq_parent
+
+            context_path = "/".join(navroot.getPhysicalPath())
             path = "%s%s" % (context_path, path)
         else:
             if context is None:
@@ -98,7 +108,8 @@ class RedirectsView(BrowserView):
         errors = {}
 
         if 'form.button.Add' in form:
-            redirection, err = absolutize_path(form.get('redirection'), is_alias=True)
+            context = aq_inner(self.context)
+            redirection, err = absolutize_path(form.get('redirection'), context, is_alias=True)
             if err:
                 errors['redirection'] = err
                 status.addStatusMessage(err, type='error')
