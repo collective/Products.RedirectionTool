@@ -148,6 +148,8 @@ class RedirectsControlPanelAdapter(object):
         return self.rt.getRedirectionAllowedForTypes()
 
     def set_managed_types(self, value):
+        if type(value) in (str, unicode):
+            value = [value]
         self.rt.setRedirectionAllowedForTypes(value)
 
     managed_types = property(get_managed_types, set_managed_types)
