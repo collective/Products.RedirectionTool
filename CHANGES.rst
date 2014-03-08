@@ -8,6 +8,9 @@ Changelog
   reinstalling.
   [davidjb]
 
+- Repository moved to github
+  [cewing]
+
 1.3.1 - 2011-10-4
 ------------------
 

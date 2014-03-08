@@ -6,8 +6,8 @@ setup(name='Products.RedirectionTool',
       version=version,
       description="The Redirection Tool allows the management of the aliases "
                   "stored in plone.app.redirector",
-      long_description = open('README.txt').read() + '\n' +
-                         open('CHANGES.txt').read(),
+      long_description = open('README.rst').read() + '\n' +
+                         open('CHANGES.rst').read(),
       classifiers=[
         "Framework :: Zope2",
         "License :: OSI Approved :: GNU General Public License (GPL)",
