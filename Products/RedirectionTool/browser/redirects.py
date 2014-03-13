@@ -204,27 +204,21 @@ class RedirectsControlPanel(BrowserView):
 
     def __init__(self, context, request):
         super(RedirectsControlPanel, self).__init__(context, request)
+        self.batch_start = int(self.request.form.get('b_start', '0'))
+        self.page_size = 20
         self.errors = []  # list of tuples: (line_number, absolute_redirection_path, err_msg, target)
 
     def redirects(self):
         storage = getUtility(IRedirectionStorage)
         portal = getUtility(ISiteRoot)
-        context_path = "/".join(self.context.getPhysicalPath())
+        # context_path = "/".join(self.context.getPhysicalPath())
         portal_path = "/".join(portal.getPhysicalPath())
-        portal_path_len = len(portal_path)
-        for redirect in storage:
-            if redirect.startswith(portal_path):
-                path = redirect[portal_path_len:]
-            else:
-                path = redirect
-            redirectto = storage.get(redirect)
-            if redirectto.startswith(portal_path):
-                redirectto = redirectto[portal_path_len:]
-            yield {
-                'redirect': redirect,
-                'path': path,
-                'redirect-to': redirectto,
-            }
+        redirect_batch = RedirectBatch(
+            list(storage), self.page_size, self.batch_start, orphan=1,
+            redirect_storage=storage, portal_path=portal_path,
+        )
+
+        return redirect_batch
 
     def __call__(self):
         storage = getUtility(IRedirectionStorage)
