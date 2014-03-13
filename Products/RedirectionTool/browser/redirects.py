@@ -15,6 +15,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.PloneBatch import Batch
 from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.app.controlpanel.widgets import MultiCheckBoxThreeColumnWidget
 from zope.formlib.form import setUpWidgets, FormFields
@@ -133,6 +134,45 @@ class IAliasesSchema(Interface):
                           missing_value=tuple(),
                           value_type=Choice(
                               vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes"))
+
+
+class RedirectBatch(Batch):
+    """process redirect items on access to avoid needing to preprocess them all
+    """
+
+    def __init__(self, sequence, size, start=0, end=0, orphan=0,
+                 overlap=0, pagerange=7, quantumleap=0,
+                 b_start_str='b_start', redirect_storage={},
+                 portal_path=''):
+        super(RedirectBatch, self).__init__(
+            sequence, size, start, end, orphan, overlap,
+            pagerange, quantumleap, b_start_str)
+        self.redirect_storage = redirect_storage
+        self.portal_path = portal_path
+
+    def __getitem__(self, index):
+        """ Get item from batch
+
+        post-process the item on access to return as a dict of three values
+            'redirect': the full Zope-root-relative path
+            'path': the path from the site root
+            'redirect-to': the path to which we should be redirected, relative
+                to the site root
+        """
+        item = super(RedirectBatch, self).__getitem__(index)
+        portal_path_len = len(self.portal_path)
+        if item.startswith(self.portal_path):
+            path = item[portal_path_len:]
+        else:
+            path = item
+        redirectto = self.redirect_storage.get(item)
+        if redirectto.startswith(self.portal_path):
+            redirectto = redirectto[portal_path_len:]
+        return {
+            'redirect': item,
+            'path': path,
+            'redirect-to': redirectto,
+        }
 
 
 class RedirectsControlPanelAdapter(object):
