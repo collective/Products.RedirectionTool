@@ -1,6 +1,14 @@
 Products.RedirectionTool
 ========================
 
+.. image:: https://secure.travis-ci.org/collective/Products.RedirectionTool.png?branch=master
+    :alt: Travis CI badge
+    :target: http://travis-ci.org/collective/Products.RedirectionTool
+
+.. image:: https://pypip.in/d/Products.RedirectionTool/badge.png
+    :alt: Downloads
+    :target: https://pypi.python.org/pypi/Products.RedirectionTool
+
 About
 -----
 The Redirection Tool allows the management of the aliases stored in
