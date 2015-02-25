@@ -25,6 +25,11 @@ setup(name='Products.RedirectionTool',
       install_requires=[
         'setuptools',
       ],
+      extras_require={
+          'test': [
+              'Products.PloneTestCase',
+          ],
+      },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
