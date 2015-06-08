@@ -37,10 +37,10 @@
       </p>
 
       <form tal:attributes="action view/view_url" method="post">
-        <tal:block tal:repeat="widget view/widgets">
+        <tal:block tal:repeat="widget python: view.form.widgets.values()">
 
             <div class="field"
-                 tal:define="description widget/hint;
+                 tal:define="description widget/field/description;
                              error widget/error"
                  tal:attributes="class python:'field'+(error and ' error' or '')">
 
