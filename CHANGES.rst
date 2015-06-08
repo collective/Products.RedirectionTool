@@ -4,6 +4,9 @@ Changelog
 1.3.2 - Unreleased
 ------------------
 
+- update to use z3c.form so it'll work with Plone 5
+  [vangheem]
+
 - Added upgrade step to allow control panel icon upgrade to happen without
   reinstalling.
   [davidjb]

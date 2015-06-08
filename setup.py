@@ -6,12 +6,11 @@ setup(name='Products.RedirectionTool',
       version=version,
       description="The Redirection Tool allows the management of the aliases "
                   "stored in plone.app.redirector",
-      long_description = open('README.rst').read() + '\n' +
-                         open('CHANGES.rst').read(),
+      long_description=open('README.rst').read() + '\n' + open('CHANGES.rst').read(),
       classifiers=[
-        "Framework :: Zope2",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Programming Language :: Python",
+          "Framework :: Zope2",
+          "License :: OSI Approved :: GNU General Public License (GPL)",
+          "Programming Language :: Python",
       ],
       keywords='Redirection Alias Zope Plone',
       author='Jarn AS',
@@ -23,7 +22,8 @@ setup(name='Products.RedirectionTool',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-        'setuptools',
+          'setuptools',
+          'z3c.form'
       ],
       extras_require={
           'test': [
@@ -33,5 +33,4 @@ setup(name='Products.RedirectionTool',
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
-      """,
-)
+      """)

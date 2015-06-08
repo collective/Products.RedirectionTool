@@ -16,8 +16,8 @@ from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from plone.app.redirector.interfaces import IRedirectionStorage
-from plone.app.controlpanel.widgets import MultiCheckBoxThreeColumnWidget
-from zope.formlib.form import setUpWidgets, FormFields
+
+from z3c.form import form, field
 
 from plone.memoize.instance import memoize
 
@@ -39,23 +39,23 @@ def absolutize_path(path, context=None, is_alias=True):
     portal = getUtility(ISiteRoot)
     err = None
     if path is None or path == '':
-        err = is_alias and _(u"You have to enter an alias.") \
-                        or _(u"You have to enter a target.")
+        err = (is_alias and _(u"You have to enter an alias.")
+               or _(u"You have to enter a target."))
     elif '://' in path:
-        err = is_alias and _(u"An alias is a path from the portal root and doesn't include http:// or alike.") \
-                        or _(u"Target path must be relative to the portal root and not include http:// or the like.")
+        err = (is_alias and _(u"An alias is a path from the portal root and doesn't include http:// or alike.")  # noqa
+               or _(u"Target path must be relative to the portal root and not include http:// or the like."))  # noqa
     else:
         if path.startswith('/'):
             context_path = "/".join(portal.getPhysicalPath())
             path = "%s%s" % (context_path, path)
         else:
             if context is None:
-                err = is_alias and _(u"Alias path must start with a slash.") \
-                                or _(u"Target path must start with a slash.")
+                err = (is_alias and _(u"Alias path must start with a slash.")
+                       or _(u"Target path must start with a slash."))
             else:
                 context_path = "/".join(context.getPhysicalPath()[:-1])
                 path = "%s/%s" % (context_path, path)
-        if not err and is_alias:  # XXX should we require Modify Alias permission on the target as well?
+        if not err and is_alias:  # noqa XXX should we require Modify Alias permission on the target as well?
             source = path.split('/')
             while len(source):
                 obj = portal.unrestrictedTraverse(source, None)
@@ -66,7 +66,7 @@ def absolutize_path(path, context=None, is_alias=True):
                         obj = None
                     break
             if obj is None:
-                err = _(u"You don't have the permission to set an alias from the location you provided.")
+                err = _(u"You don't have the permission to set an alias from the location you provided.")  # noqa
             else:
                 pass
                 # XXX check if there is an existing alias
@@ -128,7 +128,7 @@ class IAliasesSchema(Interface):
 
     managed_types = Tuple(title=_(u"Managed types"),
                           description=_(u"Select the types for which the "
-                                         "aliases can be managed"),
+                                        "aliases can be managed"),
                           required=True,
                           missing_value=tuple(),
                           value_type=Choice(
@@ -155,21 +155,21 @@ class RedirectsControlPanelAdapter(object):
     managed_types = property(get_managed_types, set_managed_types)
 
 
+class RedirectsControlPanelForm(form.EditForm):
+    fields = field.Fields(IAliasesSchema)
+
+
 class RedirectsControlPanel(BrowserView):
     template = ViewPageTemplateFile('redirects-controlpanel.pt')
 
-    form_fields = FormFields(IAliasesSchema, render_context=True)
-    form_fields['managed_types'].custom_widget = MultiCheckBoxThreeColumnWidget
-    form_fields['managed_types'].custom_widget.cssClass='label'
-
     def __init__(self, context, request):
         super(RedirectsControlPanel, self).__init__(context, request)
-        self.errors = []  # list of tuples: (line_number, absolute_redirection_path, err_msg, target)
+        self.errors = []
+        # list of tuples: (line_number, absolute_redirection_path, err_msg, target)
 
     def redirects(self):
         storage = getUtility(IRedirectionStorage)
         portal = getUtility(ISiteRoot)
-        context_path = "/".join(self.context.getPhysicalPath())
         portal_path = "/".join(portal.getPhysicalPath())
         portal_path_len = len(portal_path)
         for redirect in storage:
@@ -205,14 +205,12 @@ class RedirectsControlPanel(BrowserView):
                 status.addStatusMessage(_(u"Alias removed."), type='info')
         elif 'form.button.Save' in form:
             dst = IAliasesSchema(self.context)
-            dst.managed_types = self.request.form['form.managed_types']
+            dst.managed_types = self.request.form['form.widgets.managed_types']
         elif 'form.button.Upload' in form:
             self.upload(form['file'], portal, storage, status)
 
-        self.widgets = setUpWidgets(
-            self.form_fields, 'form', self.context, self.request,
-            form=self, ignore_request=True)
-
+        self.form = RedirectsControlPanelForm(self.context, self.request)
+        self.form.update()
         return self.template()
 
     def upload(self, file, portal, storage, status):
@@ -226,7 +224,6 @@ class RedirectsControlPanel(BrowserView):
         dialect = csv.Sniffer().sniff(file.readline() + file.readline())
         file.seek(0)
 
-        portal_path = "/".join(portal.getPhysicalPath())
         successes = []  # list of tuples: (abs_redirection, target)
         had_errors = False
         for i, fields in enumerate(csv.reader(file, dialect)):
@@ -240,8 +237,9 @@ class RedirectsControlPanel(BrowserView):
                     err = target_err
                 else:
                     if abs_redirection == abs_target:
-                        err = _(u"Aliases that point to themselves will cause \
-                            an endless cycle of redirects.") # TODO: detect indirect recursion
+                        # TODO: detect indirect recursion
+                        err = _(u"Aliases that point to themselves will cause"
+                                u"an endless cycle of redirects.")
             else:
                 err = _(u"Each line must have 2 columns.")
 
@@ -250,7 +248,8 @@ class RedirectsControlPanel(BrowserView):
                     successes.append((abs_redirection, abs_target))
             else:
                 had_errors = True
-                self.errors.append(dict(line_number=i+1, line=dialect.delimiter.join(fields), message=err))
+                self.errors.append(dict(line_number=i+1, line=dialect.delimiter.join(fields),
+                                        message=err))
 
         if not had_errors:
             for abs_redirection, abs_target in successes:
