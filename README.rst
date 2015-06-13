@@ -12,7 +12,7 @@ Products.RedirectionTool
 About
 -----
 The Redirection Tool allows the management of the aliases stored in
-`plone.app.redirector <http://pypi.python.org/pypi/plone.app.redirector.>`_
+`plone.app.redirector <http://pypi.python.org/pypi/plone.app.redirector>`_.
 
 
 Using The RedirectionTool
