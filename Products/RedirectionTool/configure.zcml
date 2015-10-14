@@ -34,6 +34,16 @@
         title="RedirectionTool: Modify aliases"
         />
 
+    <browser:resource
+        name="jquery.typewatch.js"
+        file="browser/jquery.typewatch.js"
+        />
+
+    <browser:resource
+        name="redirectiontool.js"
+        file="browser/redirectiontool.js"
+        />
+
     <browser:page
         name="manage-aliases"
         for="*"
@@ -48,6 +58,14 @@
         name="aliases-controlpanel"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".browser.redirects.RedirectsControlPanel"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        name="aliases-batch.json"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".browser.redirects.RedirectsControlPanel"
+        attribute="redirects_json"
         permission="cmf.ManagePortal"
         />
 

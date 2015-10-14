@@ -101,7 +101,12 @@
       <form tal:attributes="action view/view_url" method="post">
         <fieldset>
           <legend i18n:translate="legend_all_existing_aliases">All existing aliases for this site</legend>
-
+          <div class="alias-filter formControls">
+            <input type="text" value="" placeholder="Filter aliases"
+                   id="alias-input-filter"
+                   i18n:attributes="placeholder placeholder_filter_aliases" />
+            <span id="alias-input-filter-count"></span>
+          </div>
           <table id="redirectsTable" class="listing"
               tal:define="redirects view/redirects">
             <thead>
@@ -173,6 +178,9 @@
 
         </fieldset>
       </form>
+
+      <script type="text/javascript" src="++resource++jquery.typewatch.js"></script>
+      <script type="text/javascript" src="++resource++redirectiontool.js"></script>
     </div>
   </body>
 </html>

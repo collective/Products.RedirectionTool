@@ -1,4 +1,5 @@
 import csv
+import json
 from cStringIO import StringIO
 
 from zope.interface import implements, Interface
@@ -208,17 +209,37 @@ class RedirectsControlPanel(BrowserView):
         self.page_size = 20
         self.errors = []  # list of tuples: (line_number, absolute_redirection_path, err_msg, target)
 
-    def redirects(self):
+    def redirects(self, batch=True):
         storage = getUtility(IRedirectionStorage)
         portal = getUtility(ISiteRoot)
         # context_path = "/".join(self.context.getPhysicalPath())
         portal_path = "/".join(portal.getPhysicalPath())
+        if not batch:
+            self.batch_start = 0
+            self.page_size = 9999999
+
         redirect_batch = RedirectBatch(
             list(storage), self.page_size, self.batch_start, orphan=1,
             redirect_storage=storage, portal_path=portal_path,
         )
 
         return redirect_batch
+
+    def redirects_json(self, value=''):
+        value = value.lower()
+
+        def filtered(v):
+            return value in v['redirect'].lower() \
+               or value in v['redirect-to'].lower()
+
+        if len(value) >= 3:
+            redirects = filter(filtered, self.redirects(batch=False))
+        else:
+            # user cleared the filter value
+            self.batch_start = 0
+            redirects = list(self.redirects())
+        self.request.response.setHeader('Content-Type', 'application/json')
+        return json.dumps(redirects)
 
     def __call__(self):
         storage = getUtility(IRedirectionStorage)
