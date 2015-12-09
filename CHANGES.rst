@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.2 - Unreleased
+1.4.0 - 2015-12-08
 ------------------
 
 - update to use z3c.form so it'll work with Plone 5
