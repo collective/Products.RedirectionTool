@@ -5,9 +5,10 @@ Products.RedirectionTool
     :alt: Travis CI badge
     :target: http://travis-ci.org/collective/Products.RedirectionTool
 
-.. image:: https://pypip.in/d/Products.RedirectionTool/badge.png
+.. image:: https://img.shields.io/pypi/dm/Products.RedirectionTool.svg
     :alt: Downloads
-    :target: https://pypi.python.org/pypi/Products.RedirectionTool
+    :target: https://pypi.python.org/pypi/Products.RedirectionTool/
+
 
 About
 -----
