@@ -4,7 +4,7 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Fix i18n domain.
+- Fix i18n domain; update Brazilian Portuguese and Spanish translations.
   [hvelarde]
 
 - Fix package dependencies.
