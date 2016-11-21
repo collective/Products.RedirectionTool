@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.4.1 (unreleased)
+------------------
+
+- Fix package dependencies.
+  [hvelarde]
+
+
 1.4.0 - 2015-12-08
 ------------------
 
