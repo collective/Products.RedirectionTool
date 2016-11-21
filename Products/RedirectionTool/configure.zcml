@@ -51,4 +51,6 @@
         permission="cmf.ManagePortal"
         />
 
+    <include package=".upgrades" />
+
 </configure>
