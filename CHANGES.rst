@@ -4,6 +4,9 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Update Brazilian Portuguese and Spanish translations.
+  [hvelarde]
+
 - Fix package dependencies.
   [hvelarde]
 
