@@ -1,13 +1,14 @@
 Products.RedirectionTool
 ========================
 
-.. image:: https://secure.travis-ci.org/collective/Products.RedirectionTool.png?branch=master
-    :alt: Travis CI badge
+.. image:: http://img.shields.io/pypi/v/Products.RedirectionTool.svg
+    :target: https://pypi.python.org/pypi/Products.RedirectionTool
+
+.. image:: https://img.shields.io/travis/collective/Products.RedirectionTool/master.svg
     :target: http://travis-ci.org/collective/Products.RedirectionTool
 
-.. image:: https://img.shields.io/pypi/dm/Products.RedirectionTool.svg
-    :alt: Downloads
-    :target: https://pypi.python.org/pypi/Products.RedirectionTool/
+.. image:: https://img.shields.io/coveralls/collective/Products.RedirectionTool/master.svg
+    :target: https://coveralls.io/r/collective/Products.RedirectionTool
 
 
 About
