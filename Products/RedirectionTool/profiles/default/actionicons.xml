@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <action-icons xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="RedirectionTool">
+    i18n:domain="Products.RedirectionTool">
  <action-icon category="controlpanel"
               action_id="RedirectionTool"
               title="Redirection and Aliases" priority="0"

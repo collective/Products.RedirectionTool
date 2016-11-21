@@ -4,6 +4,9 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Fix i18n domain.
+  [hvelarde]
+
 - Fix package dependencies.
   [hvelarde]
 
