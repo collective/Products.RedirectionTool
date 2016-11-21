@@ -49,6 +49,8 @@ setup(name='Products.RedirectionTool',
       ],
       extras_require={
           'test': [
+              'plone.app.testing',
+              'plone.testing',
               'Products.CMFFormController',
               'Products.PloneTestCase',
           ],

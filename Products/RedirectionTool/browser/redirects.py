@@ -22,7 +22,7 @@ from z3c.form import form, field
 from plone.memoize.instance import memoize
 
 from zope.i18nmessageid import MessageFactory
-_ = MessageFactory('RedirectionTool')
+_ = MessageFactory('Products.RedirectionTool')
 
 
 def absolutize_path(path, context=None, is_alias=True):
