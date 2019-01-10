@@ -1,7 +1,7 @@
 import csv
-from cStringIO import StringIO
+from io import StringIO
 
-from zope.interface import implements, Interface
+from zope.interface import implementer, Interface
 from zope.component import adapts, getUtility
 from zope.schema import Choice, Tuple
 
@@ -39,19 +39,19 @@ def absolutize_path(path, context=None, is_alias=True):
     portal = getUtility(ISiteRoot)
     err = None
     if path is None or path == '':
-        err = (is_alias and _(u"You have to enter an alias.")
-               or _(u"You have to enter a target."))
+        err = (is_alias and _("You have to enter an alias.")
+               or _("You have to enter a target."))
     elif '://' in path:
-        err = (is_alias and _(u"An alias is a path from the portal root and doesn't include http:// or alike.")  # noqa
-               or _(u"Target path must be relative to the portal root and not include http:// or the like."))  # noqa
+        err = (is_alias and _("An alias is a path from the portal root and doesn't include http:// or alike.")  # noqa
+               or _("Target path must be relative to the portal root and not include http:// or the like."))  # noqa
     else:
         if path.startswith('/'):
             context_path = "/".join(portal.getPhysicalPath())
             path = "%s%s" % (context_path, path)
         else:
             if context is None:
-                err = (is_alias and _(u"Alias path must start with a slash.")
-                       or _(u"Target path must start with a slash."))
+                err = (is_alias and _("Alias path must start with a slash.")
+                       or _("Target path must start with a slash."))
             else:
                 context_path = "/".join(context.getPhysicalPath()[:-1])
                 path = "%s/%s" % (context_path, path)
@@ -66,7 +66,7 @@ def absolutize_path(path, context=None, is_alias=True):
                         obj = None
                     break
             if obj is None:
-                err = _(u"You don't have the permission to set an alias from the location you provided.")  # noqa
+                err = _("You don't have the permission to set an alias from the location you provided.")  # noqa
             else:
                 pass
                 # XXX check if there is an existing alias
@@ -107,15 +107,15 @@ class RedirectsView(BrowserView):
                 # XXX check whether there is an object
                 del form['redirection']
                 storage.add(redirection, "/".join(self.context.getPhysicalPath()))
-                status.addStatusMessage(_(u"Alias added."), type='info')
+                status.addStatusMessage(_("Alias added."), type='info')
         elif 'form.button.Remove' in form:
             redirects = form.get('redirects', ())
             for redirect in redirects:
                 storage.remove(redirect)
             if len(redirects) > 1:
-                status.addStatusMessage(_(u"Aliases removed."), type='info')
+                status.addStatusMessage(_("Aliases removed."), type='info')
             else:
-                status.addStatusMessage(_(u"Alias removed."), type='info')
+                status.addStatusMessage(_("Alias removed."), type='info')
 
         return self.template(errors=errors)
 
@@ -126,8 +126,8 @@ class RedirectsView(BrowserView):
 
 class IAliasesSchema(Interface):
 
-    managed_types = Tuple(title=_(u"Managed types"),
-                          description=_(u"Select the types for which the "
+    managed_types = Tuple(title=_("Managed types"),
+                          description=_("Select the types for which the "
                                         "aliases can be managed"),
                           required=True,
                           missing_value=tuple(),
@@ -135,10 +135,10 @@ class IAliasesSchema(Interface):
                               vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes"))
 
 
+@implementer(IAliasesSchema)
 class RedirectsControlPanelAdapter(object):
 
     adapts(IPloneSiteRoot)
-    implements(IAliasesSchema)
 
     def __init__(self, context):
         self.context = context
@@ -148,7 +148,7 @@ class RedirectsControlPanelAdapter(object):
         return self.rt.getRedirectionAllowedForTypes()
 
     def set_managed_types(self, value):
-        if type(value) in (str, unicode):
+        if type(value) in (str, str):
             value = [value]
         self.rt.setRedirectionAllowedForTypes(value)
 
@@ -198,11 +198,11 @@ class RedirectsControlPanel(BrowserView):
             for redirect in redirects:
                 storage.remove(redirect)
             if len(redirects) == 0:
-                status.addStatusMessage(_(u"No aliases selected for removal."), type='info')
+                status.addStatusMessage(_("No aliases selected for removal."), type='info')
             elif len(redirects) > 1:
-                status.addStatusMessage(_(u"Aliases removed."), type='info')
+                status.addStatusMessage(_("Aliases removed."), type='info')
             else:
-                status.addStatusMessage(_(u"Alias removed."), type='info')
+                status.addStatusMessage(_("Alias removed."), type='info')
         elif 'form.button.Save' in form:
             dst = IAliasesSchema(self.context)
             dst.managed_types = self.request.form['form.widgets.managed_types']
@@ -238,10 +238,10 @@ class RedirectsControlPanel(BrowserView):
                 else:
                     if abs_redirection == abs_target:
                         # TODO: detect indirect recursion
-                        err = _(u"Aliases that point to themselves will cause"
-                                u"an endless cycle of redirects.")
+                        err = _("Aliases that point to themselves will cause"
+                                "an endless cycle of redirects.")
             else:
-                err = _(u"Each line must have 2 columns.")
+                err = _("Each line must have 2 columns.")
 
             if not err:
                 if not had_errors:  # else don't bother
@@ -254,7 +254,7 @@ class RedirectsControlPanel(BrowserView):
         if not had_errors:
             for abs_redirection, abs_target in successes:
                 storage.add(abs_redirection, abs_target)
-            status.addStatusMessage(_(u"%i aliases added.") % len(successes), type='info')
+            status.addStatusMessage(_("%i aliases added.") % len(successes), type='info')
 
     @memoize
     def view_url(self):

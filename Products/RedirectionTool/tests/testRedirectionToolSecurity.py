@@ -1,5 +1,5 @@
-import RedirectionToolTestCase
-import utils
+from . import RedirectionToolTestCase
+from . import utils
 
 class TestRedirectionToolSecurity(RedirectionToolTestCase.RedirectionToolTestCase):
 
@@ -19,18 +19,18 @@ class TestRedirectionToolSecurity(RedirectionToolTestCase.RedirectionToolTestCas
         folder_path = folder.getPhysicalPath()[len(portal_path):]
         testurl = '/%s/foo' % '/'.join(folder_path)
         # user should be able to add redirects to his own objects
-        self.failUnless(self.rt.addRedirect(testurl, testobj))
-        self.failUnlessEqual(self.rt.getRedirectObject(testurl), testobj)
+        self.assertTrue(self.rt.addRedirect(testurl, testobj))
+        self.assertEqual(self.rt.getRedirectObject(testurl), testobj)
 
         folder = self.membership.getHomeFolder('user2')
         folder_path = folder.getPhysicalPath()[len(portal_path):]
         testurl = '/%s/foo' % '/'.join(folder_path)
         # but only if the alias is in a place which belongs to him
-        self.failIf(self.rt.addRedirect(testurl, testobj))
-        self.failUnlessEqual(self.rt.getRedirectObject(testurl), None)
+        self.assertFalse(self.rt.addRedirect(testurl, testobj))
+        self.assertEqual(self.rt.getRedirectObject(testurl), None)
         testurl = '/bar'
-        self.failIf(self.rt.addRedirect(testurl, testobj))
-        self.failUnlessEqual(self.rt.getRedirectObject(testurl), None)
+        self.assertFalse(self.rt.addRedirect(testurl, testobj))
+        self.assertEqual(self.rt.getRedirectObject(testurl), None)
 
 
 from unittest import TestSuite, makeSuite

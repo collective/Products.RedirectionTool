@@ -6,10 +6,10 @@
 #  http://www.lld.dk
 
 from zope.component import getUtility
-from zope.interface import implements
+from zope.interface import implementer
 from zope.deprecation import deprecate
 
-from Globals import InitializeClass
+from App.class_init import InitializeClass
 from AccessControl import ClassSecurityInfo
 from OFS.SimpleItem import SimpleItem
 from AccessControl import getSecurityManager
@@ -22,15 +22,13 @@ from Products.RedirectionTool.permissions import ModifyAliases
 
 from Products.CMFPlone.utils import base_hasattr
 
-from types import StringType
-
-from interfaces import IRedirectionTool
+from .interfaces import IRedirectionTool
 from plone.app.redirector.interfaces import IRedirectionStorage
 
 
+@implementer(IRedirectionTool)
 class RedirectionTool(UniqueObject, SimpleItem):
 
-    implements(IRedirectionTool)
 
     id = 'portal_redirection'
     meta_type = 'Redirection Tool'
@@ -184,7 +182,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         # Prefer the UID, otherwise use path.
         # Check path or reference if string
         reftool = getToolByName(self, 'reference_catalog', getToolByName(self, 'archetype_tool', None))
-        if type(source) is StringType:
+        if isinstance(source, str):
             portal = getToolByName(self, 'portal_url').getPortalObject()
             # Check for reference
             sourceobj = reftool.lookupObject(source)
@@ -211,7 +209,7 @@ class RedirectionTool(UniqueObject, SimpleItem):
         # Check for referencable, otherwise get path for instances
         # Check path or reference if string
         obj = None
-        if isinstance(source, StringType):
+        if isinstance(source, str):
             portal = getToolByName(self, 'portal_url').getPortalObject()
             obj = portal.unrestrictedTraverse(source, None)
             if obj is None:

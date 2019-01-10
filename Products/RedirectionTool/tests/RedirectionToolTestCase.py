@@ -1,5 +1,5 @@
 from Products.PloneTestCase import PloneTestCase
-import utils
+from . import utils
 import zope.deprecation
 
 PloneTestCase.setupPloneSite(products=['RedirectionTool'])
