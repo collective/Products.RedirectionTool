@@ -51,6 +51,7 @@ setup(name='Products.RedirectionTool',
           'test': [
               'Products.CMFFormController',
               'Products.PloneTestCase',
+              'plone.app.testing'
           ],
       },
       entry_points="""
