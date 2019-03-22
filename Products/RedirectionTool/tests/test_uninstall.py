@@ -1,10 +1,9 @@
+# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from Products.RedirectionTool.testing import (
-    REDIRECTION_TOOL_INTEGRATION_TESTING,
-)  # noqa
 from Products.CMFPlone.utils import getToolByName
+from Products.RedirectionTool.testing import REDIRECTION_TOOL_INTEGRATION_TESTING  # noqa
 
 import unittest
 

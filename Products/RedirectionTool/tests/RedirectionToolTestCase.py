@@ -1,14 +1,15 @@
+# -*- coding: utf-8 -*-
 from Products.PloneTestCase import PloneTestCase
-import utils
+
 import zope.deprecation
 
-PloneTestCase.setupPloneSite(products=['RedirectionTool'])
+
+PloneTestCase.setupPloneSite(products=["RedirectionTool"])
 
 
 class RedirectionToolTestCase(PloneTestCase.PloneTestCase):
     def afterSetUp(self):
         zope.deprecation.__show__.off()
-        utils.disableScriptValidators(self.portal)
 
         self.rt = self.portal.portal_redirection
 

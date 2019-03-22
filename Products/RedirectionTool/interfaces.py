@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from zope.interface import Interface
+
 
 class IRedirectionTool(Interface):
     """
@@ -6,18 +8,18 @@ class IRedirectionTool(Interface):
     tries to get a moved page, or you can use it to enable multiple addresses for
     the same object.
     """
-    
+
     def addRedirect(redirectfrom, redirectto):
         """
-        The method addRedirect takes the path to redirect from, and the object, 
-        referenceid or path to create a redirect to, and stores the redirect 
+        The method addRedirect takes the path to redirect from, and the object,
+        referenceid or path to create a redirect to, and stores the redirect
         internally. UID has presedence over path when choosing a reference.
         Return 1 if success, 0 otherwise.
         """
 
     def removeRedirect(redirectfrom):
         """
-        The method addRedirect takes path to remove redirect from, and deletes 
+        The method addRedirect takes path to remove redirect from, and deletes
         the redirect from the internal table. Return 1 if a redirect is removed,
         0 otherwise.
         """
@@ -30,7 +32,7 @@ class IRedirectionTool(Interface):
 
     def getRedirect(redirectfrom):
         """
-        Gets a path and checks whether there exists a redirect. If it exists, 
+        Gets a path and checks whether there exists a redirect. If it exists,
         the URL to redirect to is returned, otherwise None is returned.
         """
 
