@@ -16,7 +16,7 @@ msgstr ""
 "Preferred-Encodings: latin1 utf-8\n"
 "Domain: RedirectionTool\n"
 "X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch\n"
-"Language-name: FranÁais\n"
+"Language-name: Fran√ßais\n"
 
 #: ./browser/redirects.py:246
 msgid "%i aliases added."
@@ -54,7 +54,7 @@ msgid "An alias is a path from the portal root and doesn't include http:// or al
 msgstr ""
 
 msgid "Configure Redirection Tool"
-msgstr "Configurez outil de rÈacheminement"
+msgstr "Configurez outil de r√©acheminement"
 
 #: ./browser/redirects.py:234
 msgid "Each line must have 2 columns."
@@ -69,7 +69,7 @@ msgid "No aliases selected for removal."
 msgstr ""
 
 msgid "Redirection"
-msgstr "RÈacheminement"
+msgstr "R√©acheminement"
 
 #. Default: "Redirection and Aliases"
 #: ./profiles/default/controlpanel.xml
@@ -122,7 +122,7 @@ msgstr ""
 #. Default: "Using this form, you can manage aliases for an item. This is an easy way to make an item available under two different URLs."
 #: ./browser/manage-redirects.pt:13
 msgid "description_adding_aliases"
-msgstr "Avec ce formulaire, vous pouvez ajouter des pseudonymes supplÈmentaires. "
+msgstr "Avec ce formulaire, vous pouvez ajouter des pseudonymes suppl√©mentaires. "
 
 #. Default: "Add many aliases at once by uploading a CSV file. The first column should be the path to redirect from; the second, the path to redirect to. Both paths must be Plone-site-relative, starting with a slash (/)."
 #: ./browser/redirects-controlpanel.pt:122
@@ -153,13 +153,13 @@ msgstr ""
 #. Default: "Manage aliases"
 #: ./browser/manage-redirects.pt:11
 msgid "heading_add_aliases"
-msgstr "IdentitÈ du Pseudonymes et de l' installation alternative"
+msgstr "Identit√© du Pseudonymes et de l' installation alternative"
 
 #. <div class="formHelp" i18n:translate="help_alias">
 #. Default: "Enter the alternative Short Name or an absolute path where an alias should exist."
 #: ./browser/manage-redirects.pt:34
 msgid "help_alias"
-msgstr "InsÈrez le nom raccourci alternatif ou le circuit absolu l‡ o˘ un pseudonyme devrait exister."
+msgstr "Ins√©rez le nom raccourci alternatif ou le circuit absolu l√† o√π un pseudonyme devrait exister."
 
 #. <label for="title" i18n:translate="label_alias">
 #. Default: "Alias"
@@ -197,10 +197,9 @@ msgstr ""
 #. Default: "Existing aliases for this item"
 #: ./browser/manage-redirects.pt:20
 msgid "legend_existing_aliases"
-msgstr "Pseudonymes dÈj‡ inscrits pour cet item"
+msgstr "Pseudonymes d√©j√† inscrits pour cet item"
 
 #. Default: "Required"
 #: ./browser/redirects-controlpanel.pt:53
 msgid "title_required"
 msgstr ""
-
