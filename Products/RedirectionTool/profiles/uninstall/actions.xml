@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool">
+ <object name="object" meta_type="CMF Action Category">
+  <object name="redirection" meta_type="CMF Action" remove="true">
+  </object>
+ </object>
+</object>

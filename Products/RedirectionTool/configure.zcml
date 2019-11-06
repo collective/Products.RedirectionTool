@@ -20,6 +20,15 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         />
 
+    <gs:registerProfile
+        name="uninstall"
+        title="Uninstall RedirectionTool"
+        directory="profiles/uninstall"
+        description=""
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        />
+
     <gs:upgradeStep
         source="1"
         destination="2"

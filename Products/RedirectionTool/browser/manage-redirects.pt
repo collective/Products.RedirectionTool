@@ -28,7 +28,7 @@
       <p i18n:translate="description_adding_aliases">
       Using this form, you can manage aliases for an item. This
       is an easy way to make an item available under two different URLs.
-      </p>  
+      </p>
 
       <form tal:attributes="action view/view_url" method="post">
         <fieldset>
@@ -37,7 +37,7 @@
           <div class="field"
                tal:define="error options/errors/redirection|nothing;
                            redirection request/title | nothing;"
-               tal:attributes="class python:error and 'field error' or 'field'"> 
+               tal:attributes="class python:error and 'field error' or 'field'">
               <label for="title" i18n:translate="label_alias">Alias</label>
 
               <span class="fieldRequired" title="Required"
@@ -50,11 +50,11 @@
                   Enter the alternative Short Name or an absolute path where an alias should exist.
               </div>
 
-              <input type="text" 
-                     name="redirection" 
-                     value="#" 
-                     size="40" 
-                     tal:attributes="value request/redirection | nothing;" 
+              <input type="text"
+                     name="redirection"
+                     value="#"
+                     size="40"
+                     tal:attributes="value request/redirection | nothing;"
                      />
           </div>
           <div class="formControls">
@@ -75,9 +75,9 @@
 
           <tal:redirects repeat="redirect view/redirects">
             <div>
-              <input type="checkbox" 
-                     class="noborder" 
-                     name="redirects:tuple" 
+              <input type="checkbox"
+                     class="noborder"
+                     name="redirects:tuple"
                      tal:attributes="value redirect/redirect" />
 
               <span tal:replace="redirect/path" />

@@ -4,7 +4,14 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add uninstall profile
+  [erral]
+
+- Modernize test setup
+  [erral]
+
+- Update travis testing
+  [erral]
 
 
 1.4.1 (2016-11-23)

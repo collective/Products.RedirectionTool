@@ -1,27 +1,28 @@
-import csv
-from cStringIO import StringIO
-
-from zope.interface import implements, Interface
-from zope.component import adapts, getUtility
-from zope.schema import Choice, Tuple
-
+# -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-from Products.RedirectionTool.permissions import ModifyAliases
-
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from Products.statusmessages.interfaces import IStatusMessage
+from cStringIO import StringIO
+from plone.app.redirector.interfaces import IRedirectionStorage
+from plone.memoize.instance import memoize
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from plone.app.redirector.interfaces import IRedirectionStorage
-
-from z3c.form import form, field
-
-from plone.memoize.instance import memoize
-
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.RedirectionTool.permissions import ModifyAliases
+from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import field
+from z3c.form import form
+from zope.component import adapts
+from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
+from zope.interface import implements
+from zope.interface import Interface
+from zope.schema import Choice
+from zope.schema import Tuple
+
+import csv
+
+
 _ = MessageFactory('RedirectionTool')
 
 
@@ -39,19 +40,16 @@ def absolutize_path(path, context=None, is_alias=True):
     portal = getUtility(ISiteRoot)
     err = None
     if path is None or path == '':
-        err = (is_alias and _(u"You have to enter an alias.")
-               or _(u"You have to enter a target."))
+        err = (is_alias and _(u"You have to enter an alias.") or _(u"You have to enter a target."))
     elif '://' in path:
-        err = (is_alias and _(u"An alias is a path from the portal root and doesn't include http:// or alike.")  # noqa
-               or _(u"Target path must be relative to the portal root and not include http:// or the like."))  # noqa
+        err = (is_alias and _(u"An alias is a path from the portal root and doesn't include http:// or alike.") or _(u"Target path must be relative to the portal root and not include http:// or the like."))  # noqa
     else:
         if path.startswith('/'):
             context_path = "/".join(portal.getPhysicalPath())
             path = "%s%s" % (context_path, path)
         else:
             if context is None:
-                err = (is_alias and _(u"Alias path must start with a slash.")
-                       or _(u"Target path must start with a slash."))
+                err = (is_alias and _(u"Alias path must start with a slash.") or _(u"Target path must start with a slash."))  # noqa
             else:
                 context_path = "/".join(context.getPhysicalPath()[:-1])
                 path = "%s/%s" % (context_path, path)
@@ -248,7 +246,7 @@ class RedirectsControlPanel(BrowserView):
                     successes.append((abs_redirection, abs_target))
             else:
                 had_errors = True
-                self.errors.append(dict(line_number=i+1, line=dialect.delimiter.join(fields),
+                self.errors.append(dict(line_number=i + 1, line=dialect.delimiter.join(fields),
                                         message=err))
 
         if not had_errors:
