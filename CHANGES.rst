@@ -4,6 +4,9 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
+- Move custom importStep to ZCML
+  [avoinea]
+
 - Add uninstall profile
   [erral]
 

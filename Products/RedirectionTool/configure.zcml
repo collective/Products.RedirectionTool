@@ -38,6 +38,14 @@
         handler="Products.RedirectionTool.setuphandlers.upgrade_controlpanel"
         />
 
+    <gs:importStep
+        name="redirectiontool_various"
+        title="RedirectionTool manual setup steps" description="RedirectionTool manual (non-GS) setup work"
+        handler="Products.RedirectionTool.setuphandlers.importVarious">
+        <depends name="actions" />
+        <depends name="toolset" />
+    </gs:importStep>
+
     <permission
         id="Products.RedirectionTool.ModifyAliases"
         title="RedirectionTool: Modify aliases"
