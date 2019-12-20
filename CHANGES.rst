@@ -30,6 +30,9 @@ Changelog
 1.4.0 - 2015-12-08
 ------------------
 
+- move action to object_buttons
+  [ebrehault]
+
 - update to use z3c.form so it'll work with Plone 5
   [vangheem]
 

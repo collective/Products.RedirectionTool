@@ -2,7 +2,7 @@
 <object name="portal_actions" meta_type="Plone Actions Tool"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
    i18n:domain="RedirectionTool">
- <object name="object" meta_type="CMF Action Category">
+ <object name="object_buttons" meta_type="CMF Action Category">
   <object name="redirection" meta_type="CMF Action" i18n:domain="RedirectionTool">
    <property name="title" i18n:translate="">Aliases</property>
    <property name="description" i18n:translate=""></property>
