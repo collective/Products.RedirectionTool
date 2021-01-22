@@ -8,7 +8,7 @@
 
 from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
-from Globals import InitializeClass
+from AccessControl import InitializeClass
 from interfaces import IRedirectionTool
 from OFS.SimpleItem import SimpleItem
 from plone.app.redirector.interfaces import IRedirectionStorage

@@ -16,6 +16,9 @@ Changelog
 - Update travis testing
   [erral]
 
+- Fix InitializeClass import
+  [agitator]  
+
 
 1.4.1 (2016-11-23)
 ------------------
