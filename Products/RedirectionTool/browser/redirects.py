@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-from cStringIO import StringIO
+from io import StringIO
 from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.memoize.instance import memoize
 from Products.CMFCore.interfaces import ISiteRoot
@@ -12,10 +12,10 @@ from Products.RedirectionTool.permissions import ModifyAliases
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import field
 from z3c.form import form
-from zope.component import adapts
+from zope.component import adapter
 from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 from zope.schema import Choice
 from zope.schema import Tuple
@@ -133,10 +133,9 @@ class IAliasesSchema(Interface):
                               vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes"))
 
 
+@implementer(IAliasesSchema)
+@adapter(IPloneSiteRoot)
 class RedirectsControlPanelAdapter(object):
-
-    adapts(IPloneSiteRoot)
-    implements(IAliasesSchema)
 
     def __init__(self, context):
         self.context = context
